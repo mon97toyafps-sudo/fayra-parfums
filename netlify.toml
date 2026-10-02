@@ -1,0 +1,9 @@
+# Fayra Parfums · configuración de Netlify
+# Las funciones viven en netlify/functions (detección automática).
+
+[build]
+  functions = "netlify/functions"
+
+# Resumen semanal: lunes 9:00 am en El Salvador (UTC-6) = 15:00 UTC
+[functions."weekly"]
+  schedule = "0 15 * * 1"

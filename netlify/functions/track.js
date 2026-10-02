@@ -1,12 +1,19 @@
 /* ============================================================
-   Fayra Parfums · Monitor de visitas → Discord
+   Fayra Parfums · Monitor de visitas / carrito / pedido → Discord
    Netlify Function. La URL del webhook vive en la variable de
    entorno DISCORD_WEBHOOK_URL (nunca en el HTML del sitio).
+
+   Tipos de evento (body.type):
+     - "visit" (default) → embed de nueva visita + contadores semanales
+     - "cart"            → alguien agregó al carrito
+     - "order"           → alguien pulsó "Pedir por WhatsApp"
    ============================================================ */
 
 const WEBHOOK = process.env.DISCORD_WEBHOOK_URL;
+const ABACUS = "https://abacus.jasoncameron.dev";
+const NS = "fayraparfumsv.netlify.app";
 
-/* Rate limit suave por IP (la instancia vive poco, alcanza) */
+/* Rate limit suave por IP+tipo (la instancia vive poco, alcanza) */
 const hits = Object.create(null);
 
 function header(h, nombre) {
@@ -34,51 +41,109 @@ function detectar(ua) {
   else if (/Chrome\/|CriOS/i.test(ua)) nav = "Chrome";
   else if (/Safari\//i.test(ua)) nav = "Safari";
 
-  return { device, os, nav };
+  return { device, os, nav, movil: movil || tablet };
+}
+
+/* Semana ISO actual: ej. 2026-W40 */
+function isoWeek() {
+  const d = new Date();
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  const dia = (t.getUTCDay() + 6) % 7;
+  t.setUTCDate(t.getUTCDate() - dia + 3);
+  const first = new Date(Date.UTC(t.getUTCFullYear(), 0, 4));
+  const fday = (first.getUTCDay() + 6) % 7;
+  first.setUTCDate(first.getUTCDate() - fday + 3);
+  const semana = 1 + Math.round((t - first) / (7 * 864e5));
+  return t.getUTCFullYear() + "-W" + String(semana).padStart(2, "0");
+}
+
+async function hit(key) {
+  try { await fetch(ABACUS + "/hit/" + NS + "/" + key); } catch (e) { /* Abacus no disponible */ }
 }
 
 exports.handler = async function (event) {
-  if (!WEBHOOK) {
-    return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "sin webhook" }) };
-  }
-
   const h = event.headers || {};
-  const ip = header(h, "x-nf-client-connection-ip") || header(h, "x-forwarded-for").split(",")[0] || "?";
+  const ip = header(h, "x-nf-client-connection-ip") || (header(h, "x-forwarded-for").split(",")[0] || "?").trim();
   const pais = header(h, "x-country") || "";
   const region = header(h, "x-region") || "";
   const ciudad = header(h, "x-city") || "";
   const ua = header(h, "user-agent") || "";
 
-  /* Ignora bots/crawlers y hits repetidos */
+  let body = {};
+  try { body = JSON.parse(event.body || "{}"); } catch (e) { /* body vacío */ }
+
+  const type = body.type === "cart" || body.type === "order" ? body.type : "visit";
+
+  if (!WEBHOOK) {
+    return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "sin webhook" }) };
+  }
+
+  /* Ignora bots y hits repetidos (los pedidos no se limitan: son la cosa importante) */
   if (/bot|crawler|spider|curl|wget/i.test(ua)) {
     return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "bot" }) };
   }
   const ahora = Date.now();
-  if (hits[ip] && ahora - hits[ip] < 20000) {
+  const intervalo = type === "visit" ? 20000 : type === "cart" ? 8000 : 0;
+  const clave = ip + "|" + type;
+  if (intervalo && hits[clave] && ahora - hits[clave] < intervalo) {
     return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "repetido" }) };
   }
-  hits[ip] = ahora;
-
-  let body = {};
-  try { body = JSON.parse(event.body || "{}"); } catch (e) { /* body vacío */ }
+  hits[clave] = ahora;
 
   const d = detectar(ua);
   const ubicacion = [ciudad, region, pais].filter(Boolean).join(", ") || "—";
   const pagina = body.path || "/";
+  const base = [
+    { name: "📍 Ubicación", value: ubicacion, inline: true },
+    { name: "🌐 IP", value: "`" + ip + "`", inline: true },
+    { name: "💻 Equipo", value: d.device + " · " + d.os + " · " + d.nav, inline: false }
+  ];
 
-  const embed = {
-    title: "🛍️ Nueva visita a Fayra Parfums",
-    color: 0xc9a35c,
-    fields: [
-      { name: "Dispositivo", value: d.device + " · " + d.os + " · " + d.nav, inline: false },
-      { name: "📍 Ubicación", value: ubicacion, inline: true },
-      { name: "🌐 IP", value: "`" + ip + "`", inline: true },
-      { name: "📄 Página", value: "```" + pagina + "```", inline: false },
-      { name: "🔗 Vino de", value: body.ref || "Directo (escribió la URL)", inline: false }
-    ],
-    footer: { text: "Fayra Parfums · Monitor de visitas" },
-    timestamp: new Date().toISOString()
-  };
+  let embed;
+  if (type === "cart") {
+    embed = {
+      title: "🛒 Agregaron al carrito",
+      color: 0xc9a35c,
+      fields: [
+        { name: "Producto", value: "```" + (body.detail || "—") + "```", inline: false },
+        { name: "💳 Total en carrito", value: body.total || "—", inline: true }
+      ].concat(base),
+      footer: { text: "Fayra Parfums · Carrito" },
+      timestamp: new Date().toISOString()
+    };
+  } else if (type === "order") {
+    embed = {
+      title: "🚨 ¡Pedido por WhatsApp!",
+      color: 0x25d366,
+      fields: [
+        { name: "🧾 Pedido", value: "```" + (body.detail || "—") + "```", inline: false },
+        { name: "Entró desde", value: body.source || "—", inline: true }
+      ].concat(base),
+      footer: { text: "Fayra Parfums · ¡Lead caliente!" },
+      timestamp: new Date().toISOString()
+    };
+  } else {
+    embed = {
+      title: "🛍️ Nueva visita a Fayra Parfums",
+      color: 0xc9a35c,
+      fields: [
+        { name: "Dispositivo", value: d.device + " · " + d.os + " · " + d.nav, inline: false },
+        { name: "📍 Ubicación", value: ubicacion, inline: true },
+        { name: "🌐 IP", value: "`" + ip + "`", inline: true },
+        { name: "📄 Página", value: "```" + pagina + "```", inline: false },
+        { name: "🔗 Vino de", value: body.ref || "Directo (escribió la URL)", inline: false }
+      ],
+      footer: { text: "Fayra Parfums · Monitor de visitas" },
+      timestamp: new Date().toISOString()
+    };
+
+    /* Contadores para el resumen semanal (solo visitas reales) */
+    const wk = isoWeek();
+    await Promise.all([
+      hit("sem-" + wk + "-visitas"),
+      hit("sem-" + wk + (d.movil ? "-movil" : "-pc"))
+    ]);
+  }
 
   try {
     await fetch(WEBHOOK, {

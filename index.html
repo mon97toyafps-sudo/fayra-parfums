@@ -1318,10 +1318,35 @@
       badge.classList.add("bump");
 
       openCart();
+
+      /* Aviso a Discord: agregaron al carrito */
+      sendEvent({
+        type: "cart",
+        detail: PRODUCT.name + " " + PRODUCT.size + " ×" + count(),
+        total: money(total())
+      });
     }
 
     $("cardAdd").addEventListener("click", function () { addToCart(1); });
     $("pvAdd").addEventListener("click", function () { addToCart(qty); setQty(1); });
+
+    /* ---------- Aviso a Discord: pidieron por WhatsApp ---------- */
+    function detallePedido(items, suma) {
+      return items.map(function (it) {
+        return it.name + " " + it.size + " ×" + it.qty + " — " + money(it.qty * it.price);
+      }).join("\n") + "\nTotal: " + money(suma);
+    }
+    $("cartWhats").addEventListener("click", function () {
+      if (!cart.length) return;
+      sendEvent({ type: "order", detail: detallePedido(cart, total()), source: "Carrito 🛒" });
+    });
+    $("pvWhats").addEventListener("click", function () {
+      sendEvent({
+        type: "order",
+        detail: detallePedido([{ name: PRODUCT.name, size: PRODUCT.size, qty: qty, price: PRODUCT.price }], PRODUCT.price * qty),
+        source: "Ventana del producto 🧴"
+      });
+    });
 
     /* ---------- Abrir / cerrar carrito ---------- */
     function openCart() {
@@ -1465,21 +1490,48 @@
     })();
 
     /* ---------- Monitor de visitas (Discord vía Netlify Function) ---------- */
-    (function () {
-      /* Solo en el dominio real: en localhost/preview no molesta */
+    function sendEvent(data) {
       var host = location.hostname;
-      if (host === "localhost" || host === "127.0.0.1" || host === "" ) return;
+      if (host === "localhost" || host === "127.0.0.1" || host === "") return;
       try {
+        data.path = location.pathname;
         fetch("/.netlify/functions/track", {
           method: "POST",
           keepalive: true,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            path: location.pathname + location.search,
-            ref: document.referrer || ""
-          })
+          body: JSON.stringify(data)
         }).catch(function () {});
       } catch (e) {}
+    }
+
+    (function () {
+      sendEvent({ type: "visit", ref: document.referrer || "" });
+    })();
+
+    /* ---------- Panel en vivo: personas viendo ahora ---------- */
+    (function () {
+      var host = location.hostname;
+      if (host === "localhost" || host === "127.0.0.1" || host === "") return;
+      var sid = null;
+      try {
+        sid = sessionStorage.getItem("fayra_sid");
+      } catch (e) {}
+      if (!sid) {
+        sid = "s-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
+        try { sessionStorage.setItem("fayra_sid", sid); } catch (e) {}
+      }
+      function ping() {
+        try {
+          fetch("/.netlify/functions/online", {
+            method: "POST",
+            keepalive: true,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ sid: sid, path: location.pathname })
+          }).catch(function () {});
+        } catch (e) {}
+      }
+      ping();
+      setInterval(ping, 30000);
     })();
 
     /* ---------- Inicio ---------- */
