@@ -1464,6 +1464,24 @@
         });
     })();
 
+    /* ---------- Monitor de visitas (Discord vía Netlify Function) ---------- */
+    (function () {
+      /* Solo en el dominio real: en localhost/preview no molesta */
+      var host = location.hostname;
+      if (host === "localhost" || host === "127.0.0.1" || host === "" ) return;
+      try {
+        fetch("/.netlify/functions/track", {
+          method: "POST",
+          keepalive: true,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            path: location.pathname + location.search,
+            ref: document.referrer || ""
+          })
+        }).catch(function () {});
+      } catch (e) {}
+    })();
+
     /* ---------- Inicio ---------- */
     setQty(1);
     render();
