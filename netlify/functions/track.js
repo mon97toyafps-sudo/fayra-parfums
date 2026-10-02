@@ -7,6 +7,7 @@
      - "visit" (default) → embed de nueva visita + contadores semanales
      - "cart"            → alguien agregó al carrito
      - "order"           → alguien pulsó "Pedir por WhatsApp"
+     - "click"           → apretó un botón de la web (sin ruido en Discord)
    ============================================================ */
 
 const WEBHOOK = process.env.DISCORD_WEBHOOK_URL;
@@ -72,7 +73,7 @@ exports.handler = async function (event) {
   let body = {};
   try { body = JSON.parse(event.body || "{}"); } catch (e) { /* body vacío */ }
 
-  const type = body.type === "cart" || body.type === "order" ? body.type : "visit";
+  const type = ["cart", "order", "click"].indexOf(body.type) !== -1 ? body.type : "visit";
 
   if (!WEBHOOK) {
     return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "sin webhook" }) };
@@ -83,12 +84,19 @@ exports.handler = async function (event) {
     return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "bot" }) };
   }
   const ahora = Date.now();
-  const intervalo = type === "visit" ? 20000 : type === "cart" ? 8000 : 0;
+  const intervalo = type === "visit" ? 20000 : type === "cart" ? 8000 : type === "click" ? 4000 : 0;
   const clave = ip + "|" + type;
   if (intervalo && hits[clave] && ahora - hits[clave] < intervalo) {
     return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "repetido" }) };
   }
   hits[clave] = ahora;
+
+  /* Los clics solo se cuentan: no ensucian el canal de Discord */
+  if (type === "click") {
+    const origen = String(body.source || "otro").slice(0, 24);
+    await hit("clic-" + origen);
+    return { statusCode: 200, body: JSON.stringify({ ok: true, counted: origen }) };
+  }
 
   const d = detectar(ua);
   const ubicacion = [ciudad, region, pais].filter(Boolean).join(", ") || "—";

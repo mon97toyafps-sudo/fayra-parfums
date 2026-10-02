@@ -51,8 +51,32 @@ exports.handler = async function () {
     get("sem-" + wk + "-visitas"),
     get("sem-" + wk + "-pc"),
     get("sem-" + wk + "-movil"),
-    get("visitas")
+    get("visitas"),
+    /* Qué botones están convirtiendo (contadores acumulados) */
+    get("clic-whatsapp-texto"),
+    get("clic-carrito-whatsapp"),
+    get("clic-flotante"),
+    get("clic-agregar-carrito"),
+    get("clic-ver-producto"),
+    get("clic-instagram"),
+    get("clic-compartir")
   ]);
+
+  /* Ordena los botones de mayor a menor para ver de un vistazo cuál vende */
+  const botones = [
+    ["💬 Botón de WhatsApp del catálogo", datos[4]],
+    ["🛒 Enviar pedido desde el carrito", datos[5]],
+    ["🟢 Botón flotante de WhatsApp", datos[6]],
+    ["➕ Agregar al carrito", datos[7]],
+    ["👁️ Ver detalle del producto", datos[8]],
+    ["📸 Instagram", datos[9]],
+    ["🔗 Compartir la tienda", datos[10]]
+  ].sort(function (a, b) { return b[1] - a[1]; });
+
+  const lineas = botones
+    .filter(function (b) { return b[1] > 0; })
+    .map(function (b) { return b[0] + ": **" + b[1] + "**"; })
+    .join("\n");
 
   const embed = {
     title: "📊 Resumen semanal de Fayra Parfums",
@@ -63,7 +87,7 @@ exports.handler = async function () {
       { name: "🏛️ Computadoras", value: "```" + datos[1] + "```", inline: true },
       { name: "📱 Celulares y tablets", value: "```" + datos[2] + "```", inline: true },
       { name: "👑 Total histórico de visitas", value: "```" + datos[3] + "```", inline: false }
-    ],
+    ].concat(lineas ? [{ name: "🎯 Clicks por botón (histórico)", value: lineas, inline: false }] : []),
     footer: { text: "Fayra Parfums · Reporte automático (lunes 9am)" },
     timestamp: new Date().toISOString()
   };
