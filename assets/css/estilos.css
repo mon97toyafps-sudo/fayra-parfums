@@ -279,11 +279,13 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
 }
-.marquee__track{display:flex;gap:56px;width:max-content;animation:slide 38s linear infinite}
+/* El hueco va dentro de cada copia (padding) y no entre ellas (gap): así el
+   desplazamiento de -50% calza exacto y el ciclo no da un salto al reiniciar. */
+.marquee__track{display:flex;width:max-content;animation:slide 38s linear infinite}
 .marquee:hover .marquee__track{animation-play-state:paused}
 .marquee__track span{
   font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
-  display:flex;align-items:center;gap:56px;white-space:nowrap;
+  display:flex;align-items:center;gap:56px;white-space:nowrap;padding-right:56px;
 }
 .marquee__track span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 auto}
 @keyframes slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
@@ -638,16 +640,10 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
   .hero__inner>*{opacity:1;transform:none}
   .grain,.aurora,.cursor,.scroll-hint{display:none}
 
-  /* La marquesina se vuelve una línea centrada y legible, no una tira cortada */
-  .marquee{padding:22px 0;-webkit-mask-image:none;mask-image:none}
+  /* La franja avanza siempre, tenga el sistema las animaciones prendidas o no:
+     es un texto lento y continuo, y así se pidió. Lo demás sigue quieto. */
   .marquee__track{
-    width:auto;justify-content:center;gap:0;padding:0 clamp(20px,5vw,48px);
+    animation:slide 38s linear infinite !important;
+    animation-iteration-count:infinite !important;
   }
-  .marquee__track>span{
-    display:block;text-align:center;white-space:normal;line-height:2.2;
-  }
-  .marquee__track>span+span{display:none}
-  /* los puntos dorados se quitan: el hueco entre textos los separa mejor */
-  .marquee__track span::after{display:none}
-  .marquee__track span>span{display:inline-block;margin:0 clamp(14px,3vw,34px)}
 }
