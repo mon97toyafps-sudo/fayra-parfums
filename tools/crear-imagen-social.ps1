@@ -32,58 +32,71 @@ $g.TextRenderingHint = [System.Drawing.Text.TextRenderingHint]::AntiAliasGridFit
 # fondo oscuro
 $g.Clear($fondo)
 
-# la foto del perfume, recortada para cubrir todo el lienzo
-$escala = [Math]::Max($ancho / $foto.Width, $alto / $foto.Height)
+# La foto se pone solo en la mitad derecha, con esquinas redondeadas,
+# para que el logo y el texto queden sobre el fondo limpio y no se mezclen.
+$ladoFoto   = 420
+$marco      = 3
+$margen     = 66
+$xFoto      = $ancho - $margen - $ladoFoto - $marco
+$yFoto      = [int](($alto - $ladoFoto) / 2)
+
+$escala = [Math]::Max($ladoFoto / $foto.Width, $ladoFoto / $foto.Height)
 $fw = [int]($foto.Width * $escala)
 $fh = [int]($foto.Height * $escala)
-$g.DrawImage($foto, [int](($ancho - $fw) / 2), [int](($alto - $fh) / 2), $fw, $fh)
 
-# velo oscuro para que se lea el texto
-$velo = New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb(205, 12, 10, 8))
-$g.FillRectangle($velo, 0, 0, $ancho, $alto)
-$velo.Dispose()
+# sombra suave detras de la foto
+$sombra = New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb(90, 0, 0, 0))
+$g.FillEllipse($sombra, $xFoto - 10, $yFoto + $ladoFoto - 6, $ladoFoto + 20, 26)
+$sombra.Dispose()
 
-# degradado: oscuro a la izquierda, transparente a la derecha
-$degradado = New-Object System.Drawing.Drawing2D.LinearGradientBrush(
-    (New-Object System.Drawing.Point 0, 0),
-    (New-Object System.Drawing.Point 980, 0),
-    [System.Drawing.Color]::FromArgb(255, 12, 10, 8),
-    [System.Drawing.Color]::FromArgb(0, 12, 10, 8))
-$g.FillRectangle($degradado, 0, 0, $ancho, $alto)
-$degradado.Dispose()
+# borde dorado de la foto
+$marcoLapiz = New-Object System.Drawing.Pen $oro, $marco
+$g.DrawRectangle($marcoLapiz, $xFoto, $yFoto, $ladoFoto, $ladoFoto)
+$marcoLapiz.Dispose()
 
-# filete dorado
-$oroLapiz = New-Object System.Drawing.Pen ([System.Drawing.Color]::FromArgb(120, 201, 163, 92), 1)
-$g.DrawRectangle($oroLapiz, 26, 26, $ancho - 52, $alto - 52)
+$clip = New-Object System.Drawing.Drawing2D.GraphicsPath
+$r = 18
+$clip.AddArc($xFoto, $yFoto, $r, $r, 180, 90)
+$clip.AddArc($xFoto + $ladoFoto - $r, $yFoto, $r, $r, 270, 90)
+$clip.AddArc($xFoto + $ladoFoto - $r, $yFoto + $ladoFoto - $r, $r, $r, 0, 90)
+$clip.AddArc($xFoto, $yFoto + $ladoFoto - $r, $r, $r, 90, 90)
+$clip.CloseFigure()
+$g.SetClip($clip)
+$g.DrawImage($foto, $xFoto + [int](($ladoFoto - $fw) / 2), $yFoto + [int](($ladoFoto - $fh) / 2), $fw, $fh)
+$g.ResetClip()
+$clip.Dispose()
+
+# filete dorado alrededor de toda la tarjeta
+$oroLapiz = New-Object System.Drawing.Pen ([System.Drawing.Color]::FromArgb(110, 201, 163, 92), 1)
+$g.DrawRectangle($oroLapiz, 24, 24, $ancho - 48, $alto - 48)
 $oroLapiz.Dispose()
 
 # logo de Fayra
-$anchoLogo = 300
+$anchoLogo = 264
 $altoLogo  = [int]($logo.Height * ($anchoLogo / [double]$logo.Width))
-$g.DrawImage($logo, 78, 78, $anchoLogo, $altoLogo)
+$g.DrawImage($logo, 76, 74, $anchoLogo, $altoLogo)
 
 # tipografias
-$serif  = New-Object System.Drawing.Font("Georgia", 21, [System.Drawing.FontStyle]::Regular)
+$serif  = New-Object System.Drawing.Font("Georgia", 25, [System.Drawing.FontStyle]::Regular)
 $sansEy = New-Object System.Drawing.Font("Segoe UI", 13, [System.Drawing.FontStyle]::Regular)
-$sans   = New-Object System.Drawing.Font("Segoe UI", 17, [System.Drawing.FontStyle]::Regular)
-$precio = New-Object System.Drawing.Font("Georgia", 30, [System.Drawing.FontStyle]::Regular)
+$sans   = New-Object System.Drawing.Font("Segoe UI", 18, [System.Drawing.FontStyle]::Regular)
+$precio = New-Object System.Drawing.Font("Georgia", 40, [System.Drawing.FontStyle]::Regular)
 
 $oroLapiz2 = New-Object System.Drawing.SolidBrush $oro
 $marfilL   = New-Object System.Drawing.SolidBrush $marfil
 $apagadoL  = New-Object System.Drawing.SolidBrush $apagado
 
-$g.DrawString("PERFUMER" + $i + "A " + $middle + " EL SALVADOR", $sansEy, $oroLapiz2, 80, 196)
-$g.DrawString("Odyssey Aqua", $serif, $marfilL, 78, 240)
-$g.DrawString("Armaf " + $middle + " 100 ml EDP", $sans, $apagadoL, 80, 296)
+$g.DrawString("PERFUMER" + $i + "A " + $middle + " EL SALVADOR", $sansEy, $oroLapiz2, 78, 236)
+$g.DrawString("Odyssey Aqua", $serif, $marfilL, 76, 274)
+$g.DrawString("Armaf " + $middle + " 100 ml EDP", $sans, $apagadoL, 78, 322)
 
-# precio y envio
-$g.DrawString('$64.99', $precio, $oroLapiz2, 78, 356)
-$g.DrawString("Env" + $i + "o incluido en todo El Salvador", $sans, $apagadoL, 80, 412)
-
-# linea dorada bajo el precio
+# linea dorada antes del precio
 $linea = New-Object System.Drawing.Pen ([System.Drawing.Color]::FromArgb(150, 201, 163, 92), 2)
-$g.DrawLine($linea, 80, 400, 210, 400)
+$g.DrawLine($linea, 78, 372, 168, 372)
 $linea.Dispose()
+
+$g.DrawString('$64.99', $precio, $oroLapiz2, 76, 388)
+$g.DrawString("Env" + $i + "o incluido en todo El Salvador", $sans, $apagadoL, 78, 460)
 
 # ---- guardar ----
 $codigos = [System.Drawing.Imaging.ImageCodecInfo]::GetImageEncoders()
