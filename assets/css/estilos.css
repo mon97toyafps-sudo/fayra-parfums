@@ -642,12 +642,10 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
     width:auto;justify-content:center;gap:0;padding:0 clamp(20px,5vw,48px);
   }
   .marquee__track>span{
-    display:block;text-align:center;white-space:normal;line-height:2.1;
+    display:block;text-align:center;white-space:normal;line-height:2.2;
   }
   .marquee__track>span+span{display:none}
-  .marquee__track span>span{display:inline}
-  .marquee__track span::after{
-    content:"\00b7";background:none;width:auto;height:auto;border-radius:0;
-    display:inline-block;margin:0 14px;vertical-align:middle;
-  }
+  /* los puntos dorados se quitan: el hueco entre textos los separa mejor */
+  .marquee__track span::after{display:none}
+  .marquee__track span>span{display:inline-block;margin:0 clamp(14px,3vw,34px)}
 }
