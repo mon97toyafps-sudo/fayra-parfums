@@ -311,12 +311,25 @@
     badgeSolo.classList.toggle("show", n > 0);
   }
 
-  if (drawer) {
-    function openCart() { drawer.classList.add("open"); if (overlay) overlay.classList.add("open"); syncLock(); }
-    function closeCart() { drawer.classList.remove("open"); if (overlay) overlay.classList.remove("open"); syncLock(); }
-    window.fayraOpenCart = openCart;
+  /* Estas funciones viven fuera del "if (drawer)" a propósito: en modo estricto
+     las funciones declaradas dentro de un bloque quedan encerradas en él, y el
+     botón "Agregar" del catálogo la necesita desde afuera. Cada una revisa que
+     existan sus elementos antes de tocar el DOM, para que también sirvan en la
+     portada, donde no hay carrito. */
+  function openCart() {
+    if (!drawer) return;
+    drawer.classList.add("open");
+    if (overlay) overlay.classList.add("open");
+    syncLock();
+  }
+  function closeCart() {
+    if (!drawer) return;
+    drawer.classList.remove("open");
+    if (overlay) overlay.classList.remove("open");
+    syncLock();
+  }
 
-    function render() {
+  function render() {
       var list = $("cartList");
       if (!list) return;
       list.innerHTML = "";
@@ -437,26 +450,26 @@
     }
     window.fayraAddToCart = addToCart;
 
-    $("cartOpen").addEventListener("click", openCart);
-    $("cartClose").addEventListener("click", closeCart);
-    if (overlay) overlay.addEventListener("click", closeCart);
-    $("cartClear").addEventListener("click", function () { cart = []; render(); });
+    if (drawer) {
+      $("cartOpen").addEventListener("click", openCart);
+      $("cartClose").addEventListener("click", closeCart);
+      $("cartClear").addEventListener("click", function () { cart = []; render(); });
 
-    $("cartWhats").addEventListener("click", function () {
-      if (!cart.length) return;
-      sendEvent({
-        type: "order",
-        detail: cart.map(function (it) { return it.name + " " + it.size + " ×" + it.qty + " — " + money(it.qty * it.price); }).join("\n") + "\nTotal: " + money(total()),
-        source: "Carrito 🛒"
+      $("cartWhats").addEventListener("click", function () {
+        if (!cart.length) return;
+        sendEvent({
+          type: "order",
+          detail: cart.map(function (it) { return it.name + " " + it.size + " ×" + it.qty + " — " + money(it.qty * it.price); }).join("\n") + "\nTotal: " + money(total()),
+          source: "Carrito 🛒"
+        });
       });
-    });
 
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeCart(); });
-    render();
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeCart(); });
+      render();
 
-    /* Si se entró desde el botón del carrito de otra página, se abre solo */
-    if (location.hash === "#mi-pedido" && count() > 0) openCart();
-  }
+      /* Si se entró desde el botón del carrito de otra página, se abre solo */
+      if (location.hash === "#mi-pedido" && count() > 0) openCart();
+    }
 
   /* ============================================================
      CATÁLOGO + VENTANA DE DETALLE
