@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# Verifica el balance del JS inline y de las funciones de Netlify.
+# Revisa el balance de llaves del JS y busca caracteres no-ASCII sospechosos.
 use strict;
 use warnings;
 
@@ -10,25 +10,32 @@ sub check {
     my $po = () = $src =~ /\(/g;
     my $pc = () = $src =~ /\)/g;
     my $ok = ($o == $c && $po == $pc) ? "ok" : "DESBALANCEADO";
-    printf "%-34s { %4d } %4d   ( %4d ) %4d   %s\n", $label, $o, $c, $po, $pc, $ok;
+    printf "%-28s { %4d } %4d   ( %4d ) %4d   %s\n", $label, $o, $c, $po, $pc, $ok;
     return $o == $c && $po == $pc;
 }
 
-my $html = do { local (@ARGV, $/) = ("index.html"); <> };
-
 my $todo = 1;
-$todo &= check("index.html (script inline)", $1) if $html =~ /<script>(.*?)<\/script>/s;
-$todo &= check("index.html (script inline #2", $1) if $html =~ /<script>(.*?)<\/script>/s;
-
-for my $f (qw(netlify/functions/track.js netlify/functions/online.js netlify/functions/weekly.js)) {
+for my $f (qw(assets/js/app.js netlify/functions/track.js netlify/functions/online.js netlify/functions/weekly.js)) {
     my $src = do { local (@ARGV, $/) = ($f); <> };
     $todo &= check($f, $src);
 }
 
-# Objetos literales en el JS inline: cada { sin pareja suele ser fallo
-my $inline = "";
-$inline = $1 while $html =~ /<script>(.*?)<\/script>/gs;
-my $sospechosos = () = $inline =~ /\{(?![^{}]*[\(\[])/g;
-print "\nsospechosos en inline: $sospechosos (informativo)\n";
+# Caracteres fuera del rango latino (indicador de texto colado por error)
+my $src = do { local (@ARGV, $/) = ("assets/js/app.js"); <> };
+my @raros = ($src =~ /([\x{4E00}-\x{9FFF}\x{3000}-\x{303F}\x{FF00}-\x{FFEF}])/g);
+if (@raros) {
+    print "CARACTERES RAROS: " . join(" ", map { sprintf("U+%04X", ord($_)) } @raros) . "\n";
+    $todo = 0;
+} else {
+    print "sin caracteres raros en el JS\n";
+}
+
+# El HTML no debería quedar con un solo archivo gigante de base64
+for my $f (glob("*.html")) {
+    my $h = do { local (@ARGV, $/) = ($f); <> };
+    my $d = () = $h =~ /data:image/g;
+    print "$f: $d imagenes embebidas en base64\n";
+    $todo = 0 if $d;
+}
 
 exit($todo ? 0 : 1);

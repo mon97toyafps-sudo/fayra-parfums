@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Catálogo · Fayra Parfums</title>
+<meta name="description" content="Catálogo de Fayra Parfums: perfumes originales importados, con envío gratis a todo El Salvador. Pide fácil por WhatsApp." />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="apple-touch-icon" href="assets/img/favicon.png" />
+<link rel="canonical" href="https://fayraparfumsv.netlify.app/catalogo.html" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Fayra Parfums" />
+<meta property="og:url" content="https://fayraparfumsv.netlify.app/catalogo.html" />
+<meta property="og:title" content="Catálogo · Fayra Parfums" />
+<meta property="og:description" content="Perfumes originales importados de Emiratos Árabes Unidos. Envío gratis a todo El Salvador." />
+<meta property="og:image" content="https://fayraparfumsv.netlify.app/assets/img/perfume-1.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0c0a08" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/estilos.css" />
+</head>
+
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container header__in">
+    <a class="logo" href="index.html" aria-label="Fayra Parfums — inicio">
+      <img class="logo__script" src="assets/img/logo-script.png" alt="Fayra Parfums" />
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html#quienes">Quiénes somos</a>
+      <a href="index.html#envios">Envíos</a>
+      <a href="catalogo.html" aria-current="page">Catálogo</a>
+      <a href="index.html#preguntas">Preguntas</a>
+      <a href="index.html#pedir">Cómo pedir</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="icon-btn" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <button class="icon-btn" id="cartOpen" aria-label="Ver mi pedido">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="icon-btn__count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#quienes">Quiénes somos <span>01</span></a>
+  <a href="index.html#envios">Envíos <span>02</span></a>
+  <a href="catalogo.html">Catálogo <span>03</span></a>
+  <a href="index.html#preguntas">Preguntas <span>04</span></a>
+  <a href="index.html#pedir">Cómo pedir <span>05</span></a>
+  <a class="mm-ig" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">@fayraparfums.sv</a>
+</div>
+
+<main>
+  <!-- ================= ENCABEZADO ================= -->
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Colección</p>
+      <h1>Nuestro <em>catálogo</em></h1>
+      <p class="page-head__lead">
+        Todos nuestros perfumes son originales e importados de Emiratos Árabes Unidos.
+        Toca cualquier producto para ver sus detalles y agregarlo a tu pedido.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= REJILLA DE PRODUCTOS ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="catalog__grid" id="catalogGrid"></div>
+
+      <p class="ask reveal">
+        ¿Buscas otro perfume?
+        <a href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums.%20%C2%BFCu%C3%A1l%20me%20recomiendas%3F" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+          Pregúntanos por WhatsApp
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= BANDERA ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>100% originales<span>Importados de Emiratos</span>Larga duración<span>Concentración EDP</span>Envío gratis<span>A todo El Salvador</span>Pedido fácil<span>Directo por WhatsApp</span></span>
+      <span>100% originales<span>Importados de Emiratos</span>Larga duración<span>Concentración EDP</span>Envío gratis<span>A todo El Salvador</span>Pedido fácil<span>Directo por WhatsApp</span></span>
+    </div>
+  </div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">
+          <img src="assets/img/logo-f.png" alt="Fayra Parfums" />
+          <b>FAYRA<br /><i>Parfums</i></b>
+        </div>
+        <p class="footer__tag">
+          Tienda salvadoreña de perfumes originales. Asesoría personalizada y
+          pedidos directos por WhatsApp.
+        </p>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">@fayraparfums.sv</a></li>
+          <li><a href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
+          <li><a href="tel:+50375626865">+503 7562-6865</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>En esta página</h4>
+        <ul>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="index.html#envios">Envíos</a></li>
+          <li><a href="index.html#preguntas">Preguntas</a></li>
+          <li><a href="index.html#quienes">Quiénes somos</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__note">
+      Precios en dólares (USD) sujetos a disponibilidad; confirmamos cada pedido por WhatsApp.
+    </p>
+
+    <div class="footer__legal">
+      <span>© 2026 Fayra Parfums · El Salvador</span>
+      <span id="visitRow">Todos los derechos reservados. · Visitas: <span id="visitas">…</span></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+
+<!-- ================= VENTANA DEL PRODUCTO ================= -->
+<div class="pv" id="productView" role="dialog" aria-modal="true" aria-label="Detalle del perfume" aria-hidden="true">
+  <div class="pv__bar">
+    <a class="btn btn--ghost btn--sm" href="catalogo.html" id="pvBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      Catálogo
+    </a>
+    <button class="pv__close" id="pvClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="pv__wrap">
+    <div class="pv__col">
+      <div class="pv__media" id="pvMedia">
+        <img id="pvImg" src="assets/img/perfume-1.jpg" alt="" />
+        <button type="button" class="pv__nav pv__nav--prev" id="pvPrev" aria-label="Foto anterior">‹</button>
+        <button type="button" class="pv__nav pv__nav--next" id="pvNext" aria-label="Foto siguiente">›</button>
+        <span class="pv__counter" id="pvCounter"></span>
+      </div>
+      <div class="pv__thumbs" id="pvThumbs"></div>
+    </div>
+
+    <div>
+      <p class="pv__brand" id="pvBrand">Armaf</p>
+      <h2 class="pv__name" id="pvName">Odyssey Aqua</h2>
+      <div class="pv__tags" id="pvTags"></div>
+      <p class="pv__desc" id="pvDesc"></p>
+
+      <div class="pv__notes" id="pvNotes"></div>
+
+      <div class="pv__buy">
+        <span class="pv__price" id="pvPrice">$64.99</span>
+        <div class="qty" role="group" aria-label="Cantidad">
+          <button type="button" id="qtyMinus" aria-label="Disminuir cantidad">−</button>
+          <span class="qty__val" id="qtyVal">1</span>
+          <button type="button" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
+        </div>
+        <a class="btn btn--wa" id="pvWhats" href="https://wa.me/50375626865" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+          Pedir por WhatsApp
+        </a>
+        <button class="btn btn--ghost" id="pvAdd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+          Agregar a mi pedido
+        </button>
+        <span class="pv__free">Envío gratis a todo El Salvador · Pagas al recibir</span>
+      </div>
+
+      <p class="pv__hint">
+        Agrega el perfume a tu pedido y envíalo por WhatsApp. Coordinamos disponibilidad,
+        pago y entrega contigo.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CARRITO ================= -->
+<div class="overlay" id="cartOverlay"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Mi pedido">
+  <div class="drawer__head">
+    <h2>Mi pedido</h2>
+    <button class="drawer__x" id="cartClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div class="drawer__body" id="cartList"></div>
+
+  <div class="drawer__foot">
+    <div class="drawer__total">
+      <span>Total estimado</span>
+      <strong id="cartTotal">$0.00</strong>
+    </div>
+    <p class="drawer__free">Envío gratis a todo El Salvador · Pagas al recibir</p>
+    <a class="btn btn--wa" id="cartWhats" href="https://wa.me/50375626865" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+      Enviar pedido por WhatsApp
+    </a>
+    <button class="drawer__clear" id="cartClear" type="button">
+      <svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M6 7l1 13h10l1-13"/></svg>
+      Vaciar lista
+    </button>
+  </div>
+</aside>
+
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>
