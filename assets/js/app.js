@@ -10,7 +10,7 @@
      mensajes de pedido.
      Formato: código de país + número, sin +, sin guiones ni espacios.
      ------------------------------------------------------------ */
-  var WA = "50375626865";
+  var WA = "50363012305";
 
   /* ------------------------------------------------------------
      PRODUCTOS
