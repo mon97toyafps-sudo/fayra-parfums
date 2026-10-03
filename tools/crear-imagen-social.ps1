@@ -30,16 +30,13 @@ $g.TextRenderingHint = [System.Drawing.Text.TextRenderingHint]::AntiAliasGridFit
 $g.Clear($fondo)
 
 # halo dorado suave en el centro, para que el fondo no quede plano
-$halo = New-Object System.Drawing.Drawing2D.PathGradientBrush(
-    (New-Object System.Drawing.Drawing2D.GraphicsPath))
-$halo.Path.AddEllipse(300, -260, 600, 600)
-$centro = New-Object System.Drawing.Point2D 600, 40
-$borde  = New-Object System.Drawing.Point2D 600, 120
-$halo.CenterPoint = $centro
-$halo.CenterColor = [System.Drawing.Color]::FromArgb(48, 201, 163, 92)
-$halo.SurroundColors = @([System.Drawing.Color]::FromArgb(0, 201, 163, 92))
-$g.FillRectangle($halo, 0, 0, $ancho, $alto)
-$halo.Dispose()
+for ($r = 520; $r -gt 0; $r -= 26) {
+    $alfa = [int](3 * (1 - ($r / 520)))
+    if ($alfa -lt 1) { continue }
+    $pincel = New-Object System.Drawing.SolidBrush ([System.Drawing.Color]::FromArgb($alfa, 201, 163, 92))
+    $g.FillEllipse($pincel, (600 - $r), (200 - $r), ($r * 2), ($r * 2))
+    $pincel.Dispose()
+}
 
 # filete dorado
 $oroLapiz = New-Object System.Drawing.Pen ([System.Drawing.Color]::FromArgb(110, 201, 163, 92), 1)
@@ -58,23 +55,25 @@ $linea = New-Object System.Drawing.Pen ([System.Drawing.Color]::FromArgb(170, 20
 $g.DrawLine($linea, [int](($ancho - 120) / 2), $yLinea, [int](($ancho + 120) / 2), $yLinea)
 $linea.Dispose()
 
-# ---- textos ----
+# ---- textos (centrados midiendo el ancho antes de dibujar) ----
 $sansEy  = New-Object System.Drawing.Font("Segoe UI", 17, [System.Drawing.FontStyle]::Regular)
 $sans    = New-Object System.Drawing.Font("Segoe UI", 20, [System.Drawing.FontStyle]::Regular)
 
 $oroL    = New-Object System.Drawing.SolidBrush $oro
 $apagadoL= New-Object System.Drawing.SolidBrush $apagado
 
-$formato = New-Object System.Drawing.StringFormat
-$formato.Alignment = [System.Drawing.StringAlignment]::Center
+function Centrar([string]$texto, $fuente, $pincel, [int]$y) {
+    $anchoTexto = $g1.MeasureString($texto, $fuente).Width
+    $x = [int](($anchoGlobal - $anchoTexto) / 2)
+    $g1.DrawString($texto, $fuente, $pincel, $x, $y)
+}
 
-$rectEy = New-Object System.Drawing.RectangleF 0, [float]($yLinea + 30), [float]$ancho, 40
-$g.DrawString("PERFUMER" + $i + "A " + $middle + " EL SALVADOR", $sansEy, $oroL, $rectEy, $formato)
+$g1 = $g
+$anchoGlobal = $ancho
 
-$rect2 = New-Object System.Drawing.RectangleF 0, [float]($yLinea + 72), [float]$ancho, 40
-$g.DrawString("Env" + $i + "o incluido en todo El Salvador", $sans, $apagadoL, $rect2, $formato)
+Centrar ("PERFUMER" + $i + "A " + $middle + " EL SALVADOR") $sansEy $oroL ($yLinea + 34)
+Centrar ("Env" + $i + "o incluido en todo El Salvador")    $sans  $apagadoL ($yLinea + 76)
 
-$formato.Dispose()
 $apagadoL.Dispose(); $oroL.Dispose()
 $sans.Dispose(); $sansEy.Dispose()
 $g.Dispose(); $logo.Dispose()
