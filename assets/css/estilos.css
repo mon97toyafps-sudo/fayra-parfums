@@ -275,15 +275,18 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
 .marquee{
   position:relative;z-index:2;border-block:1px solid var(--line);
   background:var(--band);overflow:hidden;padding:20px 0;
+  /* los bordes se desvanecen: el texto entra y sale en vez de cortarse en seco */
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
 }
-.marquee__track{display:flex;gap:56px;width:max-content;animation:slide 34s linear infinite}
+.marquee__track{display:flex;gap:56px;width:max-content;animation:slide 38s linear infinite}
 .marquee:hover .marquee__track{animation-play-state:paused}
 .marquee__track span{
   font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
   display:flex;align-items:center;gap:56px;white-space:nowrap;
 }
 .marquee__track span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 auto}
-@keyframes slide{to{transform:translateX(-50%)}}
+@keyframes slide{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
 /* ---------- Regresos al ver ---------- */
 .reveal{opacity:0;transform:translateY(38px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
@@ -621,7 +624,9 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
   .icon-btn,.burger{width:39px;height:39px}
 }
 
-/* Respeta a quien pidió menos movimiento */
+/* Respeta a quien pidió menos movimiento.
+   Nota: quien tenga esto apagado en el sistema (Windows lo tiene por defecto
+   en "Efectos de animación") sigue viendo todo el contenido, solo que fijo. */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
     animation-duration:.01ms !important;animation-iteration-count:1 !important;
@@ -630,5 +635,19 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
   .reveal{opacity:1;transform:none}
   .hero__inner>*{opacity:1;transform:none}
   .grain,.aurora,.cursor,.scroll-hint{display:none}
-  .marquee__track{animation:none}
+
+  /* La marquesina se vuelve una línea centrada y legible, no una tira cortada */
+  .marquee{padding:22px 0;-webkit-mask-image:none;mask-image:none}
+  .marquee__track{
+    width:auto;justify-content:center;gap:0;padding:0 clamp(20px,5vw,48px);
+  }
+  .marquee__track>span{
+    display:block;text-align:center;white-space:normal;line-height:2.1;
+  }
+  .marquee__track>span+span{display:none}
+  .marquee__track span>span{display:inline}
+  .marquee__track span::after{
+    content:"\00b7";background:none;width:auto;height:auto;border-radius:0;
+    display:inline-block;margin:0 14px;vertical-align:middle;
+  }
 }
