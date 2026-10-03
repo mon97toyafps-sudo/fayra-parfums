@@ -1,1721 +1,1651 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fayra Parfums · Perfumes originales en El Salvador</title>
-  <meta name="description" content="Fayra Parfums, tienda de perfumes originales en El Salvador. Conoce nuestro catálogo y pide fácil por WhatsApp." />
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
-  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
-  <link rel="canonical" href="https://fayraparfumsv.netlify.app/" />
-
-  <!-- Compartir el link: WhatsApp, Instagram y Facebook muestran esta tarjeta -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Fayra Parfums" />
-  <meta property="og:url" content="https://fayraparfumsv.netlify.app/" />
-  <meta property="og:title" content="Odyssey Aqua · Armaf · 100 ml EDP · $64.99" />
-  <meta property="og:description" content="Perfumes originales importados de Emiratos Árabes Unidos. Envío gratis a todo El Salvador. Pide fácil por WhatsApp." />
-  <meta property="og:image" content="https://fayraparfumsv.netlify.app/assets/img/perfume-1.jpg" />
-  <meta property="og:image:width" content="1080" />
-  <meta property="og:image:height" content="1080" />
-  <meta property="og:image:alt" content="Frasco de Odyssey Aqua de Armaf, 100 ml" />
-  <meta property="og:locale" content="es_SV" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Odyssey Aqua · Armaf · 100 ml EDP · $64.99" />
-  <meta name="twitter:description" content="Perfumes originales importados. Envío gratis a todo El Salvador." />
-  <meta name="twitter:image" content="https://fayraparfumsv.netlify.app/assets/img/perfume-1.jpg" />
-
-  <meta name="theme-color" content="#0c0a08" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ============================================================
-       FAYRA PARFUMS — réplica de fayraparfumsv.netlify.app
-       Fondo cálido #0c0a08 · bandas #16120e · dorado #c9a35c
-       ============================================================ */
-
-    :root {
-      --bg: #0c0a08;
-      --band: #16120e;
-      --ivory: #f4ece0;
-      --muted: rgba(244, 236, 224, 0.62);
-      --faint: rgba(244, 236, 224, 0.42);
-      --gold: #c9a35c;
-      --gold-2: #e6c98f;
-      --line: rgba(244, 236, 224, 0.12);
-      --gold-line: rgba(201, 163, 92, 0.35);
-      --wa: #25d366;
-      --wa-dark: #1eb955;
-      --display: "Cormorant Garamond", Georgia, serif;
-      --body: "Jost", system-ui, -apple-system, sans-serif;
-      --header-h: 66px;
-      --ease: cubic-bezier(0.22, 0.61, 0.24, 1);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--ivory);
-      font-family: var(--body);
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    body.no-scroll { overflow: hidden; }
-
-    img { display: block; max-width: 100%; }
-    a { color: inherit; text-decoration: none; }
-    button { font-family: inherit; cursor: pointer; }
-
-    ::selection { background: var(--gold); color: var(--bg); }
-
-    .container { width: min(1240px, calc(100% - 40px)); margin: 0 auto; }
-
-    section { scroll-margin-top: var(--header-h); }
-
-    h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.12; }
-
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 4.5px;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 400;
-    }
-
-    .muted { color: var(--muted); }
-
-    /* ---------- Botones ---------- */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 32px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 2.4px;
-      text-transform: uppercase;
-      background: var(--gold);
-      color: #17120a;
-      transition: transform 0.35s var(--ease), background 0.35s var(--ease),
-                  border-color 0.35s var(--ease), color 0.35s var(--ease),
-                  box-shadow 0.35s var(--ease);
-    }
-    .btn:hover { transform: translateY(-2px); background: var(--gold-2); box-shadow: 0 12px 30px rgba(201, 163, 92, 0.16); }
-
-    .btn--outline { background: transparent; border-color: var(--line); color: var(--ivory); }
-    .btn--outline:hover { background: transparent; border-color: var(--gold); color: var(--gold); box-shadow: none; }
-
-    .btn--wa { background: var(--wa); color: #062311; }
-    .btn--wa:hover { background: var(--wa-dark); box-shadow: 0 12px 30px rgba(37, 211, 102, 0.18); }
-
-    .btn--sm { padding: 11px 22px; font-size: 11px; letter-spacing: 2px; }
-    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-    /* ---------- Animación de entrada ---------- */
-    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
-    .reveal.is-visible { opacity: 1; transform: none; }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .reveal { opacity: 1; transform: none; transition: none; }
-      * { animation: none !important; }
-    }
-
-    /* ============================================================
-       HEADER
-       ============================================================ */
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 60;
-      background: rgba(12, 10, 8, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-    }
-    .header__inner {
-      height: var(--header-h);
-      display: flex;
-      align-items: center;
-      gap: 26px;
-    }
-
-    .logo { display: flex; align-items: center; gap: 11px; }
-    .logo__mark { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
-    .logo__script { height: 44px; width: auto; display: block; margin: -6px 0; }
-    .logo__word { font-family: var(--display); font-size: 22px; letter-spacing: 2px; color: var(--ivory); line-height: 1; }
-    .logo__sub { font-size: 9.5px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-left: 7px; }
-
-    .nav { display: flex; gap: 34px; margin-left: auto; }
-    .nav a {
-      position: relative;
-      font-size: 11.5px;
-      letter-spacing: 2.6px;
-      text-transform: uppercase;
-      color: var(--ivory);
-      font-weight: 400;
-      padding: 4px 0;
-      transition: color 0.3s;
-    }
-    .nav a::after {
-      content: "";
-      position: absolute;
-      left: 0; bottom: 0;
-      width: 100%; height: 1px;
-      background: var(--gold);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.4s var(--ease);
-    }
-    .nav a:hover { color: var(--gold); }
-    .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
-
-    .icon-btn {
-      position: relative;
-      width: 38px;
-      height: 38px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      color: var(--ivory);
-      transition: border-color 0.3s, color 0.3s;
-      flex-shrink: 0;
-    }
-    .icon-btn:hover { border-color: var(--gold); color: var(--gold); }
-    .icon-btn svg { width: 17px; height: 17px; }
-    .icon-btn__count {
-      position: absolute;
-      top: -7px; right: -7px;
-      min-width: 17px; height: 17px;
-      padding: 0 4px;
-      border-radius: 999px;
-      background: var(--gold);
-      color: var(--bg);
-      font-size: 10px;
-      font-weight: 600;
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
-    .icon-btn__count.show { display: inline-flex; }
-    .icon-btn__count.bump { animation: bump 0.45s var(--ease); }
-    @keyframes bump { 40% { transform: scale(1.5); } }
-
-    .header__actions { display: flex; gap: 10px; align-items: center; }
-
-    /* Menú móvil */
-    .burger {
-      display: none;
-      width: 38px; height: 38px;
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      color: var(--ivory);
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-    .burger span { display: block; width: 16px; height: 1px; background: currentColor; transition: transform 0.35s var(--ease), opacity 0.3s; }
-    .burger.open span:nth-child(1) { transform: translateY(3px) rotate(45deg); }
-    .burger.open span:nth-child(2) { opacity: 0; }
-    .burger.open span:nth-child(3) { transform: translateY(-3px) rotate(-45deg); }
-
-    .mobile-menu {
-      position: fixed;
-      inset: var(--header-h) 0 0 0;
-      background: rgba(12, 10, 8, 0.98);
-      z-index: 55;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s var(--ease), visibility 0.4s;
-    }
-    .mobile-menu.open { opacity: 1; visibility: visible; }
-    .mobile-menu a {
-      font-family: var(--display);
-      font-size: 32px;
-      color: var(--ivory);
-      padding: 9px 18px;
-      transition: color 0.3s;
-    }
-    .mobile-menu a:hover { color: var(--gold); }
-    .mobile-menu .mm-ig {
-      margin-top: 30px;
-      font-family: var(--body);
-      font-size: 11.5px;
-      letter-spacing: 2.6px;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid var(--gold-line);
-      border-radius: 999px;
-      padding: 13px 26px;
-    }
-
-    /* ============================================================
-       HERO
-       ============================================================ */
-    .hero { padding: clamp(60px, 9vh, 100px) 0 clamp(56px, 8vh, 90px); }
-    .hero__mark { width: 78px; height: 78px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); margin-bottom: 34px; }
-    .hero h1 {
-      font-size: clamp(46px, 7.2vw, 74px);
-      letter-spacing: 0.5px;
-      margin: 22px 0 26px;
-    }
-    .hero h1 em { font-style: italic; color: var(--gold); }
-    .hero__text { max-width: 560px; color: var(--muted); font-size: 17px; margin-bottom: 38px; }
-    .hero__actions { display: flex; gap: 16px; flex-wrap: wrap; }
-
-    /* ---------- Franja de beneficios ---------- */
-    .features { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--bg); }
-    .features__grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 26px;
-      padding: 30px 0;
-      text-align: center;
-    }
-    .feature__title { font-family: var(--display); font-size: 21px; color: var(--ivory); }
-    .feature__sub { font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--faint); margin-top: 4px; }
-
-    /* ============================================================
-       CATÁLOGO
-       ============================================================ */
-    .catalog { padding: clamp(70px, 10vh, 110px) 0; }
-    .section-head { margin-bottom: 46px; }
-    .section-head h2 { font-size: clamp(34px, 4.6vw, 50px); margin-top: 16px; letter-spacing: 0.5px; }
-
-    .card {
-      width: min(340px, 100%);
-      background: transparent;
-    }
-    .card__media {
-      position: relative;
-      border-radius: 14px;
-      overflow: hidden;
-      aspect-ratio: 4 / 5;
-      background: #efeae2;
-      cursor: pointer;
-    }
-    .card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
-    .card:hover .card__media img { transform: scale(1.045); }
-
-    .badge {
-      position: absolute;
-      top: 14px;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      padding: 7px 14px;
-      border-radius: 999px;
-    }
-    .badge--dark { left: 14px; background: rgba(12, 10, 8, 0.82); color: var(--ivory); }
-    .badge--gold { right: 14px; background: var(--gold); color: #17120a; }
-
-    .card__brand { font-size: 10.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); margin: 22px 0 6px; }
-    .card__name { font-size: 30px; cursor: pointer; transition: color 0.3s; }
-    .card__name:hover { color: var(--gold); }
-    .card__desc { color: var(--muted); font-size: 14.5px; margin: 10px 0 18px; }
-    .card__bottom { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-    .card__price { font-family: var(--display); font-size: 27px; color: var(--ivory); }
-    .card__size { font-size: 11px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--faint); }
-
-    .ask { margin-top: 46px; color: var(--muted); font-size: 15px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .ask a {
-      color: var(--gold);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: color 0.3s;
-    }
-    .ask a:hover { color: var(--gold-2); }
-    .ask svg { width: 16px; height: 16px; }
-
-    /* ============================================================
-       PREGUNTAS FRECUENTES · responde lo que siempre preguntan
-       ============================================================ */
-    .faq { padding: clamp(70px, 10vh, 110px) 0; border-top: 1px solid var(--line); }
-    .faq__grid {
-      margin-top: 44px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 18px;
-    }
-    .faq__item {
-      background: var(--band);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 26px 24px;
-      transition: border-color 0.35s var(--ease), transform 0.35s var(--ease);
-    }
-    .faq__item:hover { border-color: var(--gold); transform: translateY(-3px); }
-    .faq__q {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 17px;
-      color: var(--ivory);
-      margin-bottom: 10px;
-    }
-    .faq__q svg { width: 19px; height: 19px; color: var(--gold); flex: 0 0 auto; }
-    .faq__a { color: var(--muted); font-size: 15px; line-height: 1.65; }
-    .faq__a strong { color: var(--gold); font-weight: 500; }
-
-    /* Compartir */
-    .share {
-      margin-top: 40px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-    .share__label { color: var(--muted); font-size: 15px; }
-
-    /* ============================================================
-       QUIÉNES SOMOS
-       ============================================================ */
-    .about {
-      padding: clamp(70px, 10vh, 110px) 0;
-      border-top: 1px solid var(--line);
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: clamp(30px, 5vw, 70px);
-      align-items: center;
-    }
-    .about__mark {
-      width: 210px;
-      height: 210px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid var(--line);
-      justify-self: center;
-    }
-    .about h2 { font-size: clamp(32px, 4.4vw, 48px); margin: 16px 0 26px; }
-    .about p { color: var(--muted); max-width: 680px; margin-bottom: 18px; }
-
-    /* ============================================================
-       BANDA: ENVÍOS + CÓMO PEDIR
-       ============================================================ */
-    .band { background: var(--band); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .band > .inner { padding: clamp(66px, 9vh, 100px) 0; }
-
-    .shipping h2 { font-size: clamp(34px, 4.8vw, 52px); margin: 16px 0 22px; }
-    .shipping h2 em { font-style: italic; color: var(--gold); }
-    .shipping p { color: var(--muted); max-width: 620px; margin-bottom: 30px; }
-
-    .steps {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      margin-top: 60px;
-      padding-top: 60px;
-      border-top: 1px solid var(--line);
-    }
-    .step__num { font-family: var(--display); font-size: 46px; color: var(--gold); line-height: 1; }
-    .step h3 { font-size: 26px; margin: 14px 0 8px; }
-    .step p { color: var(--muted); font-size: 15px; }
-
-    /* ============================================================
-       FOOTER
-       ============================================================ */
-    .footer { background: var(--band); padding-bottom: 84px; }
-    .footer__grid {
-      display: grid;
-      grid-template-columns: 1.3fr 1fr 1fr;
-      gap: 44px;
-      padding: 66px 0 44px;
-    }
-    .footer__brand .logo { margin-bottom: 18px; }
-    .footer__tag { color: var(--muted); font-size: 14.5px; max-width: 330px; }
-    .footer h4 { font-size: 10.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 18px; }
-    .footer ul { list-style: none; }
-    .footer li { margin-bottom: 12px; font-size: 15px; color: var(--muted); }
-    .footer li a { transition: color 0.3s; }
-    .footer li a:hover { color: var(--ivory); }
-    .footer li a.gold { color: var(--gold); text-decoration: underline; text-underline-offset: 4px; }
-    .footer li a.gold:hover { color: var(--gold-2); }
-    .footer__note { color: var(--muted); font-size: 14px; max-width: 320px; }
-
-    .footer__bottom {
-      border-top: 1px solid var(--line);
-      padding: 22px 0;
-      font-size: 13px;
-      letter-spacing: 1px;
-      color: var(--faint);
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* ============================================================
-       VENTANA DEL PRODUCTO
-       ============================================================ */
-    .product-view {
-      position: fixed;
-      inset: 0;
-      z-index: 90;
-      background: var(--bg);
-      overflow-y: auto;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(14px);
-      transition: opacity 0.45s var(--ease), visibility 0.45s, transform 0.45s var(--ease);
-    }
-    .product-view.open { opacity: 1; visibility: visible; transform: none; }
-
-    .pv__bar {
-      position: sticky;
-      top: 0;
-      z-index: 5;
-      background: rgba(12, 10, 8, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--line);
-    }
-    .pv__bar-inner { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
-    .pv__back {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 11.5px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--ivory);
-      background: none;
-      border: none;
-      transition: color 0.3s;
-    }
-    .pv__back:hover { color: var(--gold); }
-    .pv__close {
-      width: 38px; height: 38px;
-      background: transparent;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      color: var(--ivory);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.3s, color 0.3s, transform 0.3s;
-    }
-    .pv__close:hover { border-color: var(--gold); color: var(--gold); transform: rotate(90deg); }
-    .pv__close svg { width: 15px; height: 15px; }
-
-    .pv__grid {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: clamp(34px, 5vw, 64px);
-      padding: clamp(34px, 5vh, 60px) 0 clamp(60px, 8vh, 90px);
-      align-items: start;
-    }
-
-    .pv__media {
-      background: #efeae2;
-      border-radius: 16px;
-      overflow: hidden;
-      cursor: zoom-in;
-      position: sticky;
-      top: calc(var(--header-h) + 24px);
-    }
-    .pv__media img { width: 100%; transition: transform 0.7s var(--ease); }
-    .pv__media.zoomed { cursor: zoom-out; }
-    .pv__media.zoomed img { transform: scale(1.7); }
-
-    /* Galería de fotos */
-    .pv__nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      border: 1px solid rgba(12, 10, 8, 0.18);
-      background: rgba(244, 236, 224, 0.88);
-      color: #17120a;
-      font-size: 22px;
-      line-height: 1;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.3s, transform 0.3s;
-      z-index: 3;
-    }
-    .pv__nav:hover { background: #fff; transform: translateY(-50%) scale(1.07); }
-    .pv__nav--prev { left: 14px; }
-    .pv__nav--next { right: 14px; }
-    .pv__counter {
-      position: absolute;
-      right: 14px; bottom: 14px;
-      background: rgba(12, 10, 8, 0.72);
-      color: var(--ivory);
-      font-size: 11px;
-      letter-spacing: 2px;
-      padding: 5px 12px;
-      border-radius: 999px;
-      z-index: 3;
-    }
-    .pv__thumbs { display: flex; gap: 10px; margin-top: 12px; }
-    .pv__thumb {
-      width: 64px; height: 78px;
-      padding: 0;
-      border: 1px solid var(--line);
-      border-radius: 10px;
-      overflow: hidden;
-      background: #efeae2;
-      opacity: 0.55;
-      transition: opacity 0.3s, border-color 0.3s;
-    }
-    .pv__thumb img { width: 100%; height: 100%; object-fit: cover; }
-    .pv__thumb.active, .pv__thumb:hover { opacity: 1; border-color: var(--gold); }
-
-    /* Botón flotante de WhatsApp */
-    .wa-float {
-      position: fixed;
-      right: 20px; bottom: 20px;
-      width: 58px; height: 58px;
-      border-radius: 50%;
-      background: var(--wa);
-      color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.35);
-      z-index: 80;
-      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
-      animation: waIn 0.6s var(--ease) 0.8s both;
-    }
-    .wa-float:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 16px 36px rgba(37, 211, 102, 0.45); }
-    .wa-float svg { width: 28px; height: 28px; }
-    @keyframes waIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-
-    .pv__brand { font-size: 11px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--gold); }
-    .pv__name { font-size: clamp(42px, 5vw, 62px); margin: 14px 0 20px; letter-spacing: 0.5px; }
-
-    .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
-    .tag {
-      font-size: 10.5px;
-      letter-spacing: 2.4px;
-      text-transform: uppercase;
-      color: var(--ivory);
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 16px;
-    }
-
-    .pv__tagline { font-family: var(--display); font-style: italic; font-size: 21px; color: var(--ivory); margin-bottom: 20px; }
-    .pv__desc { color: var(--muted); font-size: 15.5px; margin-bottom: 34px; }
-
-    .notes {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 34px;
-    }
-    .notes > div { padding: 20px 22px; border-right: 1px solid var(--line); }
-    .notes > div:last-child { border-right: none; }
-    .notes h4 { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
-    .notes ul { list-style: none; }
-    .notes li { font-size: 15px; color: var(--ivory); padding: 4px 0; }
-
-    .pv__price { font-family: var(--display); font-size: 42px; color: var(--gold); line-height: 1; }
-    .pv__ship { font-size: 11.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
-
-    .pv__qty { display: flex; align-items: center; gap: 18px; margin: 28px 0 18px; flex-wrap: wrap; }
-    .qty {
-      display: inline-flex;
-      align-items: center;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .qty button {
-      width: 44px;
-      height: 46px;
-      background: none;
-      border: none;
-      color: var(--ivory);
-      font-size: 17px;
-      transition: color 0.3s, background 0.3s;
-    }
-    .qty button:hover { color: var(--gold); background: rgba(244, 236, 224, 0.04); }
-    .qty__val { min-width: 44px; text-align: center; font-size: 15.5px; letter-spacing: 1px; }
-    .pv__qty-label { font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--faint); }
-
-    .pv__actions { display: flex; gap: 14px; flex-wrap: wrap; }
-    .pv__actions .btn { flex: 1; min-width: 230px; }
-    .pv__note { color: var(--faint); font-size: 13.5px; margin-top: 22px; max-width: 480px; }
-
-    /* ============================================================
-       CARRITO — "MI PEDIDO"
-       ============================================================ */
-    .drawer-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(6, 5, 4, 0.62);
-      z-index: 95;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s var(--ease), visibility 0.4s;
-    }
-    .drawer-overlay.open { opacity: 1; visibility: visible; }
-
-    .drawer {
-      position: fixed;
-      top: 0; right: 0;
-      height: 100%;
-      width: min(440px, 100%);
-      background: var(--band);
-      border-left: 1px solid var(--line);
-      z-index: 96;
-      transform: translateX(100%);
-      transition: transform 0.5s var(--ease);
-      display: flex;
-      flex-direction: column;
-    }
-    .drawer.open { transform: none; }
-
-    .drawer__head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 26px;
-      border-bottom: 1px solid var(--line);
-    }
-    .drawer__head h3 { font-size: 30px; }
-    .drawer__close {
-      width: 36px; height: 36px;
-      background: none;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      color: var(--ivory);
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.3s, color 0.3s, transform 0.3s;
-    }
-    .drawer__close:hover { border-color: var(--gold); color: var(--gold); transform: rotate(90deg); }
-
-    .drawer__list { flex: 1; overflow-y: auto; padding: 6px 26px; }
-
-    .cart-item {
-      display: grid;
-      grid-template-columns: 74px 1fr;
-      gap: 16px;
-      padding: 22px 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .cart-item__img {
-      width: 74px; height: 92px;
-      object-fit: cover;
-      background: #efeae2;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-    }
-    .cart-item__brand { font-size: 9.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); }
-    .cart-item__name { font-family: var(--display); font-size: 21px; line-height: 1.2; margin-top: 3px; }
-    .cart-item__size { font-size: 10.5px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--faint); margin-top: 4px; }
-
-    .cart-item__row { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; gap: 12px; flex-wrap: wrap; }
-    .cart-item__price { font-family: var(--display); font-size: 21px; color: var(--gold); }
-
-    .cart-item__remove {
-      background: none;
-      border: none;
-      color: var(--faint);
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 4px 0;
-      transition: color 0.3s;
-    }
-    .cart-item__remove:hover { color: #cf7b5c; }
-
-    .drawer__empty { text-align: center; padding: 70px 16px; color: var(--muted); }
-    .drawer__empty p { font-size: 15px; margin-bottom: 8px; }
-    .drawer__empty small { display: block; color: var(--faint); font-size: 13px; margin-bottom: 26px; }
-
-    .drawer__foot { border-top: 1px solid var(--line); padding: 22px 26px 28px; }
-    .drawer__total-label { font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--faint); }
-    .drawer__total-row { display: flex; align-items: baseline; justify-content: space-between; margin: 4px 0 6px; }
-    .drawer__total { font-family: var(--display); font-size: 34px; color: var(--gold); }
-    .drawer__ship { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
-    .drawer__foot .btn--wa { width: 100%; }
-    .drawer__clear {
-      display: block;
-      width: 100%;
-      margin-top: 14px;
-      background: none;
-      border: none;
-      color: var(--faint);
-      font-size: 11px;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-    .drawer__clear:hover { color: var(--ivory); }
-
-    /* ============================================================
-       RESPONSIVE
-       ============================================================ */
-    @media (max-width: 1020px) {
-      .nav { display: none; }
-      .burger { display: flex; }
-      .header__inner { gap: 14px; }
-      .header__actions { margin-left: auto; }
-      .features__grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
-      .about { grid-template-columns: 1fr; text-align: center; }
-      .about__mark { width: 170px; height: 170px; }
-      .about p { margin-left: auto; margin-right: auto; }
-      .steps { grid-template-columns: 1fr; gap: 34px; }
-      .footer__grid { grid-template-columns: 1fr; gap: 34px; }
-      .pv__grid { grid-template-columns: 1fr; }
-      .pv__media { position: relative; top: auto; }
-      .notes { grid-template-columns: 1fr; }
-      .notes > div { border-right: none; border-bottom: 1px solid var(--line); }
-      .notes > div:last-child { border-bottom: none; }
-    }
-
-    @media (max-width: 620px) {
-      .logo__sub { display: none; }
-      .hero__actions .btn { width: 100%; }
-      .features__grid { grid-template-columns: 1fr; padding: 26px 0; }
-      .card { width: 100%; }
-      .pv__actions .btn { min-width: 100%; }
-      .footer__bottom { justify-content: center; text-align: center; }
-      .mobile-menu a { font-size: 27px; }
-      .drawer { width: 100%; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fayra Parfums · Perfumes originales en El Salvador</title>
+<meta name="description" content="Fayra Parfums, tienda de perfumes originales en El Salvador. Conoce nuestro catálogo y pide fácil por WhatsApp." />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="apple-touch-icon" href="assets/img/favicon.png" />
+<link rel="canonical" href="https://fayraparfumsv.netlify.app/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Fayra Parfums" />
+<meta property="og:url" content="https://fayraparfumsv.netlify.app/" />
+<meta property="og:title" content="Odyssey Aqua · Armaf · 100 ml EDP · $64.99" />
+<meta property="og:description" content="Perfumes originales importados de Emiratos Árabes Unidos. Envío gratis a todo El Salvador. Pide fácil por WhatsApp." />
+<meta property="og:image" content="https://fayraparfumsv.netlify.app/assets/img/perfume-1.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta property="og:image:alt" content="Frasco de Odyssey Aqua de Armaf, 100 ml" />
+<meta property="og:locale" content="es_SV" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Odyssey Aqua · Armaf · 100 ml EDP · $64.99" />
+<meta name="twitter:description" content="Perfumes originales importados. Envío gratis a todo El Salvador." />
+<meta name="twitter:image" content="https://fayraparfumsv.netlify.app/assets/img/perfume-1.jpg" />
+<meta name="theme-color" content="#0c0a08" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   FAYRA PARFUMS
+   Paleta: fondo #0c0a08 · bandas #14100c · oro #c9a35c
+   ============================================================ */
+:root{
+  --bg:#0c0a08;
+  --band:#14100c;
+  --band-2:#1a1510;
+  --gold:#c9a35c;
+  --gold-2:#e6cd97;
+  --gold-3:#8f6f34;
+  --ivory:#f4efe6;
+  --muted:#a89c8a;
+  --line:rgba(201,163,92,.16);
+  --line-2:rgba(201,163,92,.32);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-2:cubic-bezier(.65,0,.35,1);
+  --header-h:74px;
+  --maxw:1200px;
+  --r:18px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ivory);
+  font-family:'Jost',system-ui,-apple-system,sans-serif;
+  font-weight:300;font-size:17px;line-height:1.65;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body.no-scroll{overflow:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;line-height:1.06;margin:0;letter-spacing:-.015em}
+p{margin:0}
+em{font-style:italic;color:var(--gold)}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+.eyebrow{
+  font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);font-weight:400;display:flex;align-items:center;gap:12px;
+}
+.eyebrow::after{content:"";height:1px;width:44px;background:linear-gradient(90deg,var(--gold),transparent)}
+
+/* ---------- Textura y ambiente ---------- */
+.grain{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.4;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+}
+.aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora span{position:absolute;border-radius:50%;filter:blur(0);will-change:transform}
+.aurora span:nth-child(1){
+  width:52vw;height:52vw;top:-14vw;left:-10vw;
+  background:radial-gradient(circle,rgba(201,163,92,.16),transparent 68%);
+  animation:drift1 26s var(--ease-2) infinite alternate;
+}
+.aurora span:nth-child(2){
+  width:46vw;height:46vw;top:38vh;right:-14vw;
+  background:radial-gradient(circle,rgba(120,160,180,.12),transparent 68%);
+  animation:drift2 32s var(--ease-2) infinite alternate;
+}
+.aurora span:nth-child(3){
+  width:40vw;height:40vw;bottom:-12vw;left:22vw;
+  background:radial-gradient(circle,rgba(201,163,92,.11),transparent 70%);
+  animation:drift3 29s var(--ease-2) infinite alternate;
+}
+@keyframes drift1{to{transform:translate3d(9vw,7vh,0) scale(1.14)}}
+@keyframes drift2{to{transform:translate3d(-8vw,-6vh,0) scale(1.1)}}
+@keyframes drift3{to{transform:translate3d(6vw,-8vh,0) scale(1.18)}}
+
+/* Brillo que sigue al cursor (solo escritorio) */
+.cursor{
+  position:fixed;top:0;left:0;width:520px;height:520px;margin:-260px 0 0 -260px;
+  border-radius:50%;pointer-events:none;z-index:0;opacity:0;
+  background:radial-gradient(circle,rgba(201,163,92,.10),transparent 62%);
+  transition:opacity .5s var(--ease);
+  will-change:transform;
+}
+body.has-cursor .cursor{opacity:1}
+
+/* ---------- Barra de progreso ---------- */
+.progress{
+  position:fixed;top:0;left:0;height:2px;width:100%;z-index:90;transform:scaleX(0);
+  transform-origin:0 50%;background:linear-gradient(90deg,var(--gold-3),var(--gold),var(--gold-2));
+  will-change:transform;
+}
+
+/* ---------- Entrada de la página ---------- */
+.hero__inner>*{opacity:0;transform:translateY(26px)}
+body.ready .hero__inner>*{animation:rise .95s var(--ease) forwards}
+body.ready .hero__inner>*:nth-child(1){animation-delay:.05s}
+body.ready .hero__inner>*:nth-child(2){animation-delay:.14s}
+body.ready .hero__inner>*:nth-child(3){animation-delay:.23s}
+body.ready .hero__inner>*:nth-child(4){animation-delay:.32s}
+body.ready .hero__inner>*:nth-child(5){animation-delay:.41s}
+body.ready .hero__inner>*:nth-child(6){animation-delay:.5s}
+@keyframes rise{to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
+
+/* ---------- Header ---------- */
+.header{
+  position:fixed;top:0;left:0;right:0;z-index:70;height:var(--header-h);
+  display:flex;align-items:center;
+  transition:height .45s var(--ease),background .45s var(--ease),border-color .45s var(--ease),backdrop-filter .45s;
+  border-bottom:1px solid transparent;
+}
+.header.stuck{
+  height:62px;background:rgba(10,8,6,.82);
+  backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3);
+  border-bottom-color:var(--line);
+}
+.header__in{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%}
+.logo{display:flex;align-items:center}
+.logo__script{height:44px;width:auto;transition:height .45s var(--ease),opacity .4s}
+.header.stuck .logo__script{height:34px}
+.nav{display:flex;gap:34px}
+.nav a{position:relative;font-size:14px;letter-spacing:.06em;color:var(--muted);padding:6px 0;transition:color .35s}
+.nav a::after{
+  content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:100% 50%;
+  transition:transform .5s var(--ease);
+}
+.nav a:hover{color:var(--ivory)}
+.nav a:hover::after{transform:scaleX(1);transform-origin:0 50%}
+.header__actions{display:flex;gap:9px;align-items:center}
+
+.icon-btn{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line);
+  display:grid;place-items:center;position:relative;
+  transition:border-color .4s var(--ease),background .4s var(--ease),transform .4s var(--ease);
+}
+.icon-btn:hover{border-color:var(--gold);background:rgba(201,163,92,.09);transform:translateY(-2px)}
+.icon-btn svg{width:19px;height:19px;stroke:var(--ivory);fill:none;stroke-width:1.6;transition:stroke .4s}
+.icon-btn:hover svg{stroke:var(--gold)}
+.icon-btn__count{
+  position:absolute;top:-4px;right:-4px;min-width:19px;height:19px;padding:0 5px;
+  border-radius:10px;background:var(--gold);color:#12100c;
+  font-size:11px;font-weight:600;display:none;place-items:center;
+  box-shadow:0 3px 10px rgba(201,163,92,.4);
+}
+.icon-btn__count.show{display:grid}
+.icon-btn__count.bump{animation:bump .5s var(--ease)}
+@keyframes bump{35%{transform:scale(1.55)}}
+
+.burger{display:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.burger span{width:16px;height:1px;background:var(--ivory);transition:transform .4s var(--ease),opacity .3s}
+.burger.open span:nth-child(1){transform:translateY(3px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-3px) rotate(-45deg)}
+
+/* ---------- Menú móvil ---------- */
+.mobile-menu{
+  position:fixed;inset:var(--header-h) 0 0;z-index:65;
+  background:rgba(10,8,6,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  padding:36px clamp(20px,5vw,48px);display:flex;flex-direction:column;gap:8px;
+  opacity:0;visibility:hidden;transform:translateY(-14px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease),visibility .45s;
+}
+.mobile-menu.open{opacity:1;visibility:visible;transform:none}
+.mobile-menu a{
+  font-family:'Cormorant Garamond',serif;font-size:34px;padding:12px 0;
+  border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;
+  opacity:0;transform:translateY(18px);
+}
+.mobile-menu.open a{animation:rise .6s var(--ease) forwards}
+.mobile-menu.open a:nth-child(1){animation-delay:.06s}
+.mobile-menu.open a:nth-child(2){animation-delay:.12s}
+.mobile-menu.open a:nth-child(3){animation-delay:.18s}
+.mobile-menu.open a:nth-child(4){animation-delay:.24s}
+.mobile-menu.open a:nth-child(5){animation-delay:.3s}
+.mobile-menu a span{font-size:12px;font-family:'Jost',sans-serif;letter-spacing:.2em;color:var(--gold)}
+.mobile-menu .mm-ig{border:0;color:var(--gold);font-size:26px;margin-top:14px}
+
+/* ---------- Botones ---------- */
+.btn{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 32px;border-radius:100px;font-size:13px;font-weight:400;
+  letter-spacing:.18em;text-transform:uppercase;overflow:hidden;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s,color .4s;
+  will-change:transform;
+}
+.btn svg{width:17px;height:17px;stroke-width:1.7}
+.btn--gold{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#14100c;box-shadow:0 10px 30px rgba(201,163,92,.22)}
+.btn--gold:hover{box-shadow:0 16px 44px rgba(201,163,92,.36)}
+.btn--ghost{border:1px solid var(--line-2);color:var(--ivory)}
+.btn--ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn--wa{background:linear-gradient(135deg,#25d366,#12a44f);color:#04220f;font-weight:500}
+.btn--wa:hover{box-shadow:0 16px 40px rgba(37,211,102,.34)}
+.btn--sm{padding:11px 22px;font-size:11.5px;letter-spacing:.14em}
+.btn::after{
+  content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.34),transparent);
+  transform:skewX(-20deg);transition:left .75s var(--ease);
+}
+.btn:hover::after{left:130%}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;z-index:2;min-height:100svh;display:flex;align-items:center;padding:calc(var(--header-h) + 40px) 0 60px}
+.hero__in{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center;width:100%}
+.hero h1{font-size:clamp(56px,9.5vw,132px);line-height:.92;margin:22px 0 0}
+.hero h1 .l2{display:block;color:var(--gold);font-style:italic;font-weight:300;letter-spacing:-.03em}
+.hero__lead{color:var(--muted);font-size:clamp(16px,1.6vw,19px);max-width:47ch;margin:26px 0 0}
+.hero__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px}
+.hero__stats{display:flex;gap:clamp(20px,4vw,48px);margin-top:52px;padding-top:30px;border-top:1px solid var(--line)}
+.hero__stat b{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);color:var(--gold);font-weight:400;line-height:1}
+.hero__stat span{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+.hero__visual{position:relative}
+.frame{
+  position:relative;border-radius:26px;overflow:hidden;
+  border:1px solid var(--line-2);
+  box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px rgba(201,163,92,.08) inset;
+  transform-style:preserve-3d;will-change:transform;
+  transition:transform .5s var(--ease);
+}
+.frame img{width:100%;aspect-ratio:1;object-fit:cover;transform:scale(1.02);transition:transform 1.4s var(--ease)}
+.frame:hover img{transform:scale(1.08)}
+.frame__glow{position:absolute;inset:-40% -10% auto;height:70%;background:radial-gradient(ellipse at 50% 100%,rgba(201,163,92,.3),transparent 70%);pointer-events:none;z-index:-1}
+.frame__tag{
+  position:absolute;left:22px;bottom:22px;z-index:2;
+  background:rgba(10,8,6,.8);backdrop-filter:blur(10px);
+  border:1px solid var(--line-2);border-radius:14px;padding:12px 18px;
+}
+.frame__tag b{display:block;font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold);line-height:1}
+.frame__tag span{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.float-badge{
+  position:absolute;top:-16px;right:-10px;z-index:3;
+  background:var(--band-2);border:1px solid var(--line-2);border-radius:100px;
+  padding:10px 20px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  display:flex;align-items:center;gap:9px;box-shadow:0 14px 34px rgba(0,0,0,.5);
+  animation:bob 5s ease-in-out infinite;
+}
+@keyframes bob{50%{transform:translateY(-11px)}}
+.scroll-hint{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+}
+.scroll-hint i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--gold),transparent);position:relative;overflow:hidden}
+.scroll-hint i::after{content:"";position:absolute;inset:0;background:var(--gold-2);animation:trickle 2.1s var(--ease-2) infinite}
+@keyframes trickle{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
+
+/* ---------- Marquesina ---------- */
+.marquee{
+  position:relative;z-index:2;border-block:1px solid var(--line);
+  background:var(--band);overflow:hidden;padding:20px 0;
+}
+.marquee__track{display:flex;gap:56px;width:max-content;animation:slide 34s linear infinite}
+.marquee:hover .marquee__track{animation-play-state:paused}
+.marquee__track span{
+  font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;gap:56px;white-space:nowrap;
+}
+.marquee__track span::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- Regresos al ver ---------- */
+.reveal{opacity:0;transform:translateY(38px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.is-visible{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.1s}
+.reveal[data-d="2"]{transition-delay:.2s}
+.reveal[data-d="3"]{transition-delay:.3s}
+.reveal[data-d="4"]{transition-delay:.4s}
+.reveal[data-d="5"]{transition-delay:.5s}
+
+.section{padding:clamp(80px,12vh,140px) 0;position:relative;z-index:2}
+.section--band{background:var(--band);border-block:1px solid var(--line)}
+.section-head{margin-bottom:clamp(36px,5vw,60px)}
+.section-head h2{font-size:clamp(36px,5.4vw,66px);margin-top:16px}
+.section-head p{max-width:56ch;color:var(--muted);margin-top:16px}
+
+/* ---------- Beneficios ---------- */
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.feature{background:var(--band);padding:34px 26px;transition:background .5s var(--ease)}
+.feature:hover{background:var(--band-2)}
+.feature svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.4;margin-bottom:18px;transition:transform .6s var(--ease)}
+.feature:hover svg{transform:translateY(-4px) scale(1.08)}
+.feature h3{font-size:22px;margin-bottom:8px}
+.feature p{font-size:14px;color:var(--muted);line-height:1.6}
+
+/* ---------- Catálogo ---------- */
+.catalog__grid{display:grid;grid-template-columns:minmax(0,1fr);gap:26px}
+.card{
+  position:relative;display:grid;grid-template-columns:minmax(0,420px) 1fr;gap:clamp(24px,4vw,52px);
+  align-items:center;background:var(--band);border:1px solid var(--line);
+  border-radius:26px;padding:clamp(22px,3vw,38px);
+  transform-style:preserve-3d;will-change:transform;
+  transition:border-color .5s var(--ease),box-shadow .5s var(--ease);
+}
+.card:hover{border-color:var(--line-2);box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.card__media{
+  position:relative;border-radius:18px;overflow:hidden;cursor:pointer;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+.card__media img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform 1.2s var(--ease)}
+.card__media:hover img{transform:scale(1.07)}
+.badge{
+  position:absolute;top:14px;padding:7px 15px;border-radius:100px;
+  font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+}
+.badge--dark{left:14px;background:rgba(10,8,6,.82);color:var(--ivory);backdrop-filter:blur(8px)}
+.badge--gold{right:14px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#14100c}
+.card__brand{font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin:22px 0 10px}
+.card__name{font-size:clamp(30px,4vw,46px);cursor:pointer;display:inline-block;transition:color .4s}
+.card__name:hover{color:var(--gold)}
+.card__desc{color:var(--muted);margin-top:12px;max-width:46ch}
+.card__meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.chip{
+  border:1px solid var(--line);border-radius:100px;padding:6px 14px;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  transition:border-color .4s,color .4s,transform .4s var(--ease);
+}
+.chip:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.card__bottom{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  margin-top:28px;padding-top:26px;border-top:1px solid var(--line);
+}
+.card__price{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,44px);color:var(--gold);line-height:1}
+.card__size{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.ask{margin-top:34px;color:var(--muted);font-size:15px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ask a{color:var(--gold);display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid transparent;transition:border-color .4s}
+.ask a:hover{border-bottom-color:var(--gold)}
+.ask svg{width:16px;height:16px;fill:currentColor}
+
+/* ---------- Quiénes somos ---------- */
+.about{display:grid;grid-template-columns:230px 1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.about__mark{width:100%;border-radius:50%;border:1px solid var(--line-2);padding:18px;transition:transform .8s var(--ease)}
+.about__mark:hover{transform:rotate(-6deg) scale(1.04)}
+.about p{color:var(--muted);margin-top:18px;max-width:60ch}
+
+/* ---------- Notas ---------- */
+.pyramid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:22px}
+.note-card{
+  background:var(--band-2);border:1px solid var(--line);border-radius:var(--r);
+  padding:30px 26px;position:relative;overflow:hidden;
+  transition:transform .55s var(--ease),border-color .55s var(--ease);
+}
+.note-card:hover{transform:translateY(-6px);border-color:var(--line-2)}
+.note-card::before{
+  content:"";position:absolute;left:0;top:0;height:2px;width:100%;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0);transform-origin:0 50%;transition:transform .7s var(--ease);
+}
+.note-card:hover::before{transform:scaleX(1)}
+.note-card h3{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-family:'Jost',sans-serif;font-weight:400;margin-bottom:20px}
+.note{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.note:last-child{border:0}
+.note span{font-size:15px}
+.note i{height:3px;border-radius:2px;background:linear-gradient(90deg,var(--gold-3),var(--gold));width:0;transition:width 1.2s var(--ease)}
+.note-card.is-visible .note i{width:var(--w)}
+
+/* ---------- Preguntas ---------- */
+.faq__list{border-top:1px solid var(--line)}
+.faq__q{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:26px 4px;text-align:left;font-family:'Cormorant Garamond',serif;
+  font-size:clamp(20px,2.4vw,27px);border-bottom:1px solid var(--line);
+  transition:color .4s,padding-left .5s var(--ease);
+}
+.faq__q:hover{color:var(--gold);padding-left:14px}
+.faq__q .pm{position:relative;width:18px;height:18px;flex:0 0 auto}
+.faq__q .pm::before,.faq__q .pm::after{content:"";position:absolute;background:var(--gold);transition:transform .5s var(--ease)}
+.faq__q .pm::before{left:0;top:8.5px;width:18px;height:1.5px}
+.faq__q .pm::after{left:8.5px;top:0;width:1.5px;height:18px}
+.faq__q[aria-expanded="true"] .pm::after{transform:scaleY(0)}
+.faq__a{max-height:0;overflow:hidden;transition:max-height .6s var(--ease)}
+.faq__a p{color:var(--muted);padding:0 4px 28px;max-width:72ch}
+.faq__a strong{color:var(--gold);font-weight:400}
+.share{margin-top:40px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.share__label{color:var(--muted);font-size:15px}
+
+/* ---------- Envíos ---------- */
+.ship{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
+.ship__item{background:var(--band-2);border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;transition:border-color .5s,transform .5s var(--ease)}
+.ship__item:hover{border-color:var(--line-2);transform:translateY(-4px)}
+.ship__item svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.4;margin-bottom:16px}
+.ship__item h3{font-size:21px;margin-bottom:8px}
+.ship__item p{font-size:14px;color:var(--muted)}
+
+/* ---------- Pasos ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;counter-reset:s}
+.step{position:relative;padding-top:30px;border-top:1px solid var(--line-2)}
+.step__num{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.2em;color:var(--gold)}
+.step h3{font-size:29px;margin:12px 0 10px}
+.step p{color:var(--muted);font-size:15px}
+.step::after{
+  content:"";position:absolute;left:0;top:-1px;width:0;height:1px;
+  background:var(--gold);transition:width 1.1s var(--ease);
+}
+.step.is-visible::after{width:100%}
+
+/* ---------- Footer ---------- */
+.footer{position:relative;z-index:2;border-top:1px solid var(--line);background:var(--band);padding:clamp(56px,8vh,90px) 0 34px}
+.footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px}
+.footer__logo{display:flex;align-items:center;gap:14px}
+.footer__logo img{width:52px;height:52px;border-radius:50%;border:1px solid var(--line-2);padding:7px}
+.footer__logo b{font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:400;display:block;line-height:1.1}
+.footer__logo b i{color:var(--gold);font-style:italic}
+.footer__tag{color:var(--muted);font-size:15px;margin-top:18px;max-width:38ch}
+.footer h4{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:400;margin:0 0 18px}
+.footer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.footer li a{color:var(--muted);font-size:15px;transition:color .35s,padding-left .4s var(--ease);display:inline-block}
+.footer li a:hover{color:var(--gold);padding-left:7px}
+.footer__note{margin-top:46px;padding-top:26px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px;max-width:70ch}
+.footer__legal{display:flex;flex-wrap:wrap;gap:10px 26px;justify-content:space-between;margin-top:22px;color:var(--muted);font-size:13px}
+.footer__legal b{color:var(--gold);font-weight:400}
+
+/* ---------- Botón flotante ---------- */
+.wa-float{
+  position:fixed;right:22px;bottom:22px;z-index:80;
+  width:58px;height:58px;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,#25d366,#12a44f);
+  box-shadow:0 12px 32px rgba(37,211,102,.36);
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+}
+.wa-float svg{width:29px;height:29px;fill:#fff}
+.wa-float:hover{transform:scale(1.09) translateY(-3px);box-shadow:0 18px 44px rgba(37,211,102,.5)}
+.wa-float::after{
+  content:"";position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(37,211,102,.6);
+  animation:ping 2.6s var(--ease-2) infinite;
+}
+@keyframes ping{0%{transform:scale(1);opacity:.7}70%,100%{transform:scale(1.65);opacity:0}}
+
+/* ---------- Ventana del producto ---------- */
+.pv{
+  position:fixed;inset:0;z-index:100;background:rgba(8,6,5,.93);
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s;
+  overflow-y:auto;overscroll-behavior:contain;
+}
+.pv.open{opacity:1;visibility:visible}
+.pv__bar{
+  position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;
+  padding:16px clamp(16px,5vw,44px);background:linear-gradient(180deg,rgba(8,6,5,.95),transparent);
+}
+.pv__close{
+  width:42px;height:42px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
+  transition:transform .45s var(--ease),border-color .4s,background .4s;
+}
+.pv__close:hover{transform:rotate(90deg);border-color:var(--gold);background:rgba(201,163,92,.12)}
+.pv__close svg{width:17px;height:17px;stroke:var(--ivory);stroke-width:1.7}
+.pv__wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,56px);align-items:start;max-width:var(--maxw);margin:0 auto;padding:0 clamp(16px,5vw,48px) 70px}
+.pv__col{position:sticky;top:88px}
+.pv__media{
+  position:relative;border-radius:20px;overflow:hidden;cursor:zoom-in;
+  border:1px solid var(--line-2);background:#000;
+}
+.pv__media img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform .7s var(--ease)}
+.pv__media.zoomed img{transform:scale(1.7);cursor:zoom-out}
+.pv__nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:46px;height:46px;border-radius:50%;background:rgba(10,8,6,.72);backdrop-filter:blur(8px);
+  border:1px solid var(--line-2);color:var(--ivory);font-size:25px;line-height:1;display:none;place-items:center;
+  transition:background .4s,transform .4s var(--ease);
+}
+.pv__nav:hover{background:var(--gold);color:#14100c}
+.pv__nav--prev{left:14px}
+.pv__nav--next{right:14px}
+.pv__counter{
+  position:absolute;right:14px;bottom:14px;background:rgba(10,8,6,.78);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:100px;padding:5px 13px;font-size:11.5px;letter-spacing:.14em;
+}
+.pv__thumbs{display:none;gap:12px;margin-top:14px}
+.pv__thumb{
+  width:78px;aspect-ratio:1;border-radius:12px;overflow:hidden;border:1px solid var(--line);
+  opacity:.5;transition:opacity .4s,border-color .4s,transform .4s var(--ease);
+}
+.pv__thumb img{width:100%;height:100%;object-fit:cover}
+.pv__thumb.active{opacity:1;border-color:var(--gold);transform:translateY(-3px)}
+.pv__brand{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.pv__name{font-size:clamp(34px,5vw,54px)}
+.pv__tags{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 0}
+.pv__desc{color:var(--muted);margin-top:20px}
+.pv__notes{margin-top:34px;display:flex;flex-direction:column;gap:18px}
+.pv__notes h4{font-family:'Jost',sans-serif;font-size:11.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:9px}
+.pv__notes ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.pv__notes li{border:1px solid var(--line);border-radius:100px;padding:6px 14px;font-size:13px;color:var(--muted)}
+.pv__buy{
+  margin-top:32px;padding-top:26px;border-top:1px solid var(--line);
+  display:flex;align-items:center;gap:22px;flex-wrap:wrap;
+}
+.pv__price{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.4vw,48px);color:var(--gold);line-height:1}
+.pv__free{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);width:100%}
+.pv__hint{margin-top:22px;color:var(--muted);font-size:14.5px;max-width:52ch}
+
+/* ---------- Carrito ---------- */
+.overlay{
+  position:fixed;inset:0;z-index:95;background:rgba(8,6,5,.72);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s;
+}
+.overlay.open{opacity:1;visibility:visible}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:100;width:min(440px,100%);
+  background:var(--band);border-left:1px solid var(--line);
+  display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .6s var(--ease);
+  box-shadow:-30px 0 70px rgba(0,0,0,.5);
+}
+.drawer.open{transform:none}
+.drawer__head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px clamp(20px,5vw,30px);border-bottom:1px solid var(--line);flex:0 0 auto;
+}
+.drawer__head h2{font-size:29px}
+.drawer__x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .45s var(--ease),border-color .4s}
+.drawer__x:hover{transform:rotate(90deg);border-color:var(--gold)}
+.drawer__x svg{width:16px;height:16px;stroke:var(--ivory);stroke-width:1.7}
+.drawer__body{flex:1 1 auto;overflow-y:auto;padding:22px clamp(20px,5vw,30px)}
+.drawer__empty{text-align:center;padding:56px 0}
+.drawer__empty p{font-family:'Cormorant Garamond',serif;font-size:25px}
+.drawer__empty small{color:var(--muted);display:block;margin:8px 0 22px}
+.cart-item{display:grid;grid-template-columns:78px 1fr;gap:16px;padding-bottom:22px;margin-bottom:22px;border-bottom:1px solid var(--line);animation:rise .5s var(--ease)}
+.cart-item:last-child{border:0}
+.cart-item__img{width:78px;height:78px;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+.cart-item__brand{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
+.cart-item__name{font-family:'Cormorant Garamond',serif;font-size:23px;margin:3px 0 0;line-height:1.2}
+.cart-item__size{font-size:12.5px;color:var(--muted);margin:2px 0 0}
+.cart-item__row{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:12px}
+.cart-item__price{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold)}
+.cart-item__remove{
+  margin-top:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .35s,border-color .35s;
+}
+.cart-item__remove:hover{color:#e06a5a;border-color:#e06a5a}
+.qty{display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:100px;padding:3px}
+.qty button{
+  width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:17px;
+  transition:background .35s,color .35s;
+}
+.qty button:hover{background:var(--gold);color:#14100c}
+.qty__val{min-width:26px;text-align:center;font-size:15px}
+.drawer__foot{flex:0 0 auto;padding:22px clamp(20px,5vw,30px) 26px;border-top:1px solid var(--line);background:var(--band-2)}
+.drawer__total{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+.drawer__total span{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.drawer__total strong{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);font-weight:400}
+.drawer__free{font-size:13px;color:var(--muted);margin:0 0 18px}
+.drawer__foot .btn{width:100%}
+.drawer__clear{
+  width:100%;margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:100px;
+  font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;gap:9px;transition:color .35s,border-color .35s;
+}
+.drawer__clear:hover{color:#e06a5a;border-color:#e06a5a}
+.drawer__clear svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.6;fill:none}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1020px){
+  .hero__in{grid-template-columns:1fr;gap:44px}
+  .hero{min-height:auto;padding-top:calc(var(--header-h) + 54px)}
+  .hero__visual{order:-1;max-width:420px}
+  .scroll-hint{display:none}
+  .card{grid-template-columns:1fr}
+  .card__media{max-width:420px}
+  .about{grid-template-columns:1fr;text-align:left}
+  .about__mark{width:150px}
+  .footer__grid{grid-template-columns:1fr 1fr}
+  .pv__wrap{grid-template-columns:1fr}
+  .pv__col{position:relative;top:auto}
+  .pv__media{position:relative;top:auto}
+}
+@media (max-width:760px){
+  :root{--header-h:64px}
+  body{font-size:16px}
+  .nav{display:none}
+  .burger{display:flex}
+  .logo__script{height:38px}
+  .header.stuck .logo__script{height:30px}
+  .hero h1{font-size:clamp(46px,15vw,74px)}
+  .hero__stats{gap:22px;flex-wrap:wrap}
+  .card{padding:18px;border-radius:20px;gap:20px}
+  .card__bottom{gap:14px}
+  .card__bottom .btn{width:100%}
+  .footer__grid{grid-template-columns:1fr;gap:34px}
+  .feature{padding:26px 20px}
+  .frame__tag{left:14px;bottom:14px;padding:9px 14px}
+  .float-badge{top:-12px;right:6px;padding:8px 15px;font-size:10px}
+  .drawer{width:100%}
+  .pv__buy .btn{width:100%}
+  .wa-float{width:54px;height:54px;right:16px;bottom:16px}
+  .share{gap:12px}
+  .share .btn{width:100%}
+}
+@media (max-width:420px){
+  .hero__stats{gap:18px}
+  .hero__stat b{font-size:26px}
+  .icon-btn,.burger{width:39px;height:39px}
+}
+
+/* Respeta a quien pidió menos movimiento */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;scroll-behavior:auto !important;
+  }
+  .reveal{opacity:1;transform:none}
+  .hero__inner>*{opacity:1;transform:none}
+  .grain,.aurora,.cursor,.scroll-hint{display:none}
+  .marquee__track{animation:none}
+}
+</style>
 </head>
 
 <body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
 
-  <!-- ================= HEADER ================= -->
-  <header class="header">
-    <div class="container header__inner">
-      <a href="#inicio" class="logo" aria-label="Fayra Parfums — inicio">
-        <img class="logo__script" src="assets/img/logo-script.png" alt="Fayra Parfums" />
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container header__in">
+    <a class="logo" href="#inicio" aria-label="Fayra Parfums — inicio">
+      <img class="logo__script" src="assets/img/logo-script.png" alt="Fayra Parfums" />
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="#quienes">Quiénes somos</a>
+      <a href="#envios">Envíos</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#pedir">Cómo pedir</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="icon-btn" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
       </a>
-
-      <nav class="nav" aria-label="Navegación principal">
-        <a href="#quienes">Quiénes somos</a>
-        <a href="#envios">Envíos</a>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#preguntas">Preguntas</a>
-        <a href="#pedir">Cómo pedir</a>
-      </nav>
-
-      <div class="header__actions">
-        <a class="icon-btn" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <button class="icon-btn" id="cartOpen" aria-label="Ver mi pedido">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7.5h16l-1 12a1.7 1.7 0 0 1-1.7 1.5H6.7A1.7 1.7 0 0 1 5 19.5l-1-12Z"/><path d="M8.5 10V6.6a3.5 3.5 0 0 1 7 0V10"/></svg>
-          <span class="icon-btn__count" id="cartCount">0</span>
-        </button>
-        <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+      <button class="icon-btn" id="cartOpen" aria-label="Ver mi pedido">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="icon-btn__count" id="cartCount">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </header>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#quienes">Quiénes somos</a>
-    <a href="#envios">Envíos</a>
-    <a href="#catalogo">Catálogo</a>
-    <a href="#preguntas">Preguntas</a>
-    <a href="#pedir">Cómo pedir</a>
-    <a class="mm-ig" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">@fayraparfums.sv</a>
   </div>
+</header>
 
-  <main>
-    <!-- ================= INICIO ================= -->
-    <section class="hero" id="inicio">
-      <div class="container">
-        <img class="hero__mark reveal" src="assets/img/logo-f.png" alt="Logo de Fayra Parfums" />
-        <p class="eyebrow reveal">Perfumería · El Salvador</p>
-        <h1 class="reveal">Fayra <em>Parfums</em></h1>
-        <p class="hero__text reveal">
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#quienes">Quiénes somos <span>01</span></a>
+  <a href="#envios">Envíos <span>02</span></a>
+  <a href="#catalogo">Catálogo <span>03</span></a>
+  <a href="#preguntas">Preguntas <span>04</span></a>
+  <a href="#pedir">Cómo pedir <span>05</span></a>
+  <a class="mm-ig" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">@fayraparfums.sv</a>
+</div>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="inicio">
+    <div class="container hero__in hero__inner">
+      <div>
+        <p class="eyebrow">Perfumería · El Salvador</p>
+        <h1>Fayra<span class="l2">Parfums</span></h1>
+        <p class="hero__lead">
           Somos una tienda salvadoreña de perfumes originales. Te asesoramos para
-          encontrar tu fragancia ideal y te la llevamos hasta tu puerta con envío
-          gratis. Pide fácil y rápido por WhatsApp.
+          encontrar tu fragancia ideal y te la llevamos hasta tu puerta con envío gratis.
         </p>
-        <div class="hero__actions reveal">
-          <a class="btn" href="#catalogo">Ver catálogo</a>
-          <a class="btn btn--outline" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>
+        <div class="hero__cta">
+          <a class="btn btn--gold" href="#catalogo">
+            Ver catálogo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/></svg>
             @fayraparfums.sv
           </a>
         </div>
+        <div class="hero__stats">
+          <div class="hero__stat"><b>100%</b><span>Originales</span></div>
+          <div class="hero__stat"><b>Envío</b><span>Gratis</span></div>
+          <div class="hero__stat"><b>100ml</b><span>EDP</span></div>
+        </div>
       </div>
-    </section>
 
-    <!-- ---------- Beneficios ---------- -->
-    <section class="features">
-      <div class="container">
-        <div class="features__grid">
-          <div class="reveal">
-            <p class="feature__title">100% originales</p>
-            <p class="feature__sub">Importados de Emiratos</p>
-          </div>
-          <div class="reveal">
-            <p class="feature__title">Larga duración</p>
-            <p class="feature__sub">Concentraciones EDP</p>
-          </div>
-          <div class="reveal">
-            <p class="feature__title">Envío gratis</p>
-            <p class="feature__sub">A todo El Salvador</p>
-          </div>
-          <div class="reveal">
-            <p class="feature__title">Pedido fácil</p>
-            <p class="feature__sub">Directo por WhatsApp</p>
+      <div class="hero__visual">
+        <div class="float-badge">Más vendido</div>
+        <div class="frame" id="heroFrame">
+          <div class="frame__glow" aria-hidden="true"></div>
+          <img src="assets/img/perfume-1.jpg" alt="Frasco de Odyssey Aqua de Armaf, 100 ml" />
+          <div class="frame__tag">
+            <b>$64.99</b>
+            <span>Con envío gratis</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span>Desliza</span><i></i></div>
+  </section>
 
-    <!-- ================= CATÁLOGO ================= -->
-    <section class="catalog" id="catalogo">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Colección</p>
-          <h2>Nuestro catálogo</h2>
+  <!-- ================= MARQUESINA ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>100% originales<span>Importados de Emiratos</span>Larga duración<span>Concentración EDP</span>Envío gratis<span>A todo El Salvador</span>Pedido fácil<span>Directo por WhatsApp</span></span>
+      <span>100% originales<span>Importados de Emiratos</span>Larga duración<span>Concentración EDP</span>Envío gratis<span>A todo El Salvador</span>Pedido fácil<span>Directo por WhatsApp</span></span>
+    </div>
+  </div>
+
+  <!-- ================= BENEFICIOS ================= -->
+  <section class="section">
+    <div class="container">
+      <div class="features">
+        <div class="feature reveal" data-d="0">
+          <svg viewBox="0 0 24 24"><path d="M12 3l7.5 3v6c0 4.5-3.2 8.2-7.5 9.5C7.7 20.2 4.5 16.5 4.5 12V6L12 3Z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
+          <h3>100% originales</h3>
+          <p>Importados directamente de Emiratos Árabes Unidos.</p>
         </div>
+        <div class="feature reveal" data-d="1">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+          <h3>Larga duración</h3>
+          <p>Concentración EDP: aguanta todo el día sin reaplicar.</p>
+        </div>
+        <div class="feature reveal" data-d="2">
+          <svg viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg>
+          <h3>Envío gratis</h3>
+          <p>A todo El Salvador, sin monto mínimo ni cargos extra.</p>
+        </div>
+        <div class="feature reveal" data-d="3">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20.5l1.5-4.6A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+          <h3>Pedido fácil</h3>
+          <p>Un clic y te escribimos directo por WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <article class="card reveal">
+  <!-- ================= CATÁLOGO ================= -->
+  <section class="section section--band" id="catalogo">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Colección</p>
+        <h2>Nuestro catálogo</h2>
+      </div>
+
+      <div class="catalog__grid">
+        <article class="card reveal" id="card">
           <div class="card__media" id="cardMedia" role="button" tabindex="0" aria-label="Ver detalle de Odyssey Aqua">
             <img src="assets/img/perfume-1.jpg" alt="Odyssey Aqua de Armaf" />
             <span class="badge badge--dark">Hombre</span>
             <span class="badge badge--gold">Más vendido</span>
           </div>
-          <p class="card__brand">Armaf</p>
-          <h3 class="card__name" id="cardName" role="button" tabindex="0">Odyssey Aqua</h3>
-          <p class="card__desc">Fresco, acuático y cítrico: la frescura del mar en cada atomización.</p>
-          <div class="card__bottom">
-            <span class="card__price">$64.99</span>
-            <span class="card__size">100 ml EDP</span>
-            <button class="btn btn--outline btn--sm" id="cardAdd">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
-              Agregar
-            </button>
+          <div>
+            <p class="card__brand">Armaf</p>
+            <h3 class="card__name" id="cardName" role="button" tabindex="0">Odyssey Aqua</h3>
+            <p class="card__desc">Fresco, acuático y cítrico: la frescura del mar en cada atomización.</p>
+            <div class="card__meta">
+              <span class="chip">Hombre</span>
+              <span class="chip">Fresco</span>
+              <span class="chip">100 ml EDP</span>
+            </div>
+            <div class="card__bottom">
+              <span class="card__price">$64.99</span>
+              <span class="card__size">100 ml EDP</span>
+              <button class="btn btn--gold btn--sm" id="cardAdd" style="margin-left:auto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+                Agregar
+              </button>
+            </div>
           </div>
         </article>
-
-        <p class="ask reveal">
-          ¿Buscas otro perfume?
-          <a href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums.%20%C2%BFCu%C3%A1l%20me%20recomiendas%3F" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-            Pregúntanos por WhatsApp
-          </a>
-        </p>
       </div>
-    </section>
 
-    <!-- ================= QUIÉNES SOMOS ================= -->
-    <section id="quienes">
-      <div class="container about">
-        <img class="about__mark reveal" src="assets/img/logo-f.png" alt="Logo de Fayra Parfums" />
-        <div class="reveal">
-          <p class="eyebrow">Quiénes somos</p>
-          <h2>Conoce Fayra Parfums</h2>
-          <p>
-            Fayra Parfums nació en El Salvador con una idea sencilla: que encontrar
-            un buen perfume sea fácil, confiable y a buen precio. Seleccionamos
-            fragancias originales, te ayudamos a elegir la que va contigo y
-            coordinamos todo de forma directa por WhatsApp e Instagram.
-          </p>
-          <p>Síguenos en Instagram para ver novedades, disponibilidad y promociones.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= PREGUNTAS FRECUENTES ================= -->
-    <section class="faq" id="preguntas">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Antes de escribirnos</p>
-          <h2>Lo que más nos preguntan</h2>
-          <p style="color: var(--muted); max-width: 560px; margin-top: 14px;">
-            Si tu duda no está aquí, escríbenos por WhatsApp y te respondemos al rato.
-          </p>
-        </div>
-
-        <div class="faq__grid">
-          <div class="faq__item reveal">
-            <h3 class="faq__q">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg>
-              ¿El envío es gratis de verdad?
-            </h3>
-            <p class="faq__a">Sí. <strong>El envío no tiene costo</strong> en ningún pedido, a cualquier punto de El Salvador. No hay monto mínimo ni cargos escondidos.</p>
-          </div>
-
-          <div class="faq__item reveal">
-            <h3 class="faq__q">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              ¿A qué zonas llegan?
-            </h3>
-            <p class="faq__a">A todo el país. Cuando nos escribas <strong>nos dices a qué zona vas</strong> y te confirmamos la fecha de entrega ese mismo día.</p>
-          </div>
-
-          <div class="faq__item reveal">
-            <h3 class="faq__q">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-              ¿Cuánto tarda el pedido?
-            </h3>
-            <p class="faq__a">Coordinamos la entrega <strong>por WhatsApp</strong> y te damos un día exacto. Si pedís el mismo día y hay disponibilidad, se entrega el mismo día.</p>
-          </div>
-
-          <div class="faq__item reveal">
-            <h3 class="faq__q">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M2.5 10.5h19"/></svg>
-              ¿Cómo se paga?
-            </h3>
-            <p class="faq__a">Podés paga<strong>ar en efectivo al momento de recibir</strong> el perfume. Así ves el producto antes de entregar el dinero.</p>
-          </div>
-
-          <div class="faq__item reveal">
-            <h3 class="faq__q">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l7.5 3v6c0 4.5-3.2 8.2-7.5 9.5C7.7 20.2 4.5 16.5 4.5 12V6L12 3Z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>
-              ¿El perfume es original?
-            </h3>
-            <p class="faq__a">Sí, <strong>100% original</strong> e importado de Emiratos Árabes Unidos. Si tenés alguna duda sobre el producto, preguntanos antes de comprar.</p>
-          </div>
-
-          <div class="faq__item reveal">
-            <h3 class="faq__q">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9 9 0 0 1-3.9-.9L3 20.5l1.5-4.6A8.4 8.4 0 1 1 21 11.5Z"/></svg>
-              ¿Puedo cambiarlo si no me gusta?
-            </h3>
-            <p class="faq__a">Como esta web es un catálogo, <strong>confirmamos la disponibilidad por WhatsApp</strong> antes de cada pedido. Si no hay stock te lo decimos con honestidad.</p>
-          </div>
-        </div>
-
-        <div class="share reveal">
-          <span class="share__label">¿Le sirve a alguien que conoces? Ayúdanos a compartirlo:</span>
-          <button class="btn btn--outline btn--sm" id="shareBtn" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5.5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="18.5" r="2.6"/><path d="M8.3 10.8l7.4-4M8.3 13.2l7.4 4"/></svg>
-            <span id="shareTxt">Compartir Fayra Parfums</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================= ENVÍOS + CÓMO PEDIR ================= -->
-    <div class="band">
-      <section class="container inner shipping" id="envios">
-        <div class="reveal">
-          <p class="eyebrow">Envíos</p>
-          <h2>Envío <em>gratis</em> siempre</h2>
-          <p>
-            Enviamos a todo El Salvador sin costo adicional, en cualquier pedido.
-            Al confirmar tu compra por WhatsApp coordinamos contigo la entrega y la
-            forma de pago.
-          </p>
-          <a class="btn btn--outline" href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums.%20Quiero%20consultar%20por%20mi%20env%C3%ADo." target="_blank" rel="noopener">
-            Consultar mi envío
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-        </div>
-      </section>
-
-      <section class="container inner" id="pedir">
-        <div class="reveal">
-          <p class="eyebrow">Así de fácil</p>
-          <h2 class="section-head" style="font-size: clamp(34px, 4.8vw, 52px); margin-top: 16px;">Cómo hacer tu pedido</h2>
-        </div>
-        <ol class="steps">
-          <li class="step reveal">
-            <span class="step__num">01</span>
-            <h3>Elige</h3>
-            <p>Explora el catálogo y agrega tus perfumes favoritos a tu lista.</p>
-          </li>
-          <li class="step reveal">
-            <span class="step__num">02</span>
-            <h3>Envía</h3>
-            <p>Toca “Enviar pedido por WhatsApp”: el mensaje se escribe solo.</p>
-          </li>
-          <li class="step reveal">
-            <span class="step__num">03</span>
-            <h3>Recibe</h3>
-            <p>Confirmamos disponibilidad, forma de pago y coordinamos tu envío gratis.</p>
-          </li>
-        </ol>
-      </section>
+      <p class="ask reveal">
+        ¿Buscas otro perfume?
+        <a href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums.%20%C2%BFCu%C3%A1l%20me%20recomiendas%3F" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+          Pregúntanos por WhatsApp
+        </a>
+      </p>
     </div>
-  </main>
+  </section>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="footer">
+  <!-- ================= QUIÉNES SOMOS ================= -->
+  <section class="section" id="quienes">
+    <div class="container about">
+      <img class="about__mark reveal" src="assets/img/logo-f.png" alt="Logo de Fayra Parfums" />
+      <div class="reveal" data-d="1">
+        <p class="eyebrow">Quiénes somos</p>
+        <h2 style="font-size:clamp(34px,5vw,58px);margin-top:16px">Conoce Fayra Parfums</h2>
+        <p>
+          Fayra Parfums nació en El Salvador con una idea sencilla: que encontrar
+          un buen perfume sea fácil, confiable y a buen precio. Seleccionamos
+          fragancias originales, te ayudamos a elegir la que va contigo y
+          coordinamos todo de forma directa por WhatsApp e Instagram.
+        </p>
+        <p>Síguenos en Instagram para ver novedades, disponibilidad y promociones.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NOTAS ================= -->
+  <section class="section section--band" id="notas">
     <div class="container">
-      <div class="footer__grid">
-        <div>
-          <div class="logo">
-            <img class="logo__mark" src="assets/img/logo-f.png" alt="Logo de Fayra Parfums" />
-            <span class="logo__word">FAYRA<span class="logo__sub">Parfums</span></span>
-          </div>
-          <p class="footer__tag">
-            Tienda salvadoreña de perfumes originales. Asesoría personalizada y
-            pedidos directos por WhatsApp.
-          </p>
-        </div>
-
-        <div>
-          <h4>Contacto</h4>
-          <ul>
-            <li><a class="gold" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">@fayraparfums.sv</a></li>
-            <li><a href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
-            <li><a href="tel:+50375626865">+503 7562-6865</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Nota</h4>
-          <p class="footer__note">
-            Precios en dólares (USD) sujetos a disponibilidad; confirmamos cada
-            pedido por WhatsApp.
-          </p>
-        </div>
+      <div class="section-head reveal">
+        <p class="eyebrow">La fragancia</p>
+        <h2>Cómo huele Odyssey Aqua</h2>
+        <p>Fresco, acuático y cítrico. Abre con el mar y termina limpio, pensado para el clima de El Salvador.</p>
       </div>
-
-      <div class="footer__bottom">
-        <p>© 2026 Fayra Parfums · El Salvador</p>
-        <p id="visitRow">Todos los derechos reservados. · Visitas: <span id="visitas">…</span></p>
+      <div class="pyramid">
+        <div class="note-card reveal" data-d="0">
+          <h3>Salida</h3>
+          <div class="note"><span>Toronja</span><i style="--w:92%"></i></div>
+          <div class="note"><span>Mandarina</span><i style="--w:84%"></i></div>
+          <div class="note"><span>Notas marinas</span><i style="--w:96%"></i></div>
+        </div>
+        <div class="note-card reveal" data-d="1">
+          <h3>Corazón</h3>
+          <div class="note"><span>Lavanda</span><i style="--w:70%"></i></div>
+          <div class="note"><span>Geranio</span><i style="--w:64%"></i></div>
+          <div class="note"><span>Salvia</span><i style="--w:58%"></i></div>
+        </div>
+        <div class="note-card reveal" data-d="2">
+          <h3>Fondo</h3>
+          <div class="note"><span>Ambroxan</span><i style="--w:88%"></i></div>
+          <div class="note"><span>Almizcle</span><i style="--w:80%"></i></div>
+          <div class="note"><span>Cedro</span><i style="--w:66%"></i></div>
+        </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- ================= VENTANA DEL PRODUCTO ================= -->
-  <div class="product-view" id="productView" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Detalle del perfume">
-    <div class="pv__bar">
-      <div class="container pv__bar-inner">
-        <button class="pv__back" id="pvBack">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-          Catálogo
-        </button>
-        <button class="pv__close" id="pvClose" aria-label="Cerrar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 5l14 14M19 5L5 19"/></svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="container pv__grid">
-      <div class="pv__col">
-      <div class="pv__media" id="pvMedia">
-        <img src="assets/img/perfume-1.jpg" alt="Odyssey Aqua de Armaf" id="pvImg" />
-      </div>
+  <!-- ================= PREGUNTAS ================= -->
+  <section class="section" id="preguntas">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Antes de escribirnos</p>
+        <h2>Lo que más nos preguntan</h2>
+        <p>Si tu duda no está aquí, escríbenos por WhatsApp y te respondemos al rato.</p>
       </div>
 
-      <div class="pv__info">
-        <p class="pv__brand">Armaf</p>
-        <h1 class="pv__name">Odyssey Aqua</h1>
-
-        <div class="tags">
-          <span class="tag">Hombre</span>
-          <span class="tag">Fresco</span>
-          <span class="tag">100 ml EDP</span>
-        </div>
-
-        <p class="pv__tagline">Fresco, acuático y cítrico: la frescura del mar en cada atomización.</p>
-        <p class="pv__desc">
-          Odyssey Aqua de Armaf es una fragancia fresca y vibrante, ideal para el
-          clima de El Salvador. Abre con cítricos jugosos y notas marinas, se vuelve
-          aromática en el corazón y termina en un fondo limpio de maderas y almizcle.
-          Perfecta para el día a día, la oficina o una salida casual.
-        </p>
-
-        <div class="notes">
-          <div>
-            <h4>Salida</h4>
-            <ul><li>Toronja</li><li>Mandarina</li><li>Notas marinas</li></ul>
-          </div>
-          <div>
-            <h4>Corazón</h4>
-            <ul><li>Lavanda</li><li>Geranio</li><li>Salvia</li></ul>
-          </div>
-          <div>
-            <h4>Fondo</h4>
-            <ul><li>Ambroxan</li><li>Almizcle</li><li>Cedro</li></ul>
-          </div>
-        </div>
-
-        <p class="pv__price">$64.99</p>
-        <p class="pv__ship">Envío gratis a todo El Salvador</p>
-
-        <div class="pv__qty">
-          <span class="pv__qty-label">Cantidad</span>
-          <div class="qty" aria-label="Cantidad">
-            <button type="button" id="qtyMinus" aria-label="Disminuir cantidad">−</button>
-            <span class="qty__val" id="qtyVal">1</span>
-            <button type="button" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
-          </div>
-        </div>
-
-        <div class="pv__actions">
-          <a class="btn btn--wa" id="pvWhats" href="#" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-            Pedir por WhatsApp
-          </a>
-          <button class="btn btn--outline" id="pvAdd">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
-            Agregar a mi pedido
+      <div class="faq__list reveal">
+        <div>
+          <button class="faq__q" aria-expanded="false">
+            ¿El envío es gratis de verdad?
+            <span class="pm" aria-hidden="true"></span>
           </button>
+          <div class="faq__a"><p>Sí. <strong>El envío no tiene costo</strong> en ningún pedido, a cualquier punto de El Salvador. No hay monto mínimo ni cargos escondidos.</p></div>
         </div>
+        <div>
+          <button class="faq__q" aria-expanded="false">
+            ¿A qué zonas llegan?
+            <span class="pm" aria-hidden="true"></span>
+          </button>
+          <div class="faq__a"><p>A todo el país. Cuando nos escribas <strong>nos dices a qué zona vas</strong> y te confirmamos la fecha de entrega ese mismo día.</p></div>
+        </div>
+        <div>
+          <button class="faq__q" aria-expanded="false">
+            ¿Cuánto tarda el pedido?
+            <span class="pm" aria-hidden="true"></span>
+          </button>
+          <div class="faq__a"><p>Coordinamos la entrega <strong>por WhatsApp</strong> y te damos un día exacto. Si pedís el mismo día y hay disponibilidad, se entrega el mismo día.</p></div>
+        </div>
+        <div>
+          <button class="faq__q" aria-expanded="false">
+            ¿Cómo se paga?
+            <span class="pm" aria-hidden="true"></span>
+          </button>
+          <div class="faq__a"><p>Podés <strong>pagar en efectivo al momento de recibir</strong> el perfume. Así ves el producto antes de entregar el dinero.</p></div>
+        </div>
+        <div>
+          <button class="faq__q" aria-expanded="false">
+            ¿El perfume es original?
+            <span class="pm" aria-hidden="true"></span>
+          </button>
+          <div class="faq__a"><p>Sí, <strong>100% original</strong> e importado de Emiratos Árabes Unidos. Si tenés alguna duda sobre el producto, preguntanos antes de comprar.</p></div>
+        </div>
+        <div>
+          <button class="faq__q" aria-expanded="false">
+            ¿Puedo cambiarlo si no me gusta?
+            <span class="pm" aria-hidden="true"></span>
+          </button>
+          <div class="faq__a"><p>Como esta web es un catálogo, <strong>confirmamos la disponibilidad por WhatsApp</strong> antes de cada pedido. Si no hay stock te lo decimos con honestidad.</p></div>
+        </div>
+      </div>
 
-        <p class="pv__note">
-          Añade el perfume a tu pedido y envíalo por WhatsApp. Coordinamos
-          disponibilidad, pago y entrega contigo.
+      <div class="share reveal">
+        <span class="share__label">¿Le sirve a alguien que conoces? Ayúdanos a compartirlo:</span>
+        <button class="btn btn--ghost btn--sm" id="shareBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5.5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="18.5" r="2.6"/><path d="M8.3 10.8l7.4-4M8.3 13.2l7.4 4"/></svg>
+          <span id="shareTxt">Compartir Fayra Parfums</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ENVÍOS ================= -->
+  <section class="section section--band" id="envios">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Envíos</p>
+        <h2>Envío <em>gratis</em> siempre</h2>
+        <p>Enviamos a todo El Salvador sin costo adicional, en cualquier pedido. Coordinamos la entrega y la forma de pago directo contigo.</p>
+      </div>
+      <div class="ship">
+        <div class="ship__item reveal" data-d="0">
+          <svg viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg>
+          <h3>Todo el país</h3>
+          <p>Llegamos a cualquier punto de El Salvador sin costo.</p>
+        </div>
+        <div class="ship__item reveal" data-d="1">
+          <svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <h3>Tu zona, tu día</h3>
+          <p>Nos dices dónde vas y te confirmamos la fecha de entrega.</p>
+        </div>
+        <div class="ship__item reveal" data-d="2">
+          <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M2.5 10.5h19"/></svg>
+          <h3>Pagas al recibir</h3>
+          <p>Efectivo cuando te entregamos el perfume.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CÓMO PEDIR ================= -->
+  <section class="section" id="pedir">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Así de fácil</p>
+        <h2>Cómo hacer tu pedido</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal" data-d="0">
+          <span class="step__num">01</span>
+          <h3>Elige</h3>
+          <p>Explora el catálogo y agrega tus perfumes favoritos a tu lista.</p>
+        </div>
+        <div class="step reveal" data-d="1">
+          <span class="step__num">02</span>
+          <h3>Envía</h3>
+          <p>Toca “Enviar pedido por WhatsApp”: el mensaje se escribe solo.</p>
+        </div>
+        <div class="step reveal" data-d="2">
+          <span class="step__num">03</span>
+          <h3>Recibe</h3>
+          <p>Confirmamos disponibilidad, forma de pago y coordinamos tu envío gratis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">
+          <img src="assets/img/logo-f.png" alt="Fayra Parfums" />
+          <b>FAYRA<br /><i>Parfums</i></b>
+        </div>
+        <p class="footer__tag">
+          Tienda salvadoreña de perfumes originales. Asesoría personalizada y
+          pedidos directos por WhatsApp.
         </p>
       </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">@fayraparfums.sv</a></li>
+          <li><a href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener">Escríbenos por WhatsApp</a></li>
+          <li><a href="tel:+50375626865">+503 7562-6865</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>En esta página</h4>
+        <ul>
+          <li><a href="#catalogo">Catálogo</a></li>
+          <li><a href="#envios">Envíos</a></li>
+          <li><a href="#preguntas">Preguntas</a></li>
+          <li><a href="#quienes">Quiénes somos</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__note">
+      Precios en dólares (USD) sujetos a disponibilidad; confirmamos cada pedido por WhatsApp.
+    </p>
+
+    <div class="footer__legal">
+      <span>© 2026 Fayra Parfums · El Salvador</span>
+      <span id="visitRow">Todos los derechos reservados. · Visitas: <span id="visitas">…</span></span>
     </div>
   </div>
+</footer>
 
-  <!-- ================= WHATSAPP FLOTANTE ================= -->
-  <a class="wa-float" href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
-    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-  </a>
+<a class="wa-float" href="https://wa.me/50375626865?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
 
-  <!-- ================= CARRITO ================= -->
-  <div class="drawer-overlay" id="cartOverlay"></div>
-  <aside class="drawer" id="cartDrawer" aria-label="Mi pedido">
-    <div class="drawer__head">
-      <h3>Mi pedido</h3>
-      <button class="drawer__close" id="cartClose" aria-label="Cerrar">✕</button>
-    </div>
+<!-- ================= VENTANA DEL PRODUCTO ================= -->
+<div class="pv" id="productView" role="dialog" aria-modal="true" aria-label="Detalle del perfume" aria-hidden="true">
+  <div class="pv__bar">
+    <a class="btn btn--ghost btn--sm" href="#catalogo" id="pvBack">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      Catálogo
+    </a>
+    <button class="pv__close" id="pvClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
 
-    <div class="drawer__list" id="cartList"></div>
-
-    <div class="drawer__foot">
-      <p class="drawer__total-label">Total estimado</p>
-      <div class="drawer__total-row">
-        <span></span>
-        <strong class="drawer__total" id="cartTotal">$0.00</strong>
+  <div class="pv__wrap">
+    <div class="pv__col">
+      <div class="pv__media" id="pvMedia">
+        <img id="pvImg" src="assets/img/perfume-1.jpg" alt="Odyssey Aqua de Armaf" />
       </div>
-      <p class="drawer__ship">Envío gratis a todo El Salvador</p>
-      <a class="btn btn--wa" id="cartWhats" href="#" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
-        Enviar pedido por WhatsApp
-      </a>
-      <button class="drawer__clear" id="cartClear">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="vertical-align:-2px;margin-right:7px"><path d="M4 7h16M10 7V5.5A1.5 1.5 0 0 1 11.5 4h1A1.5 1.5 0 0 1 14 5.5V7M6.5 7l.8 12a1.6 1.6 0 0 0 1.6 1.5h6.2a1.6 1.6 0 0 0 1.6-1.5l.8-12"/></svg>Vaciar lista
-      </button>
     </div>
-  </aside>
 
-  <script>
-    /* ============================================================
-       FAYRA PARFUMS — lógica
-       ============================================================ */
+    <div>
+      <p class="pv__brand">Armaf</p>
+      <h2 class="pv__name">Odyssey Aqua</h2>
+      <div class="pv__tags">
+        <span class="chip">Hombre</span>
+        <span class="chip">Fresco</span>
+        <span class="chip">100 ml EDP</span>
+      </div>
+      <p class="pv__desc">
+        Fresco, acuático y cítrico: la frescura del mar en cada atomización. Abre con
+        cítricos jugosos y notas marinas, se vuelve aromática en el corazón y termina
+        en un fondo limpio de maderas y almizcle. Perfecta para el día a día, la oficina
+        o una salida casual.
+      </p>
 
-    var PRODUCT = {
-      id: "odyssey-aqua",
-      brand: "Armaf",
-      name: "Odyssey Aqua",
-      size: "100 ml EDP",
-      price: 64.99,
-      image: document.getElementById("pvImg").getAttribute("src")
-    };
+      <div class="pv__notes">
+        <div>
+          <h4>Salida</h4>
+          <ul><li>Toronja</li><li>Mandarina</li><li>Notas marinas</li></ul>
+        </div>
+        <div>
+          <h4>Corazón</h4>
+          <ul><li>Lavanda</li><li>Geranio</li><li>Salvia</li></ul>
+        </div>
+        <div>
+          <h4>Fondo</h4>
+          <ul><li>Ambroxan</li><li>Almizcle</li><li>Cedro</li></ul>
+        </div>
+      </div>
 
-    var WA = "50375626865";
-    var WA_GREETING = "Hola, Fayra Parfums.";
-    var money = function (n) { return "$" + n.toFixed(2); };
+      <div class="pv__buy">
+        <span class="pv__price" id="pvPrice">$64.99</span>
+        <div class="qty" role="group" aria-label="Cantidad">
+          <button type="button" id="qtyMinus" aria-label="Disminuir cantidad">−</button>
+          <span class="qty__val" id="qtyVal">1</span>
+          <button type="button" id="qtyPlus" aria-label="Aumentar cantidad">+</button>
+        </div>
+        <a class="btn btn--wa" id="pvWhats" href="https://wa.me/50375626865" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+          Pedir por WhatsApp
+        </a>
+        <button class="btn btn--ghost" id="pvAdd">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>
+          Agregar a mi pedido
+        </button>
+        <span class="pv__free">Envío gratis a todo El Salvador · Pagas al recibir</span>
+      </div>
 
-    /* ---------- Carrito (persistente) ---------- */
-    var cart = [];
-    try { cart = JSON.parse(localStorage.getItem("fayra-cart")) || []; } catch (e) { cart = []; }
+      <p class="pv__hint">
+        Agrega el perfume a tu pedido y envíalo por WhatsApp. Coordinamos disponibilidad,
+        pago y entrega contigo.
+      </p>
+    </div>
+  </div>
+</div>
 
-    function save() { try { localStorage.setItem("fayra-cart", JSON.stringify(cart)); } catch (e) {} }
+<!-- ================= CARRITO ================= -->
+<div class="overlay" id="cartOverlay"></div>
+<aside class="drawer" id="cartDrawer" aria-label="Mi pedido">
+  <div class="drawer__head">
+    <h2>Mi pedido</h2>
+    <button class="drawer__x" id="cartClose" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
 
-    function total() {
-      return cart.reduce(function (s, it) { return s + it.qty * it.price; }, 0);
-    }
-    function count() {
-      return cart.reduce(function (s, it) { return s + it.qty; }, 0);
-    }
+  <div class="drawer__body" id="cartList"></div>
 
-    /* ---------- Mensaje dinámico de WhatsApp ---------- */
-    function orderMessage(items) {
-      var lines = ["Hola, Fayra Parfums. Me gustaría realizar el siguiente pedido:", ""];
-      items.forEach(function (it) {
-        lines.push(it.name + " " + it.size);
-        lines.push("Cantidad: " + it.qty);
-        lines.push("Precio: " + money(it.price));
-        lines.push("");
-      });
-      lines.push("Total: " + money(items.reduce(function (s, it) { return s + it.qty * it.price; }, 0)));
+  <div class="drawer__foot">
+    <div class="drawer__total">
+      <span>Total estimado</span>
+      <strong id="cartTotal">$0.00</strong>
+    </div>
+    <p class="drawer__free">Envío gratis a todo El Salvador · Pagas al recibir</p>
+    <a class="btn btn--wa" id="cartWhats" href="https://wa.me/50375626865" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+      Enviar pedido por WhatsApp
+    </a>
+    <button class="drawer__clear" id="cartClear" type="button">
+      <svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V5h4v2M6 7l1 13h10l1-13"/></svg>
+      Vaciar lista
+    </button>
+  </div>
+</aside>
+
+<script>
+/* ============================================================
+   FAYRA PARFUMS — lógica
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fino = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  var PRODUCT = {
+    id: "odyssey-aqua",
+    brand: "Armaf",
+    name: "Odyssey Aqua",
+    size: "100 ml EDP",
+    price: 64.99,
+    image: document.getElementById("pvImg").getAttribute("src")
+  };
+
+  var WA = "50375626865";
+  var WA_GREETING = "Hola, Fayra Parfums.";
+  var money = function (n) { return "$" + n.toFixed(2); };
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- Carrito (persistente) ---------- */
+  var cart = [];
+  try { cart = JSON.parse(localStorage.getItem("fayra-cart")) || []; } catch (e) { cart = []; }
+  function save() { try { localStorage.setItem("fayra-cart", JSON.stringify(cart)); } catch (e) {} }
+  function total() { return cart.reduce(function (s, it) { return s + it.qty * it.price; }, 0); }
+  function count() { return cart.reduce(function (s, it) { return s + it.qty; }, 0); }
+
+  function orderMessage(items) {
+    var lines = ["Hola, Fayra Parfums. Me gustaría realizar el siguiente pedido:", ""];
+    items.forEach(function (it) {
+      lines.push(it.name + " " + it.size);
+      lines.push("Cantidad: " + it.qty);
+      lines.push("Precio: " + money(it.price));
       lines.push("");
-      lines.push("Quisiera confirmar disponibilidad y coordinar mi pedido.");
-      return lines.join("\n");
-    }
-
-    function waLink(msg) {
-      return "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg);
-    }
-
-    /* ---------- Elementos ---------- */
-    var $ = function (id) { return document.getElementById(id); };
-    var pv = $("productView");
-    var drawer = $("cartDrawer");
-    var overlay = $("cartOverlay");
-    var burger = $("burger");
-    var menu = $("mobileMenu");
-    var qty = 1;
-
-    function syncLock() {
-      var open = pv.classList.contains("open") || drawer.classList.contains("open") || menu.classList.contains("open");
-      document.body.classList.toggle("no-scroll", open);
-    }
-
-    /* ---------- Ventana del producto ---------- */
-    function openProduct() {
-      pv.classList.add("open");
-      pv.setAttribute("aria-hidden", "false");
-      pv.scrollTop = 0;
-      syncLock();
-    }
-    function closeProduct() {
-      pv.classList.remove("open");
-      pv.setAttribute("aria-hidden", "true");
-      syncLock();
-    }
-
-    $("cardMedia").addEventListener("click", openProduct);
-    $("cardName").addEventListener("click", openProduct);
-    [$("cardMedia"), $("cardName")].forEach(function (el) {
-      el.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProduct(); }
-      });
     });
-    $("pvBack").addEventListener("click", closeProduct);
-    $("pvClose").addEventListener("click", closeProduct);
+    lines.push("Total: " + money(items.reduce(function (s, it) { return s + it.qty * it.price; }, 0)));
+    lines.push("");
+    lines.push("Quisiera confirmar disponibilidad y coordinar mi pedido.");
+    return lines.join("\n");
+  }
+  function waLink(msg) { return "https://wa.me/" + WA + "?text=" + encodeURIComponent(msg); }
 
-    $("pvMedia").addEventListener("click", function () { this.classList.toggle("zoomed"); });
+  var pv = $("productView"), drawer = $("cartDrawer"), overlay = $("cartOverlay");
+  var burger = $("burger"), menu = $("mobileMenu"), qty = 1;
 
-    /* ---------- Cantidad ---------- */
-    function setQty(n) {
-      qty = Math.max(1, Math.min(99, n));
-      $("qtyVal").textContent = qty;
-      $("pvWhats").href = waLink(orderMessage([
-        { name: PRODUCT.name, size: PRODUCT.size, price: PRODUCT.price, qty: qty }
-      ]));
-    }
-    $("qtyMinus").addEventListener("click", function () { setQty(qty - 1); });
-    $("qtyPlus").addEventListener("click", function () { setQty(qty + 1); });
+  function syncLock() {
+    var open = pv.classList.contains("open") || drawer.classList.contains("open") || menu.classList.contains("open");
+    document.body.classList.toggle("no-scroll", open);
+  }
 
-    /* ---------- Carrito ---------- */
-    function render() {
-      var list = $("cartList");
-      list.innerHTML = "";
+  /* ---------- Ventana del producto ---------- */
+  function openProduct() { pv.classList.add("open"); pv.setAttribute("aria-hidden", "false"); pv.scrollTop = 0; syncLock(); }
+  function closeProduct() { pv.classList.remove("open"); pv.setAttribute("aria-hidden", "true"); syncLock(); }
 
-      if (cart.length === 0) {
-        var empty = document.createElement("div");
-        empty.className = "drawer__empty";
-        empty.innerHTML = "<p>Tu pedido está vacío.</p><small>Agrega el perfume desde el catálogo.</small>";
-        var go = document.createElement("a");
-        go.className = "btn btn--outline btn--sm";
-        go.href = "#catalogo";
-        go.textContent = "Ver catálogo";
-        go.addEventListener("click", closeCart);
-        empty.appendChild(go);
-        list.appendChild(empty);
-      } else {
-        cart.forEach(function (item, i) {
-          var row = document.createElement("div");
-          row.className = "cart-item";
+  $("cardMedia").addEventListener("click", openProduct);
+  $("cardName").addEventListener("click", openProduct);
+  [$("cardMedia"), $("cardName")].forEach(function (el) {
+    el.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProduct(); }
+    });
+  });
+  $("pvBack").addEventListener("click", closeProduct);
+  $("pvClose").addEventListener("click", closeProduct);
+  $("pvMedia").addEventListener("click", function () { this.classList.toggle("zoomed"); });
 
-          var img = document.createElement("img");
-          img.className = "cart-item__img";
-          img.src = item.image;
-          img.alt = item.name;
+  /* ---------- Cantidad ---------- */
+  function setQty(n) {
+    qty = Math.max(1, Math.min(99, n));
+    $("qtyVal").textContent = qty;
+    $("pvPrice").textContent = money(PRODUCT.price * qty);
+    $("pvWhats").href = waLink(orderMessage([{ name: PRODUCT.name, size: PRODUCT.size, price: PRODUCT.price, qty: qty }]));
+  }
+  $("qtyMinus").addEventListener("click", function () { setQty(qty - 1); });
+  $("qtyPlus").addEventListener("click", function () { setQty(qty + 1); });
 
-          var body = document.createElement("div");
+  /* ---------- Carrito ---------- */
+  function render() {
+    var list = $("cartList");
+    list.innerHTML = "";
 
-          var brand = document.createElement("p");
-          brand.className = "cart-item__brand";
-          brand.textContent = item.brand;
+    if (cart.length === 0) {
+      var empty = document.createElement("div");
+      empty.className = "drawer__empty";
+      empty.innerHTML = "<p>Tu pedido está vacío.</p><small>Agrega el perfume desde el catálogo.</small>";
+      var go = document.createElement("a");
+      go.className = "btn btn--outline btn--sm";
+      go.href = "#catalogo";
+      go.textContent = "Ver catálogo";
+      go.addEventListener("click", closeCart);
+      empty.appendChild(go);
+      list.appendChild(empty);
+    } else {
+      cart.forEach(function (item, i) {
+        var row = document.createElement("div");
+        row.className = "cart-item";
 
-          var name = document.createElement("p");
-          name.className = "cart-item__name";
-          name.textContent = item.name;
+        var img = document.createElement("img");
+        img.className = "cart-item__img";
+        img.src = item.image;
+        img.alt = item.name;
 
-          var size = document.createElement("p");
-          size.className = "cart-item__size";
-          size.textContent = item.size;
+        var body = document.createElement("div");
 
-          var rowB = document.createElement("div");
-          rowB.className = "cart-item__row";
+        var brand = document.createElement("p");
+        brand.className = "cart-item__brand";
+        brand.textContent = item.brand;
 
-          var qtyBox = document.createElement("div");
-          qtyBox.className = "qty";
+        var name = document.createElement("p");
+        name.className = "cart-item__name";
+        name.textContent = item.name;
 
-          var minus = document.createElement("button");
-          minus.type = "button";
-          minus.textContent = "−";
-          minus.setAttribute("aria-label", "Quitar uno");
-          minus.addEventListener("click", function () { change(i, -1); });
+        var size = document.createElement("p");
+        size.className = "cart-item__size";
+        size.textContent = item.size;
 
-          var amount = document.createElement("span");
-          amount.className = "qty__val";
-          amount.textContent = item.qty;
+        var rowB = document.createElement("div");
+        rowB.className = "cart-item__row";
 
-          var plus = document.createElement("button");
-          plus.type = "button";
-          plus.textContent = "+";
-          plus.setAttribute("aria-label", "Agregar uno");
-          plus.addEventListener("click", function () { change(i, 1); });
+        var qtyBox = document.createElement("div");
+        qtyBox.className = "qty";
 
-          qtyBox.appendChild(minus);
-          qtyBox.appendChild(amount);
-          qtyBox.appendChild(plus);
+        var minus = document.createElement("button");
+        minus.type = "button";
+        minus.textContent = "−";
+        minus.setAttribute("aria-label", "Quitar uno");
+        minus.addEventListener("click", function () { change(i, -1); });
 
-          var price = document.createElement("span");
-          price.className = "cart-item__price";
-          price.textContent = money(item.price);
+        var amount = document.createElement("span");
+        amount.className = "qty__val";
+        amount.textContent = item.qty;
 
-          rowB.appendChild(qtyBox);
-          rowB.appendChild(price);
+        var plus = document.createElement("button");
+        plus.type = "button";
+        plus.textContent = "+";
+        plus.setAttribute("aria-label", "Agregar uno");
+        plus.addEventListener("click", function () { change(i, 1); });
 
-          var remove = document.createElement("button");
-          remove.className = "cart-item__remove";
-          remove.type = "button";
-          remove.textContent = "Quitar";
-          remove.setAttribute("aria-label", "Eliminar del pedido");
-          remove.addEventListener("click", function () { removeAt(i); });
+        qtyBox.appendChild(minus);
+        qtyBox.appendChild(amount);
+        qtyBox.appendChild(plus);
 
-          body.appendChild(brand);
-          body.appendChild(name);
-          body.appendChild(size);
-          body.appendChild(rowB);
-          body.appendChild(remove);
+        var price = document.createElement("span");
+        price.className = "cart-item__price";
+        price.textContent = money(item.price);
 
-          row.appendChild(img);
-          row.appendChild(body);
-          list.appendChild(row);
-        });
-      }
+        rowB.appendChild(qtyBox);
+        rowB.appendChild(price);
 
-      $("cartTotal").textContent = money(total());
+        var remove = document.createElement("button");
+        remove.className = "cart-item__remove";
+        remove.type = "button";
+        remove.textContent = "Quitar";
+        remove.setAttribute("aria-label", "Eliminar del pedido");
+        remove.addEventListener("click", function () { removeAt(i); });
 
-      var badge = $("cartCount");
-      var c = count();
-      badge.textContent = c;
-      badge.classList.toggle("show", c > 0);
+        body.appendChild(brand);
+        body.appendChild(name);
+        body.appendChild(size);
+        body.appendChild(rowB);
+        body.appendChild(remove);
 
-      $("cartWhats").href = cart.length
-        ? waLink(orderMessage(cart))
-        : waLink(WA_GREETING);
-
-      save();
-    }
-
-    function change(i, d) {
-      cart[i].qty += d;
-      if (cart[i].qty <= 0) cart.splice(i, 1);
-      render();
-    }
-    function removeAt(i) { cart.splice(i, 1); render(); }
-
-    function addToCart(qtyN) {
-      var found = null;
-      cart.forEach(function (it) { if (it.id === PRODUCT.id) found = it; });
-      if (found) found.qty = Math.min(99, found.qty + qtyN);
-      else cart.push({ id: PRODUCT.id, brand: PRODUCT.brand, name: PRODUCT.name, size: PRODUCT.size, price: PRODUCT.price, image: PRODUCT.image, qty: qtyN });
-
-      render();
-
-      var badge = $("cartCount");
-      badge.classList.remove("bump");
-      void badge.offsetWidth;
-      badge.classList.add("bump");
-
-      openCart();
-
-      /* Aviso a Discord: agregaron al carrito */
-      sendEvent({
-        type: "cart",
-        detail: PRODUCT.name + " " + PRODUCT.size + " ×" + count(),
-        total: money(total())
+        row.appendChild(img);
+        row.appendChild(body);
+        list.appendChild(row);
       });
     }
 
-    $("cardAdd").addEventListener("click", function () { addToCart(1); });
-    $("pvAdd").addEventListener("click", function () { addToCart(qty); setQty(1); });
+    $("cartTotal").textContent = money(total());
 
-    /* ---------- Aviso a Discord: pidieron por WhatsApp ---------- */
-    function detallePedido(items, suma) {
-      return items.map(function (it) {
-        return it.name + " " + it.size + " ×" + it.qty + " — " + money(it.qty * it.price);
-      }).join("\n") + "\nTotal: " + money(suma);
-    }
-    $("cartWhats").addEventListener("click", function () {
-      if (!cart.length) return;
-      sendEvent({ type: "order", detail: detallePedido(cart, total()), source: "Carrito 🛒" });
+    var badge = $("cartCount");
+    var c = count();
+    badge.textContent = c;
+    badge.classList.toggle("show", c > 0);
+
+    $("cartWhats").href = cart.length ? waLink(orderMessage(cart)) : waLink(WA_GREETING);
+
+    save();
+  }
+
+  function change(i, d) { cart[i].qty += d; if (cart[i].qty <= 0) cart.splice(i, 1); render(); }
+  function removeAt(i) { cart.splice(i, 1); render(); }
+
+  function addToCart(qtyN) {
+    var found = null;
+    cart.forEach(function (it) { if (it.id === PRODUCT.id) found = it; });
+    if (found) found.qty = Math.min(99, found.qty + qtyN);
+    else cart.push({ id: PRODUCT.id, brand: PRODUCT.brand, name: PRODUCT.name, size: PRODUCT.size, price: PRODUCT.price, image: PRODUCT.image, qty: qtyN });
+
+    render();
+
+    var badge = $("cartCount");
+    badge.classList.remove("bump");
+    void badge.offsetWidth;
+    badge.classList.add("bump");
+
+    openCart();
+    sendEvent({ type: "cart", detail: PRODUCT.name + " " + PRODUCT.size + " ×" + count(), total: money(total()) });
+  }
+
+  $("cardAdd").addEventListener("click", function () { addToCart(1); });
+  $("pvAdd").addEventListener("click", function () { addToCart(qty); setQty(1); });
+
+  function detallePedido(items, suma) {
+    return items.map(function (it) {
+      return it.name + " " + it.size + " ×" + it.qty + " — " + money(it.qty * it.price);
+    }).join("\n") + "\nTotal: " + money(suma);
+  }
+  $("cartWhats").addEventListener("click", function () {
+    if (!cart.length) return;
+    sendEvent({ type: "order", detail: detallePedido(cart, total()), source: "Carrito 🛒" });
+  });
+  $("pvWhats").addEventListener("click", function () {
+    sendEvent({
+      type: "order",
+      detail: detallePedido([{ name: PRODUCT.name, size: PRODUCT.size, qty: qty, price: PRODUCT.price }], PRODUCT.price * qty),
+      source: "Ventana del producto 🧴"
     });
-    $("pvWhats").addEventListener("click", function () {
-      sendEvent({
-        type: "order",
-        detail: detallePedido([{ name: PRODUCT.name, size: PRODUCT.size, qty: qty, price: PRODUCT.price }], PRODUCT.price * qty),
-        source: "Ventana del producto 🧴"
-      });
+  });
+
+  /* ---------- Abrir / cerrar ---------- */
+  function openCart() { drawer.classList.add("open"); overlay.classList.add("open"); syncLock(); }
+  function closeCart() { drawer.classList.remove("open"); overlay.classList.remove("open"); syncLock(); }
+
+  $("cartOpen").addEventListener("click", openCart);
+  $("cartClose").addEventListener("click", closeCart);
+  overlay.addEventListener("click", closeCart);
+  $("cartClear").addEventListener("click", function () { cart = []; render(); });
+
+  function closeMenu() {
+    burger.classList.remove("open");
+    menu.classList.remove("open");
+    burger.setAttribute("aria-expanded", "false");
+    syncLock();
+  }
+  burger.addEventListener("click", function () {
+    var open = menu.classList.toggle("open");
+    burger.classList.toggle("open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    syncLock();
+  });
+  Array.prototype.forEach.call(menu.querySelectorAll("a"), function (a) {
+    a.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeProduct(); closeCart(); closeMenu(); }
+  });
+
+  /* ---------- Galería de fotos ---------- */
+  var pvImgEl = $("pvImg");
+  var GALLERY = [pvImgEl.getAttribute("src"), "assets/img/perfume-2.webp"];
+  var galIndex = 0;
+
+  var prevBtn = document.createElement("button");
+  prevBtn.type = "button"; prevBtn.className = "pv__nav pv__nav--prev";
+  prevBtn.setAttribute("aria-label", "Foto anterior"); prevBtn.textContent = "‹";
+
+  var nextBtn = document.createElement("button");
+  nextBtn.type = "button"; nextBtn.className = "pv__nav pv__nav--next";
+  nextBtn.setAttribute("aria-label", "Foto siguiente"); nextBtn.textContent = "›";
+
+  var galCount = document.createElement("span");
+  galCount.className = "pv__counter";
+
+  $("pvMedia").appendChild(prevBtn);
+  $("pvMedia").appendChild(nextBtn);
+  $("pvMedia").appendChild(galCount);
+
+  var thumbsBox = document.createElement("div");
+  thumbsBox.className = "pv__thumbs";
+  $("pvMedia").parentNode.insertBefore(thumbsBox, $("pvMedia").nextSibling);
+
+  function renderGallery() {
+    pvImgEl.src = GALLERY[galIndex];
+    $("pvMedia").classList.remove("zoomed");
+    galCount.textContent = (galIndex + 1) + " / " + GALLERY.length;
+    var many = GALLERY.length > 1;
+    prevBtn.style.display = many ? "grid" : "none";
+    nextBtn.style.display = many ? "grid" : "none";
+    galCount.style.display = many ? "block" : "none";
+    thumbsBox.style.display = many ? "flex" : "none";
+    thumbsBox.innerHTML = "";
+    GALLERY.forEach(function (src, i) {
+      var t = document.createElement("button");
+      t.type = "button";
+      t.className = "pv__thumb" + (i === galIndex ? " active" : "");
+      t.setAttribute("aria-label", "Foto " + (i + 1));
+      var im = document.createElement("img");
+      im.src = src; im.alt = "";
+      t.appendChild(im);
+      t.addEventListener("click", function () { galIndex = i; renderGallery(); });
+      thumbsBox.appendChild(t);
     });
+  }
 
-    /* ---------- Abrir / cerrar carrito ---------- */
-    function openCart() {
-      drawer.classList.add("open");
-      overlay.classList.add("open");
-      syncLock();
-    }
-    function closeCart() {
-      drawer.classList.remove("open");
-      overlay.classList.remove("open");
-      syncLock();
-    }
-
-    $("cartOpen").addEventListener("click", openCart);
-    $("cartClose").addEventListener("click", closeCart);
-    overlay.addEventListener("click", closeCart);
-    $("cartClear").addEventListener("click", function () { cart = []; render(); });
-
-    /* ---------- Menú móvil ---------- */
-    function closeMenu() {
-      burger.classList.remove("open");
-      menu.classList.remove("open");
-      burger.setAttribute("aria-expanded", "false");
-      syncLock();
-    }
-    burger.addEventListener("click", function () {
-      var open = menu.classList.toggle("open");
-      burger.classList.toggle("open", open);
-      burger.setAttribute("aria-expanded", String(open));
-      syncLock();
-    });
-    Array.prototype.forEach.call(menu.querySelectorAll("a"), function (a) {
-      a.addEventListener("click", closeMenu);
-    });
-
-    /* ---------- Escape ---------- */
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") { closeProduct(); closeCart(); closeMenu(); }
-    });
-
-    /* ---------- Animaciones de entrada ---------- */
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
-      });
-    }, { threshold: 0.12 });
-    Array.prototype.forEach.call(document.querySelectorAll(".reveal"), function (el) { io.observe(el); });
-
-    /* ---------- Galería de fotos ---------- */
-    var pvImgEl = $("pvImg");
-    var GALLERY = [pvImgEl.getAttribute("src"), "assets/img/perfume-2.webp"];
-    var galIndex = 0;
-
-    var prevBtn = document.createElement("button");
-    prevBtn.type = "button";
-    prevBtn.className = "pv__nav pv__nav--prev";
-    prevBtn.setAttribute("aria-label", "Foto anterior");
-    prevBtn.textContent = "‹";
-
-    var nextBtn = document.createElement("button");
-    nextBtn.type = "button";
-    nextBtn.className = "pv__nav pv__nav--next";
-    nextBtn.setAttribute("aria-label", "Foto siguiente");
-    nextBtn.textContent = "›";
-
-    var galCount = document.createElement("span");
-    galCount.className = "pv__counter";
-
-    $("pvMedia").appendChild(prevBtn);
-    $("pvMedia").appendChild(nextBtn);
-    $("pvMedia").appendChild(galCount);
-
-    var thumbsBox = document.createElement("div");
-    thumbsBox.className = "pv__thumbs";
-    $("pvMedia").parentNode.insertBefore(thumbsBox, $("pvMedia").nextSibling);
-
-    function renderGallery() {
-      pvImgEl.src = GALLERY[galIndex];
-      $("pvMedia").classList.remove("zoomed");
-      galCount.textContent = (galIndex + 1) + " / " + GALLERY.length;
-      var many = GALLERY.length > 1;
-      prevBtn.style.display = many ? "flex" : "none";
-      nextBtn.style.display = many ? "flex" : "none";
-      galCount.style.display = many ? "block" : "none";
-      thumbsBox.style.display = many ? "flex" : "none";
-      thumbsBox.innerHTML = "";
-      GALLERY.forEach(function (src, i) {
-        var t = document.createElement("button");
-        t.type = "button";
-        t.className = "pv__thumb" + (i === galIndex ? " active" : "");
-        t.setAttribute("aria-label", "Foto " + (i + 1));
-        var im = document.createElement("img");
-        im.src = src;
-        im.alt = "";
-        t.appendChild(im);
-        t.addEventListener("click", function () { galIndex = i; renderGallery(); });
-        thumbsBox.appendChild(t);
-      });
-    }
-
-    prevBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      galIndex = (galIndex - 1 + GALLERY.length) % GALLERY.length;
-      renderGallery();
-    });
-    nextBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      galIndex = (galIndex + 1) % GALLERY.length;
-      renderGallery();
-    });
-
-    // Deslizar con el dedo en celular
-    (function () {
-      var x0 = null;
-      var media = $("pvMedia");
-      media.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
-      media.addEventListener("touchend", function (e) {
-        if (x0 === null) return;
-        var dx = e.changedTouches[0].clientX - x0;
-        if (Math.abs(dx) > 45) {
-          galIndex = (galIndex + (dx < 0 ? 1 : -1) + GALLERY.length) % GALLERY.length;
-          renderGallery();
-        }
-        x0 = null;
-      }, { passive: true });
-    })();
-
+  prevBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    galIndex = (galIndex - 1 + GALLERY.length) % GALLERY.length;
     renderGallery();
+  });
+  nextBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    galIndex = (galIndex + 1) % GALLERY.length;
+    renderGallery();
+  });
 
-    /* ---------- Contador de visitas ---------- */
-    (function () {
-      var el = document.getElementById("visitas");
-      if (!el) return;
-      fetch("https://abacus.jasoncameron.dev/hit/fayraparfumsv.netlify.app/visitas")
-        .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
-        .then(function (d) { el.textContent = Number(d.value).toLocaleString("es-SV"); })
-        .catch(function () {
-          var row = document.getElementById("visitRow");
-          if (row) row.style.display = "none";
-        });
+  (function () {
+    var x0 = null, media = $("pvMedia");
+    media.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    media.addEventListener("touchend", function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 45) {
+        galIndex = (galIndex + (dx < 0 ? 1 : -1) + GALLERY.length) % GALLERY.length;
+        renderGallery();
+      }
+      x0 = null;
+    }, { passive: true });
+  })();
+
+  renderGallery();
+
+  /* ============================================================
+     ANIMACIONES
+     ============================================================ */
+
+  /* Entrada de la página */
+  function arrancar() { document.body.classList.add("ready"); }
+  if (document.readyState === "complete") arrancar();
+  else window.addEventListener("load", arrancar);
+  setTimeout(arrancar, 1400); /* red lenta: nunca quedamos en blanco */
+
+  /* Animaciones al hacer scroll */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+  Array.prototype.forEach.call(document.querySelectorAll(".reveal"), function (el) { io.observe(el); });
+
+  /* Header compacto + barra de progreso + parallax del hero */
+  var header = $("header"), progress = $("progress"), heroFrame = $("heroFrame");
+  var heroVisual = document.querySelector(".hero__visual");
+  var ticking = false;
+
+  function onScroll() {
+    var y = window.pageYOffset;
+    header.classList.toggle("stuck", y > 40);
+
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = "scaleX(" + (alto > 0 ? Math.min(y / alto, 1) : 0) + ")";
+
+    if (!reduced && heroVisual && y < window.innerHeight * 1.2) {
+      heroVisual.style.transform = "translate3d(0," + (y * 0.11).toFixed(1) + "px,0)";
+    }
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* Preguntas frecuentes: abrir y cerrar */
+  Array.prototype.forEach.call(document.querySelectorAll(".faq__q"), function (btn) {
+    btn.addEventListener("click", function () {
+      var abierto = btn.getAttribute("aria-expanded") === "true";
+      Array.prototype.forEach.call(document.querySelectorAll(".faq__q"), function (otro) {
+        if (otro !== btn || abierto) {
+          otro.setAttribute("aria-expanded", "false");
+          otro.nextElementSibling.style.maxHeight = null;
+        }
+      });
+      if (abierto) return;
+      btn.setAttribute("aria-expanded", "true");
+      var panel = btn.nextElementSibling;
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    });
+  });
+
+  /* Efectos de escritorio: brillo que sigue al cursor, inclinar tarjetas */
+  if (fino && !reduced) {
+    var cursor = $("cursor"), cx = 0, cy = 0, tx = 0, ty = 0;
+    window.addEventListener("pointermove", function (e) {
+      document.body.classList.add("has-cursor");
+      tx = e.clientX; ty = e.clientY;
+    }, { passive: true });
+    (function mover() {
+      cx += (tx - cx) * 0.12; cy += (ty - cy) * 0.12;
+      cursor.style.transform = "translate3d(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px,0)";
+      requestAnimationFrame(mover);
     })();
 
-    /* ---------- Monitor de visitas (Discord vía Netlify Function) ---------- */
-    function sendEvent(data) {
-      var host = location.hostname;
-      if (host === "localhost" || host === "127.0.0.1" || host === "") return;
+    [$("card"), heroFrame].forEach(function (el) {
+      if (!el) return;
+      el.addEventListener("pointermove", function (e) {
+        var r = el.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = "perspective(1100px) rotateY(" + (px * 7).toFixed(2) + "deg) rotateX(" + (-py * 7).toFixed(2) + "deg) translateZ(0)";
+      });
+      el.addEventListener("pointerleave", function () { el.style.transform = ""; });
+    });
+  }
+
+  /* ---------- Contador de visitas ---------- */
+  (function () {
+    var el = $("visitas");
+    if (!el) return;
+    fetch("https://abacus.jasoncameron.dev/hit/fayraparfumsv.netlify.app/visitas")
+      .then(function (r) { if (!r.ok) throw new Error(); return r.json(); })
+      .then(function (d) {
+        var objetivo = Number(d.value) || 0;
+        if (reduced) { el.textContent = objetivo.toLocaleString("es-SV"); return; }
+        var actual = 0, paso = Math.max(1, Math.round(objetivo / 42));
+        var reloj = setInterval(function () {
+          actual += paso;
+          if (actual >= objetivo) { actual = objetivo; clearInterval(reloj); }
+          el.textContent = actual.toLocaleString("es-SV");
+        }, 26);
+      })
+      .catch(function () { var row = $("visitRow"); if (row) row.style.display = "none"; });
+  })();
+
+  /* ---------- Monitor (Discord vía Netlify Function) ---------- */
+  function sendEvent(data) {
+    var host = location.hostname;
+    if (host === "localhost" || host === "127.0.0.1" || host === "") return;
+    try {
+      data.path = location.pathname;
+      fetch("/.netlify/functions/track", {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  sendEvent({ type: "visit", ref: document.referrer || "" });
+
+  /* De dónde vino el click */
+  (function () {
+    try {
+      document.addEventListener("click", function (ev) {
+        var a = ev.target.closest ? ev.target.closest("a") : null;
+        var b = ev.target.closest ? ev.target.closest("button") : null;
+        var el = a || b;
+        if (!el) return;
+        var src = "otro";
+        if (el.classList.contains("wa-float")) src = "flotante";
+        else if (el.id === "cartWhats" || el.id === "pvWhats") src = "carrito-whatsapp";
+        else if (el.id === "shareBtn") src = "compartir";
+        else if (a && a.href.indexOf("instagram.com") !== -1) src = "instagram";
+        else if (a && a.href.indexOf("wa.me") !== -1) src = "whatsapp-texto";
+        else if (el.id === "cardAdd" || el.id === "pvAdd") src = "agregar-carrito";
+        else if (el.id === "cardMedia" || el.id === "cardName") src = "ver-producto";
+        if (src === "otro") return;
+        sendEvent({ type: "click", source: src });
+      }, true);
+    } catch (e) {}
+  })();
+
+  /* Panel en vivo */
+  (function () {
+    var host = location.hostname;
+    if (host === "localhost" || host === "127.0.0.1" || host === "") return;
+    var sid = null;
+    try { sid = sessionStorage.getItem("fayra_sid"); } catch (e) {}
+    if (!sid) {
+      sid = "s-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
+      try { sessionStorage.setItem("fayra_sid", sid); } catch (e) {}
+    }
+    function ping() {
       try {
-        data.path = location.pathname;
-        fetch("/.netlify/functions/track", {
-          method: "POST",
-          keepalive: true,
+        fetch("/.netlify/functions/online", {
+          method: "POST", keepalive: true,
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
+          body: JSON.stringify({ sid: sid, path: location.pathname })
         }).catch(function () {});
       } catch (e) {}
     }
+    ping();
+    setInterval(ping, 30000);
+  })();
 
-    (function () {
-      sendEvent({ type: "visit", ref: document.referrer || "" });
-    })();
-
-    /* ---------- De dónde vino el click: botón flotante, hero, catálogo... ---------- */
-    (function () {
-      try {
-        document.addEventListener("click", function (ev) {
-          var a = ev.target.closest ? ev.target.closest("a") : null;
-          var b = ev.target.closest ? ev.target.closest("button") : null;
-          var el = a || b;
-          if (!el) return;
-          var src = "otro";
-          if (el.classList.contains("wa-float")) src = "flotante";
-          else if (el.id === "cartWhats" || el.id === "pvWhats") src = "carrito-whatsapp";
-          else if (el.id === "shareBtn") src = "compartir";
-          else if (a && a.href.indexOf("instagram.com") !== -1) src = "instagram";
-          else if (a && a.href.indexOf("wa.me") !== -1) src = "whatsapp-texto";
-          else if (el.id === "cardAdd" || el.id === "pvAdd") src = "agregar-carrito";
-          else if (el.id === "cardMedia" || el.id === "cardName") src = "ver-producto";
-          if (src === "otro") return;
-          sendEvent({ type: "click", source: src });
-        }, true);
-      } catch (e) {}
-    })();
-
-    /* ---------- Compartir la tienda ---------- */
-    (function () {
-      var btn = document.getElementById("shareBtn");
-      var txt = document.getElementById("shareTxt");
-      if (!btn) return;
-      var url = "https://fayraparfumsv.netlify.app/";
-      var data = {
-        title: "Fayra Parfums · Perfumes originales en El Salvador",
-        text: "Odyssey Aqua · Armaf · 100 ml EDP · $64.99 con envío gratis a todo El Salvador.",
-        url: url
-      };
-      btn.addEventListener("click", function () {
-        if (navigator.share) {
-          navigator.share(data).catch(function () {});
-        } else if (navigator.clipboard) {
-          navigator.clipboard.writeText(url).then(function () {
-            if (txt) { txt.textContent = "Link copiado ✓"; }
-            setTimeout(function () { if (txt) txt.textContent = "Compartir Fayra Parfums"; }, 2200);
-          }).catch(function () {});
-        }
-      });
-    })();
-
-    /* ---------- Panel en vivo: personas viendo ahora ---------- */
-    (function () {
-      var host = location.hostname;
-      if (host === "localhost" || host === "127.0.0.1" || host === "") return;
-      var sid = null;
-      try {
-        sid = sessionStorage.getItem("fayra_sid");
-      } catch (e) {}
-      if (!sid) {
-        sid = "s-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
-        try { sessionStorage.setItem("fayra_sid", sid); } catch (e) {}
+  /* ---------- Compartir ---------- */
+  (function () {
+    var btn = $("shareBtn"), txt = $("shareTxt");
+    if (!btn) return;
+    var url = "https://fayraparfumsv.netlify.app/";
+    var data = {
+      title: "Fayra Parfums · Perfumes originales en El Salvador",
+      text: "Odyssey Aqua · Armaf · 100 ml EDP · $64.99 con envío gratis a todo El Salvador.",
+      url: url
+    };
+    btn.addEventListener("click", function () {
+      if (navigator.share) { navigator.share(data).catch(function () {}); }
+      else if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(function () {
+          if (txt) txt.textContent = "Link copiado ✓";
+          setTimeout(function () { if (txt) txt.textContent = "Compartir Fayra Parfums"; }, 2200);
+        }).catch(function () {});
       }
-      function ping() {
-        try {
-          fetch("/.netlify/functions/online", {
-            method: "POST",
-            keepalive: true,
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ sid: sid, path: location.pathname })
-          }).catch(function () {});
-        } catch (e) {}
-      }
-      ping();
-      setInterval(ping, 30000);
-    })();
+    });
+  })();
 
-    /* ---------- Inicio ---------- */
-    setQty(1);
-    render();
-  </script>
+  /* ---------- Arranque ---------- */
+  setQty(1);
+  render();
+})();
+</script>
 </body>
 </html>
