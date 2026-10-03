@@ -25,7 +25,12 @@
       size: "100 ml EDP",
       price: 64.99,
       image: "assets/img/perfume-1.jpg",
-      gallery: ["assets/img/perfume-1.jpg", "assets/img/perfume-2.webp"],
+      gallery: [
+        "assets/img/perfume-1.jpg",
+        "assets/img/perfume-2.webp",
+        "assets/img/odyssey-ingredientes.jpg",
+        "assets/img/odyssey-ficha.jpg"
+      ],
       tags: ["Hombre", "Fresco"],
       short: "Fresco, acuático y cítrico: la frescura del mar en cada atomización.",
       long: "Fresco, acuático y cítrico: la frescura del mar en cada atomización. Abre con cítricos jugosos y notas marinas, se vuelve aromática en el corazón y termina en un fondo limpio de maderas y almizcle. Perfecta para el día a día, la oficina o una salida casual.",
@@ -262,7 +267,7 @@
     var url = "https://fayraparfumsv.netlify.app/";
     var data = {
       title: "Fayra Parfums · Perfumes originales en El Salvador",
-      text: "Perfumes originales importados. Envío gratis a todo El Salvador.",
+      text: "Perfumes originales importados. Envío incluido en el precio, a todo El Salvador.",
       url: url
     };
     btn.addEventListener("click", function () {
