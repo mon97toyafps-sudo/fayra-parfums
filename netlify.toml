@@ -2,7 +2,6 @@
 # Las funciones viven en netlify/functions (detección automática).
 
 [build]
-  publish = "."
   functions = "netlify/functions"
 
 # Node 20 fijo: @netlify/blobs pide 18 o más. Sin esto el sitio usa el Node
