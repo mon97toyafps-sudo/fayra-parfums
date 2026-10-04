@@ -32,7 +32,9 @@
   var SVGNS = "http://www.w3.org/2000/svg";
 
   /* --- el recorrido: los 14 departamentos, arrancando y terminando
-         en San Salvador (desde ahí sale todo) --- */
+         en San Salvador (desde ahí sale todo).
+         Ojo: el "id" es el que genera tools/mapa-el-salvador.pl, sin tildes
+         (usulatan, no usultan). --- */
   var PARADAS = [
     ["san-salvador", "Todo sale de San Salvador. Cada pedido se prepara a mano, uno por uno."],
     ["santa-ana",    "Nos escribís y te confirmamos que hay disponibilidad."],
@@ -44,7 +46,7 @@
     ["san-salvador", "Salimos hacia tu departamento."],
     ["la-union",     "Llegamos a los 14 departamentos del país."],
     ["san-miguel",   "Coordinamos la entrega y te damos un día exacto."],
-    ["usultan",      "El carrito llega hasta la puerta de tu casa."],
+    ["usulatan",     "El carrito llega hasta la puerta de tu casa."],
     ["morazan",      "Pagás en efectivo cuando te lo entregamos, no antes."],
     ["sonsonate",    "Si querías otra fragancia, hay más en el catálogo."],
     ["ahuachapan",   "Gracias por confiar en Fayra Parfums."],
@@ -62,10 +64,20 @@
     gDeps.appendChild(p);
   });
 
-  var puntos = PARADAS.map(function (s) {
+  var puntos = [];
+  PARADAS.forEach(function (s) {
     var d = porId[s[0]];
-    return { x: d.cx, y: d.cy, nombre: d.nombre, texto: s[1] };
+    if (!d) {
+      /* Una parada mal escrita tumbaba TODA la animación. Ahora se avisa en la
+         consola y el resto del viaje sigue funcionando. */
+      console.warn("Fayra: la parada " + s[0] + " no existe en el mapa");
+      return;
+    }
+    puntos.push({ x: d.cx, y: d.cy, nombre: d.nombre, texto: s[1], id: s[0] });
   });
+  if (puntos.length < 2) return;
+
+  function slugDe(i) { return puntos[i].id; }
 
   /* Catmull-Rom: una curva que pasa justo por cada punto, sin las
      esquinas vivas de una poligonal. */
@@ -176,8 +188,6 @@
       if (elTexto) elTexto.textContent = puntos[i].texto;
     }
   }
-
-  function slugDe(i) { return PARADAS[i][0]; }
 
   function quieto() {
     corriendo = false;
