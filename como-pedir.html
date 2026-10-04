@@ -125,18 +125,16 @@
 
             <g id="deps" class="deps"></g>
 
-            <!-- el circuito completo, siempre visible y apagado -->
-            <path id="rutaLinea" class="ruta__guia" d="" fill="none" />
-            <!-- solo la parte ya recorrida, en oro -->
-            <path id="rutaLineaB" class="ruta__linea" d="" fill="none" />
-
             <g id="ticks" class="ticks"></g>
 
-            <!-- la onda que marca el departamento que se está encendiendo -->
-            <g id="pulso" class="pulso" aria-hidden="true">
-              <g class="pulso__anillo"><circle cx="0" cy="0" r="8"/></g>
-              <circle class="pulso__punto" cx="0" cy="0" r="3"/>
+            <!-- la luz que viaja de un departamento al siguiente -->
+            <g id="orbita" class="orbita" aria-hidden="true">
+              <circle class="orbita__halo" cx="0" cy="0" r="13"/>
+              <circle class="orbita__nucleo" cx="0" cy="0" r="3.4"/>
             </g>
+
+            <!-- el nombre del departamento que está sonando -->
+            <text id="etiqueta" class="etiqueta" x="0" y="0" text-anchor="middle">San Salvador</text>
           </svg>
         </div>
 

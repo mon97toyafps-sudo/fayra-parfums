@@ -155,40 +155,37 @@
 /* el que está sonando ahora */
 .dep--vivo{
   fill:rgba(201,163,92,.55);stroke:var(--gold-2);stroke-width:1.5;
-  filter:drop-shadow(0 0 6px rgba(201,163,92,.6));
+  filter:drop-shadow(0 0 7px rgba(201,163,92,.75));
 }
 /* con la animación pausada se alcanza a ver el país entero de una vez */
 .dep--apagado{fill:rgba(201,163,92,.09);stroke:rgba(201,163,92,.28)}
 
-/* la onda que marca el departamento activo */
-.pulso{opacity:0;transition:opacity .5s var(--ease)}
-.ruta--viva .pulso{opacity:1}
-.pulso__punto{fill:var(--gold-2)}
-.pulso__anillo{
-  fill:none;stroke:var(--gold-2);stroke-width:1.1;opacity:.55;
-  transform-box:fill-box;transform-origin:center;
+/* --- la luz que viaja de un departamento al siguiente --- */
+.orbita{opacity:0;transition:opacity .6s var(--ease)}
+.ruta--viva .orbita{opacity:1}
+.orbita__halo{fill:rgba(201,163,92,.18)}
+.orbita__nucleo{
+  fill:var(--gold-2);
+  animation:latido-orbita 1.7s ease-in-out infinite;
 }
-.ruta--viva .pulso__anillo{animation:onda 1.9s ease-out infinite}
-@keyframes onda{
-  0%{transform:scale(.35);opacity:.75}
-  100%{transform:scale(2.6);opacity:0}
-}
-
-/* la línea de la ruta */
-.ruta__guia{
-  stroke:rgba(201,163,92,.13);stroke-width:.9;stroke-linecap:round;
-  stroke-dasharray:1.5 6;
-}
-.ruta__linea{
-  stroke:var(--gold-2);stroke-width:1.5;stroke-linecap:round;opacity:.85;
-  filter:drop-shadow(0 0 4px rgba(201,163,92,.45));
+@keyframes latido-orbita{
+  0%,100%{r:3.2;opacity:.92}
+  50%{r:4.1;opacity:1}
 }
 
-/* los puntos donde para */
-.ticks .tick{fill:#0c0a08;stroke:rgba(201,163,92,.6);stroke-width:.9}
-
-/* con el recorrido pausado solo se ve el circuito de guía */
-.ruta:not(.ruta--viva) .ruta__linea{display:none}
+/* --- el nombre del departamento que está sonando --- */
+.etiqueta{
+  fill:var(--gold-2);
+  font-family:'Jost',system-ui,sans-serif;
+  font-size:8px;font-weight:400;letter-spacing:.09em;
+  paint-order:stroke;stroke:#0c0a08;stroke-width:2.6px;stroke-linejoin:round;
+  pointer-events:none;
+}
+.etiqueta--entra{animation:entra-etiqueta .6s var(--ease) both}
+@keyframes entra-etiqueta{
+  from{opacity:0;transform:translateY(4px)}
+  to{opacity:1;transform:none}
+}
 
 @keyframes latido{
   0%{box-shadow:0 0 0 0 rgba(201,163,92,.55)}
