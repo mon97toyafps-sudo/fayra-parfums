@@ -2,7 +2,17 @@
 # Las funciones viven en netlify/functions (detección automática).
 
 [build]
+  publish = "."
   functions = "netlify/functions"
+
+# Node 20 fijo: @netlify/blobs pide 18 o más. Sin esto el sitio usa el Node
+# que tenga configurado en la imagen de build, y si ese es viejo el
+# "npm install" falla y el deploy se cae entero.
+[build.environment]
+  NODE_VERSION = "20"
+
+[functions]
+  node_bundler = "esbuild"
 
 # Resumen semanal: lunes 9:00 am en El Salvador (UTC-6) = 15:00 UTC
 [functions."weekly"]
