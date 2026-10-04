@@ -1,2 +1,4 @@
-# Carpeta interna de la app de escritorio
-.freebuff/
+node_modules/
+.netlify/
+.DS_Store
+*.log

@@ -1,0 +1,267 @@
+/* ============================================================
+   FAYRA PARFUMS · PÁGINAS NUEVAS
+   Portada con redes primero, portales a las otras páginas y la
+   animación de la ruta (assets/js/ruta.js).
+   ============================================================ */
+
+/* ---------- Hero: portada de marca y portada de página interna ---------- */
+.hero--portada .hero__visual{display:flex;justify-content:center}
+.hero--inner{min-height:auto;padding:calc(var(--header-h) + clamp(40px,7vw,90px)) 0 clamp(40px,6vw,72px)}
+.hero--corto{padding-bottom:0}
+.hero__full{grid-column:1/-1;text-align:left}
+.hero__full .hero__lead{max-width:60ch}
+.nav a.is-on{color:var(--gold)}
+.mobile-menu a.is-on{color:var(--gold)}
+
+/* ---------- Emblema giratorio del hero ---------- */
+.emblem{
+  position:relative;width:min(78vw,420px);aspect-ratio:1;
+  display:grid;place-items:center;isolation:isolate;
+}
+.emblem img{
+  width:64%;border-radius:50%;position:relative;z-index:2;
+  filter:drop-shadow(0 22px 60px rgba(0,0,0,.7));
+}
+.emblem__ring{
+  position:absolute;inset:14%;border-radius:50%;
+  border:1px solid var(--line-2);
+  border-top-color:var(--gold);border-right-color:rgba(201,163,92,.5);
+  animation:gira 26s linear infinite;
+}
+.emblem__ring--b{
+  inset:2%;border:1px solid rgba(201,163,92,.12);
+  border-bottom-color:rgba(201,163,92,.42);
+  animation:gira 44s linear infinite reverse;
+}
+.emblem::after{
+  content:"";position:absolute;inset:26%;border-radius:50%;z-index:1;
+  background:radial-gradient(circle,rgba(201,163,92,.20),transparent 70%);
+}
+@keyframes gira{to{transform:rotate(360deg)}}
+
+.emblem__orbit{position:absolute;inset:0;margin:0;padding:0;list-style:none;z-index:3}
+.emblem__orbit li{
+  position:absolute;left:50%;top:50%;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-2);white-space:nowrap;
+  transform-origin:0 0;
+}
+.emblem__orbit li:nth-child(1){transform:rotate(-90deg) translate(0,-50%)}
+.emblem__orbit li:nth-child(2){transform:rotate(30deg)  translate(0,-50%)}
+.emblem__orbit li:nth-child(3){transform:rotate(150deg) translate(0,-50%)}
+
+/* ---------- Tarjetas de redes ---------- */
+.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.social{
+  position:relative;display:grid;grid-template-rows:auto 1fr auto;gap:18px;
+  padding:28px 26px 22px;border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(180deg,var(--band),var(--bg));
+  overflow:hidden;transition:border-color .5s var(--ease),transform .5s var(--ease);
+}
+.social::before{
+  content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s var(--ease);
+  background:radial-gradient(120% 90% at 50% 0%,rgba(201,163,92,.14),transparent 62%);
+}
+.social:hover{transform:translateY(-6px);border-color:var(--line-2)}
+.social:hover::before{opacity:1}
+.social>*{position:relative}
+.social__icon{
+  width:54px;height:54px;border-radius:15px;display:grid;place-items:center;
+  border:1px solid var(--line-2);background:rgba(201,163,92,.08);
+  transition:transform .6s var(--ease),background .5s var(--ease);
+}
+.social:hover .social__icon{transform:rotate(-7deg) scale(1.06)}
+.social__icon svg{width:26px;height:26px}
+.social__body{display:grid;gap:5px;align-content:start}
+.social__body b{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:400;line-height:1.1}
+.social__body i{font-style:normal;font-size:13px;color:var(--gold);letter-spacing:.03em}
+.social__body span{font-size:14px;color:var(--muted);line-height:1.6}
+.social__go{
+  display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);transition:color .4s var(--ease);
+}
+.social:hover .social__go{color:var(--gold)}
+.social__go i{
+  width:26px;height:1px;background:currentColor;position:relative;flex:0 0 auto;
+  transition:width .5s var(--ease);
+}
+.social:hover .social__go i{width:40px}
+.social--wa .social__icon{color:#25D366}
+.social--ig .social__icon{color:#e35b8a}
+.social--tt .social__icon{color:#5ce1e6}
+
+/* ---------- Los tres portales ---------- */
+.portals{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.portal{
+  position:relative;display:flex;flex-direction:column;gap:20px;
+  padding:30px 28px 26px;border:1px solid var(--line);border-radius:var(--r);
+  background:linear-gradient(180deg,var(--band),var(--bg));overflow:hidden;
+  transition:border-color .5s var(--ease),transform .6s var(--ease);
+}
+.portal::after{
+  content:"";position:absolute;right:-40%;top:-40%;width:80%;height:80%;
+  border-radius:50%;opacity:0;transition:opacity .6s var(--ease);
+  background:radial-gradient(circle,rgba(201,163,92,.15),transparent 65%);
+}
+.portal:hover{transform:translateY(-7px);border-color:var(--line-2)}
+.portal:hover::after{opacity:1}
+.portal__num{
+  font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);
+  letter-spacing:.3em;
+}
+.portal__body{display:grid;gap:7px}
+.portal__body b{font-family:'Cormorant Garamond',serif;font-size:31px;font-weight:400;line-height:1.05}
+.portal__body i{font-style:normal;color:var(--gold-2);font-size:14.5px}
+.portal__body span{color:var(--muted);font-size:14px;line-height:1.6}
+.portal__go{
+  margin-top:auto;align-self:flex-start;width:42px;height:42px;border-radius:50%;
+  display:grid;place-items:center;border:1px solid var(--line-2);
+  transition:background .5s var(--ease),transform .5s var(--ease),color .4s var(--ease);
+}
+.portal__go svg{width:19px;height:19px}
+.portal:hover .portal__go{background:var(--gold);color:var(--bg);transform:translateX(5px)}
+
+/* ---------- Botón de WhatsApp ---------- */
+.btn--wa{border-color:rgba(37,211,102,.42);color:#8ff0b6}
+.btn--wa:hover{background:rgba(37,211,102,.14);border-color:#25D366;color:#c6f9d9}
+.btn--wa svg{width:19px;height:19px;flex:0 0 auto}
+.icon-btn--wa{color:#25D366}
+
+/* ============================================================
+   LA RUTA: el carrito sobre el mapa de El Salvador
+   ============================================================ */
+.section--ruta{position:relative;z-index:2}
+.ruta__head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:clamp(28px,4vw,46px)}
+.ruta__head .section-head{margin-bottom:0}
+
+.cine{
+  display:inline-flex;align-items:center;gap:11px;padding:12px 20px;
+  border:1px solid var(--line);border-radius:100px;font-size:11.5px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  transition:border-color .4s var(--ease),color .4s var(--ease);
+}
+.cine:hover{border-color:var(--line-2);color:var(--gold)}
+.cine i{font-style:normal;font-size:11px;color:var(--gold-3);text-transform:none;letter-spacing:.04em}
+.cine__dot{width:8px;height:8px;border-radius:50%;background:var(--muted);transition:background .4s var(--ease)}
+.cine--on{color:var(--gold);border-color:var(--line-2)}
+.cine--on .cine__dot{background:var(--gold);box-shadow:0 0 0 0 rgba(201,163,92,.6);animation:latido 2s infinite}
+.cine--off .cine__dot{background:#5a4a3a}
+
+.ruta{
+  display:grid;grid-template-columns:1.42fr .58fr;gap:clamp(20px,3vw,34px);
+  align-items:stretch;border:1px solid var(--line);border-radius:calc(var(--r) + 6px);
+  background:linear-gradient(180deg,var(--band),var(--bg));padding:clamp(16px,2.4vw,30px);
+}
+.ruta__mapa{display:flex;align-items:center;justify-content:center;min-width:0}
+#mapaES{width:100%;height:auto;display:block;overflow:visible}
+
+/* departamentos */
+.dep{
+  fill:rgba(201,163,92,.055);stroke:rgba(201,163,92,.26);stroke-width:.7;
+  transition:fill .7s var(--ease),stroke .7s var(--ease);
+}
+.dep--base{fill:rgba(201,163,92,.13);stroke:rgba(201,163,92,.5)}
+.dep--vivo{fill:rgba(201,163,92,.42);stroke:var(--gold);stroke-width:1.1}
+/* con la animación apagada se alcanza a ver el país entero de una vez */
+.dep--apagado{fill:rgba(201,163,92,.10);stroke:rgba(201,163,92,.30)}
+
+/* la línea de la ruta */
+.ruta__linea{
+  stroke:var(--gold);stroke-width:1.1;stroke-linecap:round;opacity:.55;
+  filter:drop-shadow(0 0 5px rgba(201,163,92,.55));
+}
+.ruta__linea--b{stroke:var(--gold-2);stroke-width:3.4;opacity:.13;filter:none}
+
+/* los puntos donde para */
+.ticks .tick{fill:#0c0a08;stroke:rgba(201,163,92,.6);stroke-width:.9}
+
+/* el carrito */
+.carro__sombra{fill:rgba(0,0,0,.5)}
+.carro__estela{
+  stroke:linear-gradient(90deg,transparent,var(--gold));stroke-width:2.4;
+  stroke-linecap:round;fill:none;opacity:.5;
+}
+.carro__caja path{fill:var(--gold-2);stroke:var(--gold);stroke-width:.5}
+.carro__cinta{fill:none;stroke:rgba(12,10,8,.45);stroke-width:.5}
+.carro__ruedas .rueda{fill:#1c1610;stroke:var(--gold);stroke-width:.9}
+.carro{filter:drop-shadow(0 3px 8px rgba(0,0,0,.75))}
+
+@keyframes latido{
+  0%{box-shadow:0 0 0 0 rgba(201,163,92,.55)}
+  70%{box-shadow:0 0 0 11px rgba(201,163,92,0)}
+  100%{box-shadow:0 0 0 0 rgba(201,163,92,0)}
+}
+
+/* con el movimiento apagado el carrito no viaja: el mapa se ve entero */
+.ruta:not(.ruta--viva) .ruta__linea{opacity:.2;stroke-dasharray:3 4}
+.ruta:not(.ruta--viva) .carro__estela{display:none}
+
+/* panel lateral */
+.ruta__panel{display:flex;flex-direction:column;gap:20px;min-width:0}
+.ruta__dial{
+  border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;
+  background:rgba(201,163,92,.05);min-height:190px;
+  display:flex;flex-direction:column;justify-content:center;gap:10px;
+}
+.ruta__paso{
+  font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.34em;
+  color:var(--gold);
+}
+.ruta__de{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.ruta__dial h3{font-size:clamp(20px,2.1vw,26px);line-height:1.28;margin-top:4px}
+
+.ruta__lista{
+  list-style:none;margin:0;padding:0;flex:1;overflow:auto;
+  max-height:290px;border-top:1px solid var(--line);
+}
+.ruta__lista li{
+  display:flex;align-items:baseline;gap:13px;padding:9px 4px;
+  border-bottom:1px solid rgba(201,163,92,.07);color:var(--muted);
+  font-size:13.5px;transition:color .4s var(--ease),padding-left .4s var(--ease);
+}
+.ruta__lista li b{
+  font-family:'Cormorant Garamond',serif;font-weight:400;font-size:12px;
+  letter-spacing:.16em;color:var(--gold-3);flex:0 0 auto;
+}
+.ruta__lista li.is-on{color:var(--gold-2);padding-left:11px}
+.ruta__lista li.is-on b{color:var(--gold)}
+
+.ruta__pie{
+  display:flex;gap:16px;align-items:flex-start;margin-top:26px;
+  color:var(--muted);font-size:14.5px;max-width:74ch;
+}
+.ruta__pie svg{width:22px;height:22px;stroke:var(--gold);fill:none;flex:0 0 auto;margin-top:2px}
+
+/* ---------- Cierre ---------- */
+.cierre{text-align:center;max-width:720px;margin:0 auto}
+.cierre h2{font-size:clamp(34px,5.2vw,62px)}
+.cierre p{color:var(--muted);margin:18px auto 0;max-width:52ch}
+.cierre__btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px}
+.section--cierre{padding-bottom:clamp(70px,9vw,120px)}
+
+/* ---------- Pie: enlace al panel ---------- */
+.footer__panel{
+  color:var(--gold-3);border-bottom:1px solid transparent;padding-bottom:1px;
+  transition:color .4s var(--ease),border-color .4s var(--ease);
+}
+.footer__panel:hover{color:var(--gold);border-bottom-color:var(--line-2)}
+
+/* ---------- Pantallas chicas ---------- */
+@media (max-width:980px){
+  .ruta{grid-template-columns:1fr}
+  .ruta__lista{max-height:210px}
+}
+@media (max-width:640px){
+  .emblem{width:min(70vw,300px)}
+  .emblem__orbit{display:none}
+  .ruta{padding:12px}
+  .ruta__dial{min-height:0;padding:20px 18px}
+  .portals,.socials{grid-template-columns:1fr}
+}
+
+/* Respeta a quien pidió menos movimiento.
+   El botón "modo cine" lo prende igual a propósito (ver ruta.js). */
+@media (prefers-reduced-motion:reduce){
+  .emblem__ring{animation:none}
+  .dep--vivo{transition:none}
+  .ruta__panel *{transition:none}
+}

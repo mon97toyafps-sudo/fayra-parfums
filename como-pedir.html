@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es-SV">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Cómo pedir · Fayra Parfums</title>
+<meta name="description" content="Cómo pedir en Fayra Parfums: eliges en el catálogo, nos escribís por WhatsApp y te llevamos el perfume a cualquier punto de El Salvador con el envío incluido." />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://fayraparfumsv.netlify.app/como-pedir" />
+<meta property="og:title" content="Cómo pedir · Fayra Parfums" />
+<meta property="og:description" content="Envío incluido en el precio a todo El Salvador. Pagas al recibir." />
+<meta property="og:image" content="https://fayraparfumsv.netlify.app/assets/img/social.jpg?v=2" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Fayra Parfums — Envío a todo El Salvador" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://fayraparfumsv.netlify.app/assets/img/social.jpg?v=2" />
+
+<link rel="icon" href="assets/img/favicon.png" />
+<link rel="stylesheet" href="assets/css/estilos.css" />
+<link rel="stylesheet" href="assets/css/paginas.css" />
+</head>
+
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container header__in">
+    <a class="logo" href="index.html" aria-label="Fayra Parfums — inicio">
+      <img class="logo__script" src="assets/img/logo-script.png" alt="Fayra Parfums" />
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="index.html">Inicio</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="nosotros.html">Quiénes somos</a>
+      <a class="is-on" href="como-pedir.html">Cómo pedir</a>
+    </nav>
+
+    <div class="header__actions">
+      <a class="icon-btn" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="icon-btn" href="https://tiktok.com/@fayraparfums.sv" target="_blank" rel="noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3v13.1a2.6 2.6 0 1 1-2.1-2.6v-3a5.6 5.6 0 1 0 5.1 5.6V8.6a6.6 6.6 0 0 0 3.9 1.3V6.8a3.8 3.8 0 0 1-3.9-3.8V2Z"/></svg>
+      </a>
+      <a class="icon-btn icon-btn--wa" href="https://wa.me/50363012305?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.8-1.3-.2-.1-.5-.5Z"/></svg>
+      </a>
+      <a class="icon-btn" id="cartOpen" href="catalogo.html#mi-pedido" aria-label="Ver mi pedido">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+        <span class="icon-btn__count" id="cartCount">0</span>
+      </a>
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Inicio <span>01</span></a>
+  <a href="catalogo.html">Catálogo <span>02</span></a>
+  <a href="nosotros.html">Quiénes somos <span>03</span></a>
+  <a class="is-on" href="como-pedir.html">Cómo pedir <span>04</span></a>
+  <a href="https://wa.me/50363012305?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener">WhatsApp <span>05</span></a>
+  <a href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">Instagram <span>06</span></a>
+  <a href="https://tiktok.com/@fayraparfums.sv" target="_blank" rel="noopener">TikTok <span>07</span></a>
+</div>
+
+<main>
+  <!-- ================= PORTADA ================= -->
+  <section class="hero hero--inner hero--corto" id="inicio">
+    <div class="container hero__in hero__inner">
+      <div class="hero__full">
+        <p class="eyebrow">Cómo pedir</p>
+        <h1>Del frasco<span class="l2">a tu puerta</span></h1>
+        <p class="hero__lead">
+          Salimos de San Salvador y llegamos a los 14 departamentos del país.
+          Así es el camino de tu pedido, paso por paso.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--gold" href="catalogo.html">
+            Ir al catálogo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--wa" href="https://wa.me/50363012305?text=Hola%2C%20Fayra%20Parfums.%20Quiero%20hacer%20un%20pedido." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.8-1.3-.2-.1-.5-.5Z"/></svg>
+            Quiero pedir
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EL CARRITO Y EL MAPA ================= -->
+  <section class="section section--ruta" id="ruta">
+    <div class="container">
+      <div class="ruta__head">
+        <div class="section-head reveal">
+          <p class="eyebrow">La ruta</p>
+          <h2>Donde sea que estés, <em>llegamos</em></h2>
+        </div>
+        <button class="cine" id="cine" type="button" aria-pressed="false">
+          <span class="cine__dot"></span>
+          Modo cine
+          <i>Activar animaciones</i>
+        </button>
+      </div>
+
+      <div class="ruta reveal" data-d="1">
+        <div class="ruta__mapa">
+          <svg id="mapaES" viewBox="0 0 480 260" role="img" aria-label="Mapa de El Salvador con la ruta de entrega">
+            <defs>
+              <filter id="brillo" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="2.4" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <g id="deps" class="deps"></g>
+
+            <path id="rutaLinea" class="ruta__linea" d="" fill="none" />
+            <path id="rutaLineaB" class="ruta__linea ruta__linea--b" d="" fill="none" />
+
+            <g id="ticks" class="ticks"></g>
+            <g id="carro" class="carro" aria-hidden="true">
+              <ellipse class="carro__sombra" cx="0" cy="9" rx="13" ry="3.4"/>
+              <path class="carro__estela" d="M-6 4 L-26 4"/>
+              <g class="carro__caja">
+                <path d="M-6.6 -1.6 L-1.4 -4.4 L3.8 -1.6 L3.8 3.6 L-1.4 6.4 L-6.6 3.6 Z"/>
+                <path class="carro__cinta" d="M-1.4 -4.4 L3.8 -1.6 M-1.4 -4.4 L-1.4 6.4 M-6.6 -1.6 L1.4 1.2"/>
+              </g>
+              <g class="carro__ruedas">
+                <circle class="rueda" id="rueda1" cx="-4.6" cy="9" r="2.7"/>
+                <circle class="rueda" id="rueda2" cx="4.2" cy="9" r="2.7"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <aside class="ruta__panel">
+          <div class="ruta__dial">
+            <span class="ruta__paso" id="rutaPaso">01</span>
+            <span class="ruta__de" id="rutaDe">San Salvador</span>
+            <h3 id="rutaTexto">Todo sale de San Salvador. Cada pedido se prepara a mano, uno por uno.</h3>
+          </div>
+          <ol class="ruta__lista" id="rutaLista"></ol>
+        </aside>
+      </div>
+
+      <p class="ruta__pie reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg>
+        <span>
+          El envío ya está incluido en el precio de cada perfume, sin monto mínimo.
+          Cuando nos escribís te confirmamos el día exacto de entrega.
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= PASOS ================= -->
+  <section class="section section--band" id="pasos">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Tus tres pasos</p>
+        <h2>Así de fácil es pedir</h2>
+      </div>
+      <div class="steps">
+        <div class="step reveal" data-d="0">
+          <span class="step__num">01</span>
+          <h3>Elige</h3>
+          <p>Explora el catálogo y agrega tus perfumes favoritos a tu lista. Si dudas, pregúntanos antes.</p>
+        </div>
+        <div class="step reveal" data-d="1">
+          <span class="step__num">02</span>
+          <h3>Envía</h3>
+          <p>Toca “Enviar pedido por WhatsApp”: el mensaje se escribe solo con lo que elegiste.</p>
+        </div>
+        <div class="step reveal" data-d="2">
+          <span class="step__num">03</span>
+          <h3>Recibe</h3>
+          <p>Confirmamos disponibilidad, coordinamos tu entrega y pagás en efectivo al recibir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ENVÍOS Y PAGOS ================= -->
+  <section class="section" id="envios">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Envíos y pagos</p>
+        <h2>Envío <em>incluido</em> en el precio</h2>
+        <p>El envío ya va incluido en el precio de cada perfume. Lo que ves es el producto y la entrega a cualquier punto de El Salvador, y no vas a pagar nada extra al recibirlo.</p>
+      </div>
+      <div class="ship">
+        <div class="ship__item reveal" data-d="0">
+          <svg viewBox="0 0 24 24"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg>
+          <h3>Los 14 departamentos</h3>
+          <p>Llegamos a cualquier punto de El Salvador, ya incluido en el precio.</p>
+        </div>
+        <div class="ship__item reveal" data-d="1">
+          <svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+          <h3>Tu zona, tu día</h3>
+          <p>Nos dices dónde vas y te confirmamos la fecha de entrega.</p>
+        </div>
+        <div class="ship__item reveal" data-d="2">
+          <svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M2.5 10.5h19"/></svg>
+          <h3>Pagas al recibir</h3>
+          <p>Efectivo cuando te entregamos el perfume, no un peso antes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CIERRE ================= -->
+  <section class="section section--band section--cierre">
+    <div class="container">
+      <div class="cierre reveal">
+        <h2>¿Listo para el tuyo?</h2>
+        <p>Mirá el catálogo y armá tu pedido. Si tenés dudas, escribinos y te ayudamos a elegir.</p>
+        <div class="cierre__btns">
+          <a class="btn btn--gold" href="catalogo.html">
+            Ver catálogo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--wa" href="https://wa.me/50363012305?text=Hola%2C%20Fayra%20Parfums.%20Quiero%20hacer%20un%20pedido." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.8-1.3-.2-.1-.5-.5Z"/></svg>
+            +503 6301-2305
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo">
+          <img src="assets/img/logo-f.png" alt="Fayra Parfums" />
+          <b>FAYRA<br /><i>Parfums</i></b>
+        </div>
+        <p class="footer__tag">
+          Tienda salvadoreña de perfumes originales. Asesoría personalizada y
+          pedidos directos por WhatsApp.
+        </p>
+      </div>
+
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/50363012305?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener">WhatsApp · +503 6301-2305</a></li>
+          <li><a href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener">Instagram · @fayraparfums.sv</a></li>
+          <li><a href="https://tiktok.com/@fayraparfums.sv" target="_blank" rel="noopener">TikTok · @fayraparfums.sv</a></li>
+          <li><a href="tel:+50363012305">Llamada · +503 6301-2305</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>En Fayra</h4>
+        <ul>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="nosotros.html">Quiénes somos</a></li>
+          <li><a href="como-pedir.html">Cómo pedir</a></li>
+          <li><a href="nosotros.html#preguntas">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer__note">
+      Precios en dólares (USD) sujetos a disponibilidad; confirmamos cada pedido por WhatsApp.
+    </p>
+
+    <div class="footer__legal">
+      <span>© 2026 Fayra Parfums · El Salvador</span>
+      <span>Todos los derechos reservados. · <a class="footer__panel" href="/panel">Panel</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/50363012305?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a9.9 9.9 0 0 0-8.5 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.6-1.2.1-.2 0-.4 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.9.9-1.1 2.2-.2 3.9a11.6 11.6 0 0 0 4.5 4.3c1.7.8 2.4.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2l-.8-1.3-.2-.1-.5-.5Z"/></svg>
+</a>
+
+<script src="assets/js/mapa-es.js" defer></script>
+<script src="assets/js/ruta.js" defer></script>
+<script src="assets/js/app.js" defer></script>
+</body>
+</html>

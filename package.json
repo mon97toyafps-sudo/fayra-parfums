@@ -1,0 +1,9 @@
+{
+  "name": "fayra-parfums",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tienda Fayra Parfums. Las dependencias son solo para las Netlify Functions (guardar los datos del panel).",
+  "dependencies": {
+    "@netlify/blobs": "^7.1.3"
+  }
+}

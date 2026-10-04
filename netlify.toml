@@ -7,3 +7,11 @@
 # Resumen semanal: lunes 9:00 am en El Salvador (UTC-6) = 15:00 UTC
 [functions."weekly"]
   schedule = "0 15 * * 1"
+
+# El panel no es un HTML suelto: lo sirve la función, que primero valida la
+# clave. Si fuera panel.html, cualquiera con la dirección lo abriría.
+[[redirects]]
+  from = "/panel"
+  to = "/.netlify/functions/panel"
+  status = 200
+  force = true
