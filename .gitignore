@@ -1,9 +1,2 @@
-node_modules/
-.netlify/
-.DS_Store
-*.log
+# Carpeta interna de la app de escritorio
 .freebuff/
-es.svg
-
-# pruebas
-_fuera/
