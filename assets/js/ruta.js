@@ -138,7 +138,7 @@
   /* Coloca la luz. En la primera mitad del paso vuela al departamento
      siguiente; en la segunda se queda descansando ahí. */
   function mueveLuz(i, local) {
-    if (i >= N) { pon(puntos[N].x, puntos[N].y); return; }
+    if (!tramos[i]) { pon(puntos[N].x, puntos[N].y); return; }
     var avance = Math.min(1, local / VIAJE);
     var e = avance < 0.5
       ? 2 * avance * avance
@@ -184,18 +184,34 @@
     if (elTexto) elTexto.textContent = p.texto;
   }
 
-  function frame(ahora) {
-    if (!corriendo) return;
+  function dibuja(ahora) {
     var t = ((ahora - t0) / 1000) % ciclo;
+    /* El redondeo puede empujar el índice una parada de más al cerrar la
+       vuelta, y ahí no hay tramo que leer: la animación se caía. */
     var i = Math.floor(t / PASO);
+    if (i > N) i = N;
     var local = (t - i * PASO) / PASO;
 
     /* el departamento enciende cuando la luz ya llegó */
-    if (local >= VIAJE * 0.55 || i >= N) enciende(Math.min(i + (local >= VIAJE * 0.55 ? 1 : 0), N));
+    if (i >= N) enciende(N);
+    else if (local >= VIAJE * 0.55) enciende(i + 1);
     else enciende(i);
 
     mueveLuz(i, local);
-    requestAnimationFrame(frame);
+  }
+
+  /* Un error dentro del dibujado corta el requestAnimationFrame y la
+     animación se queda congelada para siempre, sin explicación. Acá se avisa
+     una vez y el recorrido sigue. */
+  var avisado = false;
+  function corre(ahora) {
+    if (!corriendo) return;
+    try {
+      dibuja(ahora);
+    } catch (e) {
+      if (!avisado) { avisado = true; console.error("Fayra: la animacion fallo", e); }
+    }
+    requestAnimationFrame(corre);
   }
 
   function quieto() {
@@ -228,7 +244,7 @@
     /* siempre arranca en San Salvador, sin salto */
     t0 = performance.now();
     if (raiz) raiz.classList.add("ruta--viva");
-    requestAnimationFrame(frame);
+    requestAnimationFrame(corre);
   }
 
   /* ---------------------------------------------------------- arranque --- */
