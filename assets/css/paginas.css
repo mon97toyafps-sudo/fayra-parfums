@@ -156,25 +156,29 @@
 .dep--apagado{fill:rgba(201,163,92,.10);stroke:rgba(201,163,92,.30)}
 
 /* la línea de la ruta */
-.ruta__linea{
-  stroke:var(--gold);stroke-width:1.1;stroke-linecap:round;opacity:.55;
-  filter:drop-shadow(0 0 5px rgba(201,163,92,.55));
+.ruta__guia{
+  stroke:rgba(201,163,92,.20);stroke-width:1;stroke-linecap:round;
+  stroke-dasharray:2 5;
 }
-.ruta__linea--b{stroke:var(--gold-2);stroke-width:3.4;opacity:.13;filter:none}
+.ruta__linea{
+  stroke:var(--gold-2);stroke-width:1.6;stroke-linecap:round;opacity:.9;
+  filter:drop-shadow(0 0 4px rgba(201,163,92,.5));
+}
 
 /* los puntos donde para */
-.ticks .tick{fill:#0c0a08;stroke:rgba(201,163,92,.6);stroke-width:.9}
+.ticks .tick{fill:#0c0a08;stroke:rgba(201,163,92,.7);stroke-width:1}
+.ticks .tick:first-child{fill:var(--gold);stroke:var(--gold-2);stroke-width:1.4}
 
 /* el carrito */
-.carro__sombra{fill:rgba(0,0,0,.5)}
+.carro__sombra{fill:rgba(0,0,0,.55)}
 .carro__estela{
-  stroke:linear-gradient(90deg,transparent,var(--gold));stroke-width:2.4;
-  stroke-linecap:round;fill:none;opacity:.5;
+  stroke:var(--gold);stroke-width:1.6;stroke-linecap:round;fill:none;opacity:.35;
 }
-.carro__caja path{fill:var(--gold-2);stroke:var(--gold);stroke-width:.5}
-.carro__cinta{fill:none;stroke:rgba(12,10,8,.45);stroke-width:.5}
-.carro__ruedas .rueda{fill:#1c1610;stroke:var(--gold);stroke-width:.9}
-.carro{filter:drop-shadow(0 3px 8px rgba(0,0,0,.75))}
+.carro__caja{fill:var(--gold-2);stroke:var(--gold);stroke-width:.45}
+.carro__ventana{fill:#0c0a08;opacity:.55}
+.carro__franja{stroke:rgba(12,10,8,.4);stroke-width:.5;fill:none}
+.carro__ruedas .rueda{fill:#141009;stroke:var(--gold);stroke-width:1.1}
+.carro{filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
 
 @keyframes latido{
   0%{box-shadow:0 0 0 0 rgba(201,163,92,.55)}
@@ -182,8 +186,8 @@
   100%{box-shadow:0 0 0 0 rgba(201,163,92,0)}
 }
 
-/* con el movimiento apagado el carrito no viaja: el mapa se ve entero */
-.ruta:not(.ruta--viva) .ruta__linea{opacity:.2;stroke-dasharray:3 4}
+/* con el carrito quieto solo se ve el circuito de guía */
+.ruta:not(.ruta--viva) .ruta__linea{display:none}
 .ruta:not(.ruta--viva) .carro__estela{display:none}
 
 /* panel lateral */

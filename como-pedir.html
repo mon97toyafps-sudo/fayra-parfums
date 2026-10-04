@@ -125,20 +125,25 @@
 
             <g id="deps" class="deps"></g>
 
-            <path id="rutaLinea" class="ruta__linea" d="" fill="none" />
-            <path id="rutaLineaB" class="ruta__linea ruta__linea--b" d="" fill="none" />
+            <!-- el circuito completo, siempre visible y apagado -->
+            <path id="rutaLinea" class="ruta__guia" d="" fill="none" />
+            <!-- solo la parte ya recorrida, en oro -->
+            <path id="rutaLineaB" class="ruta__linea" d="" fill="none" />
 
             <g id="ticks" class="ticks"></g>
+
             <g id="carro" class="carro" aria-hidden="true">
-              <ellipse class="carro__sombra" cx="0" cy="9" rx="13" ry="3.4"/>
-              <path class="carro__estela" d="M-6 4 L-26 4"/>
-              <g class="carro__caja">
-                <path d="M-6.6 -1.6 L-1.4 -4.4 L3.8 -1.6 L3.8 3.6 L-1.4 6.4 L-6.6 3.6 Z"/>
-                <path class="carro__cinta" d="M-1.4 -4.4 L3.8 -1.6 M-1.4 -4.4 L-1.4 6.4 M-6.6 -1.6 L1.4 1.2"/>
+              <ellipse class="carro__sombra" cx="0" cy="10.5" rx="12" ry="2.8"/>
+              <path class="carro__estela" d="M-9 3 L-30 3"/>
+              <g id="carroCuerpo">
+                <path class="carro__caja" d="M-9.5 -5.5 h9.5 a1.6 1.6 0 0 1 1.6 1.6 v6.2 h-11.1 z"/>
+                <path class="carro__caja" d="M1.8 -1.2 h3.1 l3.2 3.6 v.6 H1.8 z"/>
+                <path class="carro__ventana" d="M2.6 -.4 h1.9 l2.1 2.4 H2.6 z"/>
+                <path class="carro__franja" d="M-9.5 1.4 h19.6"/>
               </g>
               <g class="carro__ruedas">
-                <circle class="rueda" id="rueda1" cx="-4.6" cy="9" r="2.7"/>
-                <circle class="rueda" id="rueda2" cx="4.2" cy="9" r="2.7"/>
+                <circle class="rueda" id="rueda1" cx="-4.6" cy="9" r="2.9"/>
+                <circle class="rueda" id="rueda2" cx="5.6" cy="9" r="2.9"/>
               </g>
             </g>
           </svg>

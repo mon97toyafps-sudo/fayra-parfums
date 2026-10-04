@@ -20,6 +20,7 @@
   var pRuta   = document.getElementById("rutaLinea");
   var pRutaB  = document.getElementById("rutaLineaB");
   var gCarro  = document.getElementById("carro");
+  var gCuerpo = document.getElementById("carroCuerpo");
   var r1      = document.getElementById("rueda1");
   var r2      = document.getElementById("rueda2");
   var elPaso  = document.getElementById("rutaPaso");
@@ -31,25 +32,29 @@
 
   var SVGNS = "http://www.w3.org/2000/svg";
 
-  /* --- el recorrido: los 14 departamentos, arrancando y terminando
-         en San Salvador (desde ahí sale todo).
-         Ojo: el "id" es el que genera tools/mapa-el-salvador.pl, sin tildes.
-         Usulután -> usulutan. Si se escribe mal, la parada se salta. --- */
+  /* --- El recorrido: los 14 departamentos, arrancando y terminando en San
+         Salvador (desde ahí sale todo).
+         El orden NO es el del abecedario: va rodeando el país en un solo
+         giro (oeste, norte, este, sur y de vuelta), para que la línea
+         parezca un viaje y no un enredo. Se calculó con el vecino más
+         cercano sobre las coordenadas del mapa.
+         Ojo: el "id" es el que genera tools/mapa-el-salvador.pl, sin tildes
+         (Usulután -> usulutan). Si se escribe mal, la parada se salta. --- */
   var PARADAS = [
     ["san-salvador", "Todo sale de San Salvador. Cada pedido se prepara a mano, uno por uno."],
-    ["santa-ana",    "Nos escribís y te confirmamos que hay disponibilidad."],
-    ["chalatenango", "Revisamos el frasco antes de empacarlo: tiene que ser original."],
-    ["cabanas",      "Lo envolvemos para que llegue sin que se damage en el camino."],
-    ["san-vicente",  "El precio que viste ya trae el envío. No se paga nada extra."],
+    ["la-libertad",  "Arrancamos por el centro, cerca de la capital."],
+    ["sonsonate",    "Seguimos por la costa, sin cargo extra."],
+    ["ahuachapan",   "Hasta el oeste del país. El envío sigue incluido."],
+    ["santa-ana",    "Santa Ana y su sierra. Aquí hay fragancia para todos los gustos."],
+    ["chalatenango", "Seguimos hacia el norte del país."],
+    ["cuscatlan",    "Revisamos el frasco: tiene que ser original."],
+    ["cabanas",      "Lo empacamos para que llegue sin que se dañe."],
+    ["san-vicente",  "El precio que viste ya trae el envío incluido."],
     ["la-paz",       "Si es tu primera compra, te asesoramos antes de que pagues."],
-    ["cuscatlan",    "Te mandamos el resumen del pedido por WhatsApp."],
-    ["san-salvador", "Salimos hacia tu departamento."],
-    ["la-union",     "Llegamos a los 14 departamentos del país."],
-    ["san-miguel",   "Coordinamos la entrega y te damos un día exacto."],
     ["usulutan",     "El carrito llega hasta la puerta de tu casa."],
-    ["morazan",      "Pagás en efectivo cuando te lo entregamos, no antes."],
-    ["sonsonate",    "Si querías otra fragancia, hay más en el catálogo."],
-    ["ahuachapan",   "Gracias por confiar en Fayra Parfums."],
+    ["san-miguel",   "Coordinamos la entrega y te damos un día exacto."],
+    ["morazan",      "Llegamos hasta la frontera, sin problema."],
+    ["la-union",     "Los 14 departamentos del país, todos alcanzados."],
     ["san-salvador", "Volvemos a empezar. ¿Ya hiciste tu pedido?"]
   ];
 
@@ -79,15 +84,17 @@
 
   function slugDe(i) { return puntos[i].id; }
 
-  /* Catmull-Rom: una curva que pasa justo por cada punto, sin las
-     esquinas vivas de una poligonal. */
+  /* Catmull-Rom suave: pasa justo por cada punto pero sin los laños que
+     armaba la versión normal. Con el divisor en 6 la curva se pasaba de
+     vuelta en las curvas cerradas y el mapa quedaba lleno de bucles. */
+  var TEN = 11;
   function tramo(i) {
     var p0 = puntos[i - 1] || puntos[i];
     var p1 = puntos[i];
     var p2 = puntos[i + 1];
     var p3 = puntos[i + 2] || puntos[i + 1];
-    var c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
-    var c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+    var c1x = p1.x + (p2.x - p0.x) / TEN, c1y = p1.y + (p2.y - p0.y) / TEN;
+    var c2x = p2.x - (p3.x - p1.x) / TEN, c2y = p2.y - (p3.y - p1.y) / TEN;
     return "M" + p1.x.toFixed(2) + " " + p1.y.toFixed(2) +
            " C" + c1x.toFixed(2) + " " + c1y.toFixed(2) +
            ", " + c2x.toFixed(2) + " " + c2y.toFixed(2) +
@@ -153,6 +160,9 @@
   var t0 = 0;
   var indiceActual = -1;
 
+  var ESCALA = 2.7;   /* el carrito se dibuja pequeño y se agrupa aquí */
+  var RADIO_RUEDA = 2.9;
+
   function pinta(i, avance) {
     var tr = tramos[i];
     var L = tr.largo * avance;
@@ -162,19 +172,19 @@
     var ang = Math.atan2(a2.y - a1.y, a2.x - a1.x) * 180 / Math.PI;
 
     gCarro.setAttribute("transform",
-      "translate(" + pt.x.toFixed(2) + "," + pt.y.toFixed(2) + ") rotate(" + ang.toFixed(1) + ")");
+      "translate(" + pt.x.toFixed(2) + "," + pt.y.toFixed(2) + ") scale(" + ESCALA + ")");
+    gCuerpo.setAttribute("transform", "rotate(" + ang.toFixed(1) + ")");
 
-    /* las ruedas giran según lo que avanzó, no según el reloj */
+    /* Las ruedas giran sobre SU propio centro. Con rotate(giro) a secas
+       harian vuelta alrededor del origen del grupo y salían volando. */
     var recorrido = tr.desde + L;
-    var giro = (recorrido / 24).toFixed(1);
-    r1.setAttribute("transform", "rotate(" + giro + ")");
-    r2.setAttribute("transform", "rotate(" + giro + ")");
+    var giro = (recorrido / RADIO_RUEDA).toFixed(1);
+    r1.setAttribute("transform", "rotate(" + giro + " -4.6 9)");
+    r2.setAttribute("transform", "rotate(" + giro + " 5.6 9)");
 
-    /* la línea se dibuja a medida que el carrito avanza */
+    /* Solo el tramo ya recorrido se ve en oro; el resto queda de guía. */
     var pintado = tr.desde + L;
-    pRuta.style.strokeDasharray = largoTotal;
-    pRutaB.style.strokeDasharray = largoTotal;
-    pRuta.style.strokeDashoffset = (largoTotal - pintado).toFixed(1);
+    pRutaB.style.strokeDasharray = largoTotal + " " + largoTotal;
     pRutaB.style.strokeDashoffset = (largoTotal - pintado).toFixed(1);
 
     if (i !== indiceActual) {
@@ -194,8 +204,6 @@
     if (raiz) raiz.classList.remove("ruta--viva");
 
     /* sin animación el mapa se ve entero y el carrito se queda en la base */
-    pRuta.style.strokeDasharray = "";
-    pRuta.style.strokeDashoffset = "";
     pRutaB.style.strokeDasharray = "";
     pRutaB.style.strokeDashoffset = "";
     for (var k = 0; k < items.length; k++) items[k].classList.remove("is-on");
@@ -207,7 +215,8 @@
     if (base) base.classList.remove("dep--apagado");
 
     gCarro.setAttribute("transform",
-      "translate(" + puntos[0].x + "," + puntos[0].y + ") rotate(0)");
+      "translate(" + puntos[0].x + "," + puntos[0].y + ") scale(" + ESCALA + ")");
+    if (gCuerpo) gCuerpo.setAttribute("transform", "rotate(0)");
 
     if (items[0]) items[0].classList.add("is-on");
     if (elPaso) elPaso.textContent = "01";
