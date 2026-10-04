@@ -29,7 +29,6 @@
   var elDe     = document.getElementById("rutaDe");
   var elTexto  = document.getElementById("rutaTexto");
   var elLista  = document.getElementById("rutaLista");
-  var elCine   = document.getElementById("cine");
   var raiz     = document.querySelector(".ruta");
 
   var SVGNS = "http://www.w3.org/2000/svg";
@@ -127,8 +126,8 @@
   function dos(n) { return (n < 10 ? "0" : "") + n; }
 
   /* --------------------------------------------------------- ritmo --- */
-  var PASO = 2.1;                 /* segundos por departamento */
-  var VIAJE = 0.42;               /* parte del paso en la que viaja la luz */
+  var PASO = 1.15;                /* segundos por departamento */
+  var VIAJE = 0.46;               /* parte del paso en la que viaja la luz */
   var ciclo = puntos.length * PASO;
 
   /* --------------------------------------------------------- estado --- */
@@ -171,9 +170,9 @@
       elEtiqueta.textContent = p.nombre;
       /* el nombre va debajo del departamento; si está pegado al borde de
          arriba, se pone abajo para que no se salga del mapa */
-      var arriba = p.cy < 72;
+      var arriba = p.y < 74;
       elEtiqueta.setAttribute("x", Math.max(30, Math.min(450, p.x)));
-      elEtiqueta.setAttribute("y", arriba ? p.cy + 17 : p.cy - 11);
+      elEtiqueta.setAttribute("y", arriba ? p.y + 18 : p.y - 11);
       /* se saca y se vuelve a poner la clase para que la entrada se repita */
       elEtiqueta.classList.remove("etiqueta--entra");
       void elEtiqueta.getBoundingClientRect();
@@ -226,45 +225,24 @@
     if (corriendo) return;
     corriendo = true;
     indiceActual = -1;
-    /* arranca en un punto cualquiera para que no siempre empiece igual */
-    t0 = performance.now() - Math.random() * (ciclo * 1000);
+    /* siempre arranca en San Salvador, sin salto */
+    t0 = performance.now();
     if (raiz) raiz.classList.add("ruta--viva");
     requestAnimationFrame(frame);
   }
 
   /* ---------------------------------------------------------- arranque --- */
-  /* Los departamentos se encienden siempre. No se consulta
-     prefers-reduced-motion a propósito: con las animaciones del sistema
-     apagadas (Windows lo trae así de fábrica) el mapa se quedaba
-     congelado y parecía roto. El botón sirve para pausarlo si a alguien
-     le molesta el movimiento. */
-  var pausadoAMano = false;
-  var etiqueta = elCine ? elCine.querySelector("i") : null;
-
-  function boton(pausado) {
-    if (!elCine) return;
-    elCine.classList.toggle("cine--on", !pausado);
-    elCine.setAttribute("aria-pressed", pausado ? "false" : "true");
-    if (etiqueta) etiqueta.textContent = pausado ? "Ver la animación" : "Pausar si molesta";
-  }
-
-  function alterna() {
-    pausadoAMano = corriendo;
-    if (pausadoAMano) { quieto(); boton(true); }
-    else { arranca(); boton(false); }
-  }
-
+  /* Los departamentos se encienden siempre, sin botón de pausa: con las
+     animaciones del sistema apagadas (Windows lo trae así de fábrica) el mapa
+     se quedaba congelado y parecía roto. Cada vuelta empieza en San
+     Salvador y termina volviendo a él. */
   quieto();
   arranca();
-  boton(false);
-
-  if (elCine) elCine.addEventListener("click", alterna);
 
   /* con la pestaña escondida el requestAnimationFrame se detiene: al volver
-     no queremos que salte de golpe, pero si el visitante lo paró a mano que
-     siga parado. */
+     se retoma desde San Salvador para que no salte a la mitad. */
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) corriendo = false;
-    else if (!pausadoAMano) arranca();
+    else arranca();
   });
 })();
