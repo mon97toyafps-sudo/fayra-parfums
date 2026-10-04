@@ -49,6 +49,23 @@ if (%raros) {
     print "sin caracteres raros en el JS\n";
 }
 
+# Las paradas de la ruta tienen que existir en el mapa. Con una de mas se cae
+# toda la animacion del carrito y en la pagina solo se ven los departamentos
+# quietos, sin ninguna pista de que faltara algo.
+if (-e "assets/js/ruta.js" && -e "assets/js/mapa-es.js") {
+    my $mapa = do { local (@ARGV, $/) = ("assets/js/mapa-es.js"); <> };
+    my $ruta = do { local (@ARGV, $/) = ("assets/js/ruta.js"); <> };
+    my %existe = map { $_ => 1 } ($mapa =~ /id: "([a-z0-9-]+)"/g);
+    my @paradas = ($ruta =~ /^\s*\["([a-z0-9-]+)",/gm);
+    my @faltan = grep { !$existe{$_} } @paradas;
+    if (@faltan) {
+        print "PARADAS QUE NO ESTAN EN EL MAPA: @faltan\n";
+        $todo = 0;
+    } else {
+        printf "las %d paradas de la ruta existen en el mapa\n", scalar @paradas;
+    }
+}
+
 # El HTML no debería quedar con un solo archivo gigante de base64
 for my $f (glob("*.html")) {
     my $h = do { local (@ARGV, $/) = ($f); <> };

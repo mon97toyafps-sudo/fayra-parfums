@@ -33,8 +33,8 @@
 
   /* --- el recorrido: los 14 departamentos, arrancando y terminando
          en San Salvador (desde ahí sale todo).
-         Ojo: el "id" es el que genera tools/mapa-el-salvador.pl, sin tildes
-         (usulatan, no usultan). --- */
+         Ojo: el "id" es el que genera tools/mapa-el-salvador.pl, sin tildes.
+         Usulután -> usulutan. Si se escribe mal, la parada se salta. --- */
   var PARADAS = [
     ["san-salvador", "Todo sale de San Salvador. Cada pedido se prepara a mano, uno por uno."],
     ["santa-ana",    "Nos escribís y te confirmamos que hay disponibilidad."],
@@ -46,7 +46,7 @@
     ["san-salvador", "Salimos hacia tu departamento."],
     ["la-union",     "Llegamos a los 14 departamentos del país."],
     ["san-miguel",   "Coordinamos la entrega y te damos un día exacto."],
-    ["usulatan",     "El carrito llega hasta la puerta de tu casa."],
+    ["usulutan",     "El carrito llega hasta la puerta de tu casa."],
     ["morazan",      "Pagás en efectivo cuando te lo entregamos, no antes."],
     ["sonsonate",    "Si querías otra fragancia, hay más en el catálogo."],
     ["ahuachapan",   "Gracias por confiar en Fayra Parfums."],
