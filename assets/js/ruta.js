@@ -8,9 +8,6 @@
    La curva se arma tramo por tramo con Catmull-Rom, y cada tramo
    se mide con getPointAtLength sobre su propio <path>. Así cada
    parada cae exactamente en su punto, sin adivinar longitudes.
-
-   Si el sistema pide menos animaciones el mapa queda estático con
-   todo iluminado, y el botón "modo cine" lo prende a la fuerza.
    ============================================================ */
 
 (function () {
@@ -140,10 +137,6 @@
   var ciclo = tramos.reduce(function (a, b) { return a + b.paso; }, 0);
 
   /* --------------------------------------------------------- estado --- */
-  var reduce = false;
-  try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
-
-  var cine = false;
   var corriendo = false;
   var t0 = 0;
   var indiceActual = -1;
@@ -244,27 +237,36 @@
   }
 
   /* ---------------------------------------------------------- arranque --- */
-  quieto();
+  /* El carrito SIEMPRE viaja. No se consulta prefers-reduced-motion a
+     propósito: con las animaciones del sistema apagadas (Windows lo trae
+     asi de fábrica) el mapa se quedaba congelado y parecía roto. Si alguien
+     no quiere movimiento, tiene el botón de pausa a mano. */
+  var pausadoAMano = false;
+  var etiqueta = elCine ? elCine.querySelector("i") : null;
 
-  if (reduce) {
-    if (elCine) elCine.classList.add("cine--off");
-  } else {
-    arranca();
+  function boton(pausado) {
+    if (!elCine) return;
+    elCine.classList.toggle("cine--on", !pausado);
+    elCine.setAttribute("aria-pressed", pausado ? "false" : "true");
+    if (etiqueta) etiqueta.textContent = pausado ? "Ver la animación" : "Pausar si molesta";
   }
 
-  if (elCine) {
-    elCine.addEventListener("click", function () {
-      cine = !cine;
-      elCine.setAttribute("aria-pressed", cine ? "true" : "false");
-      elCine.classList.toggle("cine--on", cine);
-      if (cine) arranca(); else quieto();
-    });
+  function alterna() {
+    pausadoAMano = corriendo;
+    if (pausadoAMano) { quieto(); boton(true); }
+    else { arranca(); boton(false); }
   }
 
-  /* con la pestaña escondida el requestAnimationFrame se detiene: al
-     volver no queremos que el carrito salte de golpe al punto que le toca. */
+  arranca();
+  boton(false);
+
+  if (elCine) elCine.addEventListener("click", alterna);
+
+  /* con la pestaña escondida el requestAnimationFrame se detiene: al volver
+     no queremos que el carrito salte de golpe al punto que le toca, pero si
+     el visitante lo paró a mano, que siga parado. */
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) corriendo = false;
-    else if (!reduce || cine) arranca();
+    else if (!pausadoAMano) arranca();
   });
 })();
