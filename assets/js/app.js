@@ -184,6 +184,37 @@
   /* ============================================================
      MONITOR Y CONTADOR (todas las páginas)
      ============================================================ */
+
+  /* Un solo id por pestaña: con él el panel sabe si sigue siendo la
+     misma persona o si cerró y volvió. */
+  var SID = (function () {
+    try {
+      var s = sessionStorage.getItem("fayra_sid");
+      if (s) return s;
+      s = "s-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
+      sessionStorage.setItem("fayra_sid", s);
+      return s;
+    } catch (e) { return "s-anon"; }
+  })();
+
+  function registro(datos) {
+    var host = location.hostname;
+    if (host === "localhost" || host === "127.0.0.1" || host === "") return;
+    try {
+      var cuerpo = {
+        sid: SID,
+        path: location.pathname,
+        ref: document.referrer || "",
+        accion: datos.accion || "visita"
+      };
+      fetch("/.netlify/functions/registro", {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cuerpo)
+      }).catch(function () {});
+    } catch (e) {}
+  }
   function sendEvent(data) {
     var host = location.hostname;
     if (host === "localhost" || host === "127.0.0.1" || host === "") return;
@@ -196,6 +227,14 @@
         body: JSON.stringify(data)
       }).catch(function () {});
     } catch (e) {}
+
+    /* además queda guardado en los Blobs para que aparezca en el panel */
+    registro({
+      accion: data.type === "order" ? "pedido"
+             : data.type === "cart" ? "carrito"
+             : data.type === "click" ? "clic:" + (data.source || "otro")
+             : "visita"
+    });
   }
   sendEvent({ type: "visit", ref: document.referrer || "" });
 
@@ -241,21 +280,8 @@
   (function () {
     var host = location.hostname;
     if (host === "localhost" || host === "127.0.0.1" || host === "") return;
-    var sid = null;
-    try { sid = sessionStorage.getItem("fayra_sid"); } catch (e) {}
-    if (!sid) {
-      sid = "s-" + Date.now() + "-" + Math.random().toString(36).slice(2, 10);
-      try { sessionStorage.setItem("fayra_sid", sid); } catch (e) {}
-    }
-    function ping() {
-      try {
-        fetch("/.netlify/functions/online", {
-          method: "POST", keepalive: true,
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sid: sid, path: location.pathname })
-        }).catch(function () {});
-      } catch (e) {}
-    }
+    /* "sigo aquí": el panel usa esto para saber quién está adentro ahora */
+    function ping() { registro({ accion: "ping" }); }
     ping();
     setInterval(ping, 30000);
   })();
