@@ -176,8 +176,8 @@
 
 /* la línea de la ruta */
 .ruta__guia{
-  stroke:rgba(201,163,92,.20);stroke-width:1;stroke-linecap:round;
-  stroke-dasharray:2 5;
+  stroke:rgba(201,163,92,.13);stroke-width:.9;stroke-linecap:round;
+  stroke-dasharray:1.5 6;
 }
 .ruta__linea{
   stroke:var(--gold-2);stroke-width:1.5;stroke-linecap:round;opacity:.85;
