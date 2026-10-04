@@ -1,13 +1,18 @@
 /* ============================================================
-   Fayra Parfums · La ruta: el carrito recorre El Salvador
+   Fayra Parfums · La ruta
    ============================================================
-   Toma el mapa real (assets/js/mapa-es.js) y anima un carrito por
-   una curva suave que pasa por los 14 departamentos. En cada parada
-   se enciende el departamento y cambia el texto del proceso.
+   Toma el mapa real de El Salvador (assets/js/mapa-es.js) y va
+   encendiendo los 14 departamentos uno por uno, mientras el texto del
+   lateral va contando cómo es un pedido de punta a punta.
 
-   La curva se arma tramo por tramo con Catmull-Rom, y cada tramo
-   se mide con getPointAtLength sobre su propio <path>. Así cada
-   parada cae exactamente en su punto, sin adivinar longitudes.
+   El orden de las paradas rodea el país en un solo giro (oeste, norte,
+   este, sur y de vuelta), calculado con el vecino más cercano sobre las
+   coordenadas del mapa, para que la línea parezca un recorrido y no un
+   enredo.
+
+   Ojo: el "id" de cada parada es el que genera tools/mapa-el-salvador.pl,
+   sin tildes (Usulután -> usulutan). Si se escribe mal, la parada se salta
+   y tools/check-js.pl lo avisa.
    ============================================================ */
 
 (function () {
@@ -19,10 +24,8 @@
   var gTicks  = document.getElementById("ticks");
   var pRuta   = document.getElementById("rutaLinea");
   var pRutaB  = document.getElementById("rutaLineaB");
-  var gCarro  = document.getElementById("carro");
-  var gCuerpo = document.getElementById("carroCuerpo");
-  var r1      = document.getElementById("rueda1");
-  var r2      = document.getElementById("rueda2");
+  var gPulso  = document.getElementById("pulso");
+  var gAnillo = gPulso ? gPulso.querySelector(".pulso__anillo") : null;
   var elPaso  = document.getElementById("rutaPaso");
   var elDe    = document.getElementById("rutaDe");
   var elTexto = document.getElementById("rutaTexto");
@@ -32,14 +35,7 @@
 
   var SVGNS = "http://www.w3.org/2000/svg";
 
-  /* --- El recorrido: los 14 departamentos, arrancando y terminando en San
-         Salvador (desde ahí sale todo).
-         El orden NO es el del abecedario: va rodeando el país en un solo
-         giro (oeste, norte, este, sur y de vuelta), para que la línea
-         parezca un viaje y no un enredo. Se calculó con el vecino más
-         cercano sobre las coordenadas del mapa.
-         Ojo: el "id" es el que genera tools/mapa-el-salvador.pl, sin tildes
-         (Usulután -> usulutan). Si se escribe mal, la parada se salta. --- */
+  /* --- el recorrido --- */
   var PARADAS = [
     ["san-salvador", "Todo sale de San Salvador. Cada pedido se prepara a mano, uno por uno."],
     ["la-libertad",  "Arrancamos por el centro, cerca de la capital."],
@@ -51,7 +47,7 @@
     ["cabanas",      "Lo empacamos para que llegue sin que se dañe."],
     ["san-vicente",  "El precio que viste ya trae el envío incluido."],
     ["la-paz",       "Si es tu primera compra, te asesoramos antes de que pagues."],
-    ["usulutan",     "El carrito llega hasta la puerta de tu casa."],
+    ["usulutan",     "El pedido llega hasta la puerta de tu casa."],
     ["san-miguel",   "Coordinamos la entrega y te damos un día exacto."],
     ["morazan",      "Llegamos hasta la frontera, sin problema."],
     ["la-union",     "Los 14 departamentos del país, todos alcanzados."],
@@ -60,6 +56,7 @@
 
   /* ---------------------------------------------------------- dibujo --- */
   var porId = {};
+  var nodos = {};
   M.departamentos.forEach(function (d) {
     porId[d.id] = d;
     var p = document.createElementNS(SVGNS, "path");
@@ -67,14 +64,13 @@
     p.setAttribute("class", "dep");
     p.setAttribute("data-dep", d.id);
     gDeps.appendChild(p);
+    nodos[d.id] = p;
   });
 
   var puntos = [];
   PARADAS.forEach(function (s) {
     var d = porId[s[0]];
     if (!d) {
-      /* Una parada mal escrita tumbaba TODA la animación. Ahora se avisa en la
-         consola y el resto del viaje sigue funcionando. */
       console.warn("Fayra: la parada " + s[0] + " no existe en el mapa");
       return;
     }
@@ -82,11 +78,9 @@
   });
   if (puntos.length < 2) return;
 
-  function slugDe(i) { return puntos[i].id; }
+  var N = puntos.length - 1;
 
-  /* Catmull-Rom suave: pasa justo por cada punto pero sin los laños que
-     armaba la versión normal. Con el divisor en 6 la curva se pasaba de
-     vuelta en las curvas cerradas y el mapa quedaba lleno de bucles. */
+  /* Catmull-Rom suave: pasa justo por cada punto sin cerrar bucles. */
   var TEN = 11;
   function tramo(i) {
     var p0 = puntos[i - 1] || puntos[i];
@@ -101,9 +95,7 @@
            ", " + p2.x.toFixed(2) + " " + p2.y.toFixed(2);
   }
 
-  var N = puntos.length - 1;
-
-  /* un path oculto por tramo, solo para poder medirlo con precisión */
+  /* un path oculto por tramo, solo para medirlo con precisión */
   var medidor = document.createElementNS(SVGNS, "g");
   medidor.setAttribute("visibility", "hidden");
   medidor.setAttribute("aria-hidden", "true");
@@ -125,7 +117,7 @@
   pRuta.setAttribute("d", camino);
   pRutaB.setAttribute("d", camino);
 
-  /* los puntitos de cada parada */
+  /* el puntito de cada parada */
   puntos.forEach(function (p, k) {
     var c = document.createElementNS(SVGNS, "circle");
     c.setAttribute("cx", p.x);
@@ -145,121 +137,90 @@
 
   function dos(n) { return (n < 10 ? "0" : "") + n; }
 
-  /* --------------------------------------------------------- timing --- */
-  var VELOCIDAD = 17;   /* unidades svg por segundo */
-  var QUIETO    = 1.9;  /* segundos parado en cada parada */
-
-  for (var t = 0; t < tramos.length; t++) {
-    tramos[t].viaje = tramos[t].largo / VELOCIDAD;
-    tramos[t].paso  = tramos[t].viaje + QUIETO;
-  }
-  var ciclo = tramos.reduce(function (a, b) { return a + b.paso; }, 0);
+  /* --------------------------------------------------------- ritmo --- */
+  var PASO = 1.9;          /* segundos por departamento */
+  var ciclo = puntos.length * PASO;
 
   /* --------------------------------------------------------- estado --- */
   var corriendo = false;
   var t0 = 0;
   var indiceActual = -1;
 
-  var ESCALA = 2.7;   /* el carrito se dibuja pequeño y se agrupa aquí */
-  var RADIO_RUEDA = 2.9;
+  function enciende(i) {
+    if (i === indiceActual) return;
+    indiceActual = i;
+    var p = puntos[i];
 
-  function pinta(i, avance) {
-    var tr = tramos[i];
-    var L = tr.largo * avance;
-    var pt = tr.path.getPointAtLength(L);
-    var a1 = tr.path.getPointAtLength(Math.max(0, L - 0.7));
-    var a2 = tr.path.getPointAtLength(Math.min(tr.largo, L + 0.7));
-    var ang = Math.atan2(a2.y - a1.y, a2.x - a1.x) * 180 / Math.PI;
-
-    gCarro.setAttribute("transform",
-      "translate(" + pt.x.toFixed(2) + "," + pt.y.toFixed(2) + ") scale(" + ESCALA + ")");
-    gCuerpo.setAttribute("transform", "rotate(" + ang.toFixed(1) + ")");
-
-    /* Las ruedas giran sobre SU propio centro. Con rotate(giro) a secas
-       harian vuelta alrededor del origen del grupo y salían volando. */
-    var recorrido = tr.desde + L;
-    var giro = (recorrido / RADIO_RUEDA).toFixed(1);
-    r1.setAttribute("transform", "rotate(" + giro + " -4.6 9)");
-    r2.setAttribute("transform", "rotate(" + giro + " 5.6 9)");
-
-    /* Solo el tramo ya recorrido se ve en oro; el resto queda de guía. */
-    var pintado = tr.desde + L;
-    pRutaB.style.strokeDasharray = largoTotal + " " + largoTotal;
-    pRutaB.style.strokeDashoffset = (largoTotal - pintado).toFixed(1);
-
-    if (i !== indiceActual) {
-      indiceActual = i;
-      for (var k = 0; k < items.length; k++) items[k].classList.toggle("is-on", k === i);
-      for (var m = 0; m < gDeps.children.length; m++) gDeps.children[m].classList.remove("dep--vivo");
-      var nodo = gDeps.querySelector('[data-dep="' + slugDe(i) + '"]');
-      if (nodo) nodo.classList.add("dep--vivo");
-      if (elPaso) elPaso.textContent = dos(i + 1);
-      if (elDe) elDe.textContent = puntos[i].nombre;
-      if (elTexto) elTexto.textContent = puntos[i].texto;
+    /* los que ya se iluminaron quedan suave; el actual, encendido */
+    for (var k = 0; k < items.length; k++) {
+      items[k].classList.toggle("is-on", k === i);
+      items[k].classList.toggle("is-pasado", k < i);
     }
-  }
-
-  function quieto() {
-    corriendo = false;
-    if (raiz) raiz.classList.remove("ruta--viva");
-
-    /* sin animación el mapa se ve entero y el carrito se queda en la base */
-    pRutaB.style.strokeDasharray = "";
-    pRutaB.style.strokeDashoffset = "";
-    for (var k = 0; k < items.length; k++) items[k].classList.remove("is-on");
     for (var m = 0; m < gDeps.children.length; m++) {
-      gDeps.children[m].classList.remove("dep--vivo");
-      gDeps.children[m].classList.add("dep--apagado");
+      gDeps.children[m].classList.remove("dep--vivo", "dep--visitado");
     }
-    var base = gDeps.querySelector('[data-dep="san-salvador"]');
-    if (base) base.classList.remove("dep--apagado");
+    for (var v = 0; v < i; v++) nodos[puntos[v].id].classList.add("dep--visitado");
+    nodos[p.id].classList.add("dep--vivo");
 
-    gCarro.setAttribute("transform",
-      "translate(" + puntos[0].x + "," + puntos[0].y + ") scale(" + ESCALA + ")");
-    if (gCuerpo) gCuerpo.setAttribute("transform", "rotate(0)");
+    /* la onda, en el centro del departamento */
+    if (gPulso) gPulso.setAttribute("transform", "translate(" + p.x + "," + p.y + ")");
 
-    if (items[0]) items[0].classList.add("is-on");
-    if (elPaso) elPaso.textContent = "01";
-    if (elDe) elDe.textContent = puntos[0].nombre;
-    if (elTexto) elTexto.textContent = puntos[0].texto;
-    indiceActual = -1;
+    /* la línea de oro llega hasta donde vamos */
+    if (i < N) {
+      pRutaB.style.strokeDasharray = largoTotal + " " + largoTotal;
+      pRutaB.style.strokeDashoffset = (largoTotal - tramos[i].desde).toFixed(1);
+    } else {
+      pRutaB.style.strokeDasharray = largoTotal + " " + largoTotal;
+      pRutaB.style.strokeDashoffset = "0";
+    }
+
+    if (elPaso) elPaso.textContent = dos(i + 1);
+    if (elDe) elDe.textContent = p.nombre;
+    if (elTexto) elTexto.textContent = p.texto;
   }
 
   function frame(ahora) {
     if (!corriendo) return;
     var t = ((ahora - t0) / 1000) % ciclo;
-    var acum = 0;
-    for (var i = 0; i < tramos.length; i++) {
-      if (t < acum + tramos[i].paso) {
-        var local = Math.min(1, (t - acum) / tramos[i].viaje);
-        /* easeInOut: sale suave, frena en la parada */
-        var e = local < 0.5
-          ? 2 * local * local
-          : 1 - Math.pow(-2 * local + 2, 2) / 2;
-        pinta(i, e);
-        break;
-      }
-      acum += tramos[i].paso;
-      if (i === tramos.length - 1) pinta(0, 0);
-    }
+    enciende(Math.floor(t / PASO));
     requestAnimationFrame(frame);
+  }
+
+  function quieto() {
+    corriendo = false;
+    if (raiz) raiz.classList.remove("ruta--viva");
+    pRutaB.style.strokeDasharray = "";
+    pRutaB.style.strokeDashoffset = "";
+    for (var k = 0; k < items.length; k++) items[k].classList.remove("is-on", "is-pasado");
+    for (var m = 0; m < gDeps.children.length; m++) {
+      gDeps.children[m].classList.remove("dep--vivo", "dep--visitado");
+      gDeps.children[m].classList.add("dep--apagado");
+    }
+    for (var v = 0; v < puntos.length; v++) nodos[puntos[v].id].classList.remove("dep--apagado");
+    nodos[puntos[0].id].classList.add("dep--vivo");
+    if (gPulso) gPulso.setAttribute("transform", "translate(" + puntos[0].x + "," + puntos[0].y + ")");
+    if (items[0]) items[0].classList.add("is-on");
+    if (elPaso) elPaso.textContent = "01";
+    if (elDe) elDe.textContent = puntos[0].nombre;
+    if (elTexto) elTexto.textContent = puntos[0].texto;
+    indiceActual = 0;
   }
 
   function arranca() {
     if (corriendo) return;
     corriendo = true;
     indiceActual = -1;
-    /* arranca en un punto cualquiera del viaje para no repetir siempre igual */
+    /* arranca en un punto cualquiera para que no siempre empiece igual */
     t0 = performance.now() - Math.random() * (ciclo * 1000);
     if (raiz) raiz.classList.add("ruta--viva");
     requestAnimationFrame(frame);
   }
 
   /* ---------------------------------------------------------- arranque --- */
-  /* El carrito SIEMPRE viaja. No se consulta prefers-reduced-motion a
-     propósito: con las animaciones del sistema apagadas (Windows lo trae
-     asi de fábrica) el mapa se quedaba congelado y parecía roto. Si alguien
-     no quiere movimiento, tiene el botón de pausa a mano. */
+  /* Los municipios se encienden siempre. No se consulta prefers-reduced-motion
+     a propósito: con las animaciones del sistema apagadas (Windows lo trae así
+     de fábrica) el mapa se quedaba congelado y parecía roto. El botón sirve
+     para pausarlo si a alguien le molesta el movimiento. */
   var pausadoAMano = false;
   var etiqueta = elCine ? elCine.querySelector("i") : null;
 
@@ -276,14 +237,15 @@
     else { arranca(); boton(false); }
   }
 
+  quieto();
   arranca();
   boton(false);
 
   if (elCine) elCine.addEventListener("click", alterna);
 
   /* con la pestaña escondida el requestAnimationFrame se detiene: al volver
-     no queremos que el carrito salte de golpe al punto que le toca, pero si
-     el visitante lo paró a mano, que siga parado. */
+     no queremos que salte de golpe, pero si el visitante lo paró a mano que
+     siga parado. */
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) corriendo = false;
     else if (!pausadoAMano) arranca();

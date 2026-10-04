@@ -147,13 +147,32 @@
 
 /* departamentos */
 .dep{
-  fill:rgba(201,163,92,.055);stroke:rgba(201,163,92,.26);stroke-width:.7;
-  transition:fill .7s var(--ease),stroke .7s var(--ease);
+  fill:rgba(201,163,92,.05);stroke:rgba(201,163,92,.24);stroke-width:.7;
+  transition:fill .55s var(--ease),stroke .55s var(--ease);
 }
-.dep--base{fill:rgba(201,163,92,.13);stroke:rgba(201,163,92,.5)}
-.dep--vivo{fill:rgba(201,163,92,.42);stroke:var(--gold);stroke-width:1.1}
-/* con la animación apagada se alcanza a ver el país entero de una vez */
-.dep--apagado{fill:rgba(201,163,92,.10);stroke:rgba(201,163,92,.30)}
+/* los que ya pasaron quedan encendidos suave */
+.dep--visitado{fill:rgba(201,163,92,.17);stroke:rgba(201,163,92,.45)}
+/* el que está sonando ahora */
+.dep--vivo{
+  fill:rgba(201,163,92,.55);stroke:var(--gold-2);stroke-width:1.5;
+  filter:drop-shadow(0 0 6px rgba(201,163,92,.6));
+}
+/* con la animación pausada se alcanza a ver el país entero de una vez */
+.dep--apagado{fill:rgba(201,163,92,.09);stroke:rgba(201,163,92,.28)}
+
+/* la onda que marca el departamento activo */
+.pulso{opacity:0;transition:opacity .5s var(--ease)}
+.ruta--viva .pulso{opacity:1}
+.pulso__punto{fill:var(--gold-2)}
+.pulso__anillo{
+  fill:none;stroke:var(--gold-2);stroke-width:1.1;opacity:.55;
+  transform-box:fill-box;transform-origin:center;
+}
+.ruta--viva .pulso__anillo{animation:onda 1.9s ease-out infinite}
+@keyframes onda{
+  0%{transform:scale(.35);opacity:.75}
+  100%{transform:scale(2.6);opacity:0}
+}
 
 /* la línea de la ruta */
 .ruta__guia{
@@ -161,34 +180,21 @@
   stroke-dasharray:2 5;
 }
 .ruta__linea{
-  stroke:var(--gold-2);stroke-width:1.6;stroke-linecap:round;opacity:.9;
-  filter:drop-shadow(0 0 4px rgba(201,163,92,.5));
+  stroke:var(--gold-2);stroke-width:1.5;stroke-linecap:round;opacity:.85;
+  filter:drop-shadow(0 0 4px rgba(201,163,92,.45));
 }
 
 /* los puntos donde para */
-.ticks .tick{fill:#0c0a08;stroke:rgba(201,163,92,.7);stroke-width:1}
-.ticks .tick:first-child{fill:var(--gold);stroke:var(--gold-2);stroke-width:1.4}
+.ticks .tick{fill:#0c0a08;stroke:rgba(201,163,92,.6);stroke-width:.9}
 
-/* el carrito */
-.carro__sombra{fill:rgba(0,0,0,.55)}
-.carro__estela{
-  stroke:var(--gold);stroke-width:1.6;stroke-linecap:round;fill:none;opacity:.35;
-}
-.carro__caja{fill:var(--gold-2);stroke:var(--gold);stroke-width:.45}
-.carro__ventana{fill:#0c0a08;opacity:.55}
-.carro__franja{stroke:rgba(12,10,8,.4);stroke-width:.5;fill:none}
-.carro__ruedas .rueda{fill:#141009;stroke:var(--gold);stroke-width:1.1}
-.carro{filter:drop-shadow(0 2px 6px rgba(0,0,0,.8))}
+/* con el recorrido pausado solo se ve el circuito de guía */
+.ruta:not(.ruta--viva) .ruta__linea{display:none}
 
 @keyframes latido{
   0%{box-shadow:0 0 0 0 rgba(201,163,92,.55)}
   70%{box-shadow:0 0 0 11px rgba(201,163,92,0)}
   100%{box-shadow:0 0 0 0 rgba(201,163,92,0)}
 }
-
-/* con el carrito quieto solo se ve el circuito de guía */
-.ruta:not(.ruta--viva) .ruta__linea{display:none}
-.ruta:not(.ruta--viva) .carro__estela{display:none}
 
 /* panel lateral */
 .ruta__panel{display:flex;flex-direction:column;gap:20px;min-width:0}
@@ -219,6 +225,7 @@
 }
 .ruta__lista li.is-on{color:var(--gold-2);padding-left:11px}
 .ruta__lista li.is-on b{color:var(--gold)}
+.ruta__lista li.is-pasado{color:rgba(230,205,151,.5)}
 
 .ruta__pie{
   display:flex;gap:16px;align-items:flex-start;margin-top:26px;
@@ -256,6 +263,4 @@
    El botón "modo cine" lo prende igual a propósito (ver ruta.js). */
 @media (prefers-reduced-motion:reduce){
   .emblem__ring{animation:none}
-  .dep--vivo{transition:none}
-  .ruta__panel *{transition:none}
 }

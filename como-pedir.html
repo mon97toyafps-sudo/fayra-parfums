@@ -132,19 +132,10 @@
 
             <g id="ticks" class="ticks"></g>
 
-            <g id="carro" class="carro" aria-hidden="true">
-              <ellipse class="carro__sombra" cx="0" cy="10.5" rx="12" ry="2.8"/>
-              <path class="carro__estela" d="M-9 3 L-30 3"/>
-              <g id="carroCuerpo">
-                <path class="carro__caja" d="M-9.5 -5.5 h9.5 a1.6 1.6 0 0 1 1.6 1.6 v6.2 h-11.1 z"/>
-                <path class="carro__caja" d="M1.8 -1.2 h3.1 l3.2 3.6 v.6 H1.8 z"/>
-                <path class="carro__ventana" d="M2.6 -.4 h1.9 l2.1 2.4 H2.6 z"/>
-                <path class="carro__franja" d="M-9.5 1.4 h19.6"/>
-              </g>
-              <g class="carro__ruedas">
-                <circle class="rueda" id="rueda1" cx="-4.6" cy="9" r="2.9"/>
-                <circle class="rueda" id="rueda2" cx="5.6" cy="9" r="2.9"/>
-              </g>
+            <!-- la onda que marca el departamento que se está encendiendo -->
+            <g id="pulso" class="pulso" aria-hidden="true">
+              <g class="pulso__anillo"><circle cx="0" cy="0" r="8"/></g>
+              <circle class="pulso__punto" cx="0" cy="0" r="3"/>
             </g>
           </svg>
         </div>
