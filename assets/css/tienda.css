@@ -92,10 +92,10 @@
    Ahora arriba hay barra de aviso y categorías, así que el aire de
    más se come la pantalla: acá se aprieta para que el producto se
    vea sin tener que bajar. */
-.page-head{padding:calc(var(--header-h) + clamp(16px,2.2vh,28px)) 0 clamp(12px,1.6vh,16px)}
+.page-head{padding:calc(var(--header-h) + clamp(14px,1.8vh,22px)) 0 clamp(8px,1.1vh,12px)}
 .page-head h1{font-size:clamp(32px,4.4vw,54px);margin:12px 0 0}
 .page-head__lead{margin-top:13px;font-size:clamp(15px,1.35vw,17px);max-width:52ch}
-.section--tienda{padding-top:clamp(20px,2.6vh,30px)}
+.section--tienda{padding-top:clamp(14px,1.9vh,24px)}
 
 /* Las portadas de las páginas internas no son la portada del sitio: se
    achican para que la página se lea como una sección de tienda y no como
