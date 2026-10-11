@@ -50,7 +50,13 @@ sub archivo_de {
     return $pedido;
 }
 
-while (my $c = $d->accept) {
+while (1) {
+    # accept() devuelve vacío cuando pasa un rato sin que nadie pida nada
+    # (tiene su propio tiempo de espera). Con "while (my $c = ...)" eso
+    # terminaba el bucle y el servidor se moría solo al minuto de inactividad.
+    my $c = $d->accept;
+    next if !$c;
+
     # Una sola petición por conexión, y se cierra enseguida. Si se deja la
     # conexión abierta (keep-alive), el navegador ocupa el único hilo del
     # servidor esperando recursos y la página se queda cargando siempre.

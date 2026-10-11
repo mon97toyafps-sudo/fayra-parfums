@@ -115,6 +115,32 @@
   var heroVisual = document.querySelector(".hero__visual");
   var ticking = false;
 
+  /* El header tiene tres pisos (aviso, buscador, categorías) y su alto cambia
+     según el ancho de la pantalla. Las cabeceras se apartan con --header-h,
+     así que se lo mide de verdad en vez de dejarlo escrito a mano: si no, en
+     el celular el header tapaba la primera foto. */
+  function medirHeader() {
+    if (!header) return;
+
+    /* Si la página está bajada el header está encogido y mediría de menos.
+       Se lo devuelve un momento a su tamaño completo, sin transición, para
+       medirlo bien; después se lo deja como estaba. */
+    var estaba = header.classList.contains("stuck");
+    header.classList.add("midiendo");
+    if (estaba) header.classList.remove("stuck");
+
+    var alto = Math.ceil(header.getBoundingClientRect().height);
+
+    if (estaba) header.classList.add("stuck");
+    header.classList.remove("midiendo");
+
+    if (alto > 0) document.documentElement.style.setProperty("--header-h", alto + "px");
+  }
+  medirHeader();
+  window.addEventListener("resize", medirHeader);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(medirHeader);
+  window.addEventListener("load", medirHeader);
+
   function onScroll() {
     var y = window.pageYOffset;
     if (header) header.classList.toggle("stuck", y > 40);
@@ -506,31 +532,129 @@
      CATÁLOGO + VENTANA DE DETALLE
      ============================================================ */
   var grid = $("catalogGrid");
+  var filtros = $("filtros");
+  var buscador = $("buscador");
+  var buscarInput = $("buscarInput");
+  var catActual = "";
+  var textoBusqueda = "";
+
+  /* Sacar parámetros del enlace (?cat=… y ?buscar=…) sin depender de nada
+     externo. Se usa en el catálogo, que es adonde apunta el buscador. */
+  function param(nombre) {
+    var m = location.search.match(new RegExp("[?&]" + nombre + "=([^&]*)"));
+    return m ? decodeURIComponent(m[1].replace(/\+/g, " ")) : "";
+  }
+
+  /* La familia de cada perfume es su primera etiqueta. Las categorías del
+     menú salen de ahí: nunca aparece una que no tenga nada adentro. */
+  function familias() {
+    var vistas = [];
+    PRODUCTS.forEach(function (p) {
+      var f = (p.tags || [])[0];
+      if (f && vistas.indexOf(f) === -1) vistas.push(f);
+    });
+    return vistas;
+  }
+
+  /* Todas las etiquetas, para los filtros finos del catálogo */
+  function etiquetas() {
+    var vistas = [];
+    PRODUCTS.forEach(function (p) {
+      (p.tags || []).forEach(function (t) { if (vistas.indexOf(t) === -1) vistas.push(t); });
+    });
+    return vistas;
+  }
+
+  function coincide(p, txt) {
+    if (!txt) return true;
+    var heno = [p.name, p.brand, p.size, p.short, (p.tags || []).join(" ")].join(" ").toLowerCase();
+    return heno.indexOf(txt) !== -1;
+  }
+
+  function pintarFiltros() {
+    if (filtros) {
+      var html = '<button type="button" class="chip' + (catActual ? "" : " chip--on") + '" data-cat="">Todo</button>';
+      etiquetas().forEach(function (t) {
+        html += '<button type="button" class="chip' + (t === catActual ? " chip--on" : "") + '" data-cat="' + t + '">' + t + "</button>";
+      });
+      filtros.innerHTML = html;
+      Array.prototype.forEach.call(filtros.querySelectorAll("button"), function (b) {
+        b.addEventListener("click", function () {
+          catActual = b.getAttribute("data-cat");
+          Array.prototype.forEach.call(filtros.querySelectorAll("button"), function (o) {
+            o.classList.toggle("chip--on", o === b);
+          });
+          pintarGrid();
+        });
+      });
+    }
+
+    /* Las categorías se cuelgan al final de la fila del header */
+    var nav = $("catnav");
+    if (nav && familias().length) {
+      var corte = document.createElement("span");
+      corte.className = "catnav__corte";
+      corte.setAttribute("aria-hidden", "true");
+      nav.appendChild(corte);
+
+      var todo = document.createElement("a");
+      todo.href = "catalogo.html";
+      todo.textContent = "Todo";
+      nav.appendChild(todo);
+
+      familias().forEach(function (f) {
+        var a = document.createElement("a");
+        a.href = "catalogo.html?cat=" + encodeURIComponent(f);
+        a.textContent = f;
+        nav.appendChild(a);
+      });
+    }
+  }
 
   function pintarGrid() {
     if (!grid) return;
-    grid.innerHTML = "";
+
+    var tope = parseInt(grid.getAttribute("data-max"), 10);
+    var txt = textoBusqueda.toLowerCase().trim();
+    var lista = [];
+
     PRODUCTS.forEach(function (p, i) {
+      var fam = (p.tags || [])[0] || "";
+      if (catActual && fam !== catActual && (p.tags || []).indexOf(catActual) === -1) return;
+      if (!coincide(p, txt)) return;
+      lista.push({ p: p, i: i });
+    });
+    if (tope > 0) lista = lista.slice(0, tope);
+
+    grid.innerHTML = "";
+    lista.forEach(function (item) {
+      var p = item.p;
+      var distintas = etiquetas();
+      /* Solo se muestra la etiqueta si de verdad sirve para distinguir algo:
+         con un solo perfume, "Hombre" y "Fresco" no filtran nada todavía. */
+      var chips = distintas.length > 1
+        ? (p.tags || []).map(function (t) { return '<span class="chip">' + t + '</span>'; }).join("")
+        : "";
+      var fam = (p.tags || [])[0] || "";
+
       var art = document.createElement("article");
       art.className = "card reveal";
-      art.setAttribute("data-d", String(i % 4));
+      art.setAttribute("data-d", "0");
       art.innerHTML =
         '<div class="card__media ver-detalle" role="button" tabindex="0" aria-label="Ver detalle de ' + p.name + '">' +
           '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy" />' +
-          '<span class="badge badge--dark">Hombre</span>' +
-          '<span class="badge badge--gold">Más vendido</span>' +
+          (distintas.length > 1 && fam ? '<span class="badge badge--dark">' + fam + '</span>' : '') +
+          '<span class="badge badge--gold">Envío incluido</span>' +
         '</div>' +
         '<div>' +
           '<p class="card__brand">' + p.brand + '</p>' +
           '<h3 class="card__name ver-detalle" role="button" tabindex="0">' + p.name + '</h3>' +
           '<p class="card__desc">' + p.short + '</p>' +
-          '<div class="card__meta">' +
-            p.tags.map(function (t) { return '<span class="chip">' + t + '</span>'; }).join("") +
-          '</div>' +
+          '<div class="card__meta">' + chips + '</div>' +
           '<div class="card__bottom">' +
             '<span class="card__price">' + money(p.price) + '</span>' +
             '<span class="card__size">' + p.size + '</span>' +
-            '<button class="btn btn--gold btn--sm add-cart" style="margin-left:auto">' +
+            '<button class="btn btn--gold btn--sm add-cart">' +
               '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>Agregar' +
             '</button>' +
           '</div>' +
@@ -538,27 +662,66 @@
 
       var botonesDetalle = art.querySelectorAll(".ver-detalle");
       Array.prototype.forEach.call(botonesDetalle, function (el) {
-        el.addEventListener("click", function () { openProduct(i); });
+        el.addEventListener("click", function () { openProduct(item.i); });
         el.addEventListener("keydown", function (e) {
-          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProduct(i); }
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openProduct(item.i); }
         });
       });
       art.querySelector(".add-cart").addEventListener("click", function () { addToCart(p, 1); });
       grid.appendChild(art);
-
-      /* inclinación 3D en escritorio */
-      if (fino && !reduced) {
-        art.addEventListener("pointermove", function (e) {
-          var r = art.getBoundingClientRect();
-          var px = (e.clientX - r.left) / r.width - 0.5;
-          var py = (e.clientY - r.top) / r.height - 0.5;
-          art.style.transform = "perspective(1100px) rotateY(" + (px * 6).toFixed(2) + "deg) rotateX(" + (-py * 6).toFixed(2) + "deg)";
-        });
-        art.addEventListener("pointerleave", function () { art.style.transform = ""; });
-      }
     });
 
+    if (!lista.length) {
+      grid.innerHTML =
+        '<div class="tienda__vacio">' +
+          '<b>No encontramos nada con eso</b>' +
+          '<span>Probá con otra palabra, o preguntanos y lo conseguimos.</span>' +
+          '<a class="btn btn--wa btn--sm" href="' + waLink(WA_GREETING + " Ando buscando un perfume que no aparece en la página.") + '" target="_blank" rel="noopener">Preguntar por WhatsApp</a>' +
+        '</div>';
+    }
+
+    var cuenta = $("tiendaCuenta");
+    if (cuenta) {
+      cuenta.textContent = lista.length === 1 ? "1 perfume" : lista.length + " perfumes";
+    }
+
     Array.prototype.forEach.call(grid.querySelectorAll(".reveal"), function (el) { io.observe(el); });
+  }
+
+  /* El buscador filtra al escribir donde hay rejilla; desde las otras
+     páginas manda al catálogo con la palabra ya puesta. */
+  if (buscarInput) {
+    if (param("buscar")) buscarInput.value = param("buscar");
+    textoBusqueda = buscarInput.value;
+    buscarInput.addEventListener("input", function () {
+      if (!grid) return;
+      textoBusqueda = buscarInput.value;
+      pintarGrid();
+    });
+  }
+  if (buscador && grid) {
+    buscador.addEventListener("submit", function (e) { e.preventDefault(); pintarGrid(); });
+  }
+  catActual = param("cat");
+  pintarFiltros();
+
+  /* La portada muestra el primer perfume en el banner. */
+  if (existe("bannerImg") && PRODUCTS.length) {
+    var destacado = PRODUCTS[0];
+    $("bannerImg").src = destacado.image;
+    $("bannerImg").alt = destacado.name;
+    $("bannerPrecio").textContent = money(destacado.price);
+    $("bannerNombre").textContent = destacado.name + " · " + destacado.size;
+    var shot = $("bannerShot");
+    if (shot) {
+      /* En el catálogo se abre la ficha del producto; en la portada, que no
+         tiene ventana de detalle, se va derecho al catálogo. */
+      shot.style.cursor = "pointer";
+      shot.addEventListener("click", function () {
+        if (pv) openProduct(0);
+        else location.href = "catalogo.html";
+      });
+    }
   }
 
   var prodActual = null;

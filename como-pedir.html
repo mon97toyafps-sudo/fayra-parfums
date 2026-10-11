@@ -17,9 +17,15 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://fayraparfumsv.netlify.app/assets/img/social.jpg?v=2" />
 
+<meta name="theme-color" content="#0c0a08" />
+
 <link rel="icon" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="assets/css/estilos.css" />
 <link rel="stylesheet" href="assets/css/paginas.css" />
+<link rel="stylesheet" href="assets/css/tienda.css" />
 </head>
 
 <body>
@@ -30,17 +36,25 @@
 
 <!-- ================= HEADER ================= -->
 <header class="header" id="header">
+  <div class="topbar">
+    <div class="container topbar__in">
+      <span>Envío <b>incluido</b> en el precio · A todo El Salvador</span>
+      <a class="solo-ancho" href="https://wa.me/50363012305?text=Hola%2C%20Fayra%20Parfums." target="_blank" rel="noopener">Escríbenos · +503 6301-2305</a>
+    </div>
+  </div>
+
   <div class="container header__in">
     <a class="logo" href="index.html" aria-label="Fayra Parfums — inicio">
       <img class="logo__script" src="assets/img/logo-script.png" alt="Fayra Parfums" />
     </a>
 
-    <nav class="nav" aria-label="Navegación principal">
-      <a href="index.html">Inicio</a>
-      <a href="catalogo.html">Catálogo</a>
-      <a href="nosotros.html">Quiénes somos</a>
-      <a class="is-on" href="como-pedir.html">Cómo pedir</a>
-    </nav>
+    <form class="buscador" id="buscador" role="search" action="catalogo.html" method="get">
+      <input id="buscarInput" name="buscar" type="search" autocomplete="off"
+             placeholder="Buscá un perfume, una marca…" aria-label="Buscar en el catálogo" />
+      <button type="submit" aria-label="Buscar">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
+      </button>
+    </form>
 
     <div class="header__actions">
       <a class="icon-btn" href="https://instagram.com/fayraparfums.sv" target="_blank" rel="noopener" aria-label="Instagram">
@@ -61,6 +75,12 @@
       </button>
     </div>
   </div>
+  <nav class="catnav" id="catnav" aria-label="Secciones y categorías">
+    <a href="index.html">Inicio</a>
+    <a href="catalogo.html">Catálogo</a>
+    <a href="nosotros.html">Quiénes somos</a>
+    <a class="is-on" href="como-pedir.html">Cómo pedir</a>
+  </nav>
 </header>
 
 <div class="mobile-menu" id="mobileMenu">
