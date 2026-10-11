@@ -21,7 +21,7 @@
   --r:18px;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 18px)}
 body{
   margin:0;background:var(--bg);color:var(--ivory);
   font-family:'Jost',system-ui,-apple-system,sans-serif;
@@ -217,7 +217,7 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
 
 /* ---------- Encabezado de página interior (catálogo) ---------- */
 .page-head{
-  position:relative;z-index:2;padding:calc(var(--header-h) + clamp(46px,9vh,96px)) 0 clamp(30px,5vh,56px);
+  position:relative;z-index:2;padding:calc(var(--header-h) + clamp(38px,6.5vh,76px)) 0 clamp(20px,3vh,34px);
   border-bottom:1px solid var(--line);
 }
 .page-head h1{font-size:clamp(42px,7vw,86px);margin:20px 0 0}
@@ -226,7 +226,7 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
 /* ============================================================
    HERO
    ============================================================ */
-.hero{position:relative;z-index:2;min-height:100svh;display:flex;align-items:center;padding:calc(var(--header-h) + 40px) 0 60px}
+.hero{position:relative;z-index:2;min-height:100svh;display:flex;align-items:center;padding:calc(var(--header-h) + 40px) 0 clamp(96px,12vh,124px)}
 .hero__in{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center;width:100%}
 .hero h1{font-size:clamp(56px,9.5vw,132px);line-height:.92;margin:22px 0 0}
 .hero h1 .l2{display:block;color:var(--gold);font-style:italic;font-weight:300;letter-spacing:-.03em}
@@ -299,9 +299,9 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
 .reveal[data-d="4"]{transition-delay:.4s}
 .reveal[data-d="5"]{transition-delay:.5s}
 
-.section{padding:clamp(80px,12vh,140px) 0;position:relative;z-index:2}
+.section{padding:clamp(62px,8.5vh,108px) 0;position:relative;z-index:2}
 .section--band{background:var(--band);border-block:1px solid var(--line)}
-.section-head{margin-bottom:clamp(36px,5vw,60px)}
+.section-head{margin-bottom:clamp(28px,4vw,46px)}
 .section-head h2{font-size:clamp(36px,5.4vw,66px);margin-top:16px}
 .section-head p{max-width:56ch;color:var(--muted);margin-top:16px}
 
@@ -638,7 +638,10 @@ body.ready .grain,body.ready .aurora{animation:fadeIn 1.6s ease forwards}
   }
   .reveal{opacity:1;transform:none}
   .hero__inner>*{opacity:1;transform:none}
-  .grain,.aurora,.cursor,.scroll-hint{display:none}
+  /* El "Desliza" se queda aunque el sistema tenga las animaciones apagadas:
+     sin él, quien no ve el brillo que sigue al cursor no entiende que la
+     página sigue abajo. */
+  .grain,.aurora,.cursor{display:none}
 
   /* La franja avanza siempre, tenga el sistema las animaciones prendidas o no:
      es un texto lento y continuo, y así se pidió. Lo demás sigue quieto. */

@@ -15,7 +15,7 @@
 
 /* ---------- Emblema giratorio del hero ---------- */
 .emblem{
-  position:relative;width:min(78vw,420px);aspect-ratio:1;
+  position:relative;width:min(76vw,480px);aspect-ratio:1;
   display:grid;place-items:center;isolation:isolate;
 }
 .emblem img{
