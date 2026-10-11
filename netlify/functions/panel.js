@@ -93,11 +93,12 @@ function entrar(clave) {
 
 /* ============================================================ datos === */
 
-/* Netlify inyecta el siteID solo si Blobs está prendido en el proyecto.
-   Con CONTEXT explícito funciona igual en cualquier caso. */
+/* Netlify inyecta el siteID y el token cuando Blobs está prendido en el
+   proyecto, y la librería les da prioridad sobre lo que se pase acá. Antes
+   se pasaba siteID: process.env.CONTEXT ("production"), que no es un ID de
+   sitio: quedaba ignorado, pero confundía al leer el código. */
 async function abrirStore() {
   const b = await import("@netlify/blobs");
-  if (process.env.CONTEXT) return b.getStore({ name: "fayra", siteID: process.env.CONTEXT });
   return b.getStore("fayra");
 }
 
