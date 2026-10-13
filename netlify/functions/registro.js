@@ -40,8 +40,13 @@ async function abrirStore() {
   return blobs;
 }
 
-async function lee(store) {
-  try { return (await store.get("json", { type: "json" })) || null; }
+/* Recibe la promesa de una lectura y devuelve el dato o null.
+   Antes esta función recibía la store y leía siempre la clave "json", pero
+   se la llamaba con el resultado de store.get(...). Como store.get sobre una
+   promesa no existe, la excepción se tragaba y lee() devolvía null siempre:
+   cada visita arrancaba de cero y los contadores del panel nunca subían. */
+async function lee(promesa) {
+  try { return (await promesa) || null; }
   catch (e) { return null; }
 }
 
@@ -181,10 +186,10 @@ exports.handler = async (event) => {
   const hoy = new Date(ahora).toISOString().slice(0, 10);
 
   const [metricas, online, geo, eventos] = await Promise.all([
-    lee(store.get("metricas")),
-    lee(store.get("online")),
-    lee(store.get("geo")),
-    lee(store.get("eventos"))
+    lee(store.get("metricas", { type: "json" })),
+    lee(store.get("online", { type: "json" })),
+    lee(store.get("geo", { type: "json" })),
+    lee(store.get("eventos", { type: "json" }))
   ]);
 
   const m = metricas || { total: 0, dias: {}, fuentes: {}, paginas: {}, dispositivos: {}, ubicaciones: {} };
