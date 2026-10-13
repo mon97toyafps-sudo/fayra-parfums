@@ -8,8 +8,13 @@
    el token, así que sin la clave no hay nada que ver.
 
    Variables de entorno (en Netlify → Site settings → Environment):
-     ADMIN_PASSWORD  → la clave del dueño
-     SESSION_SECRET  → texto largo y aleatorio, solo para firmar tokens
+     ADMIN_PASSWORD      → la clave del dueño
+     SESSION_SECRET      → texto largo y aleatorio, solo para firmar tokens
+     NETLIFY_SITE_ID     → id del sitio, para abrir la store de Blobs
+     NETLIFY_BLOBS_TOKEN → token de la cuenta, para abrir la store de Blobs
+
+   Sin las dos últimas el panel abre y pide la clave, pero al entrar no
+   tiene de dónde leer las visitas: la store no se puede abrir.
    ============================================================ */
 
 const crypto = require("crypto");
