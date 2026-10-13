@@ -326,7 +326,7 @@
       if (navigator.share) { navigator.share(data).catch(function () {}); }
       else if (navigator.clipboard) {
         navigator.clipboard.writeText(url).then(function () {
-          if (txt) txt.textContent = "Link copiado ✓";
+          if (txt) txt.textContent = "Link copiado";
           setTimeout(function () { if (txt) txt.textContent = "Compartir Fayra Parfums"; }, 2200);
         }).catch(function () {});
       }
@@ -517,7 +517,7 @@
         sendEvent({
           type: "order",
           detail: cart.map(function (it) { return it.name + " " + it.size + " ×" + it.qty + " — " + money(it.qty * it.price); }).join("\n") + "\nTotal: " + money(total()),
-          source: "Carrito 🛒"
+          source: "Carrito"
         });
       });
 
@@ -644,7 +644,7 @@
         '<div class="card__media ver-detalle" role="button" tabindex="0" aria-label="Ver detalle de ' + p.name + '">' +
           '<img src="' + p.image + '" alt="' + p.name + '" loading="lazy" />' +
           (distintas.length > 1 && fam ? '<span class="badge badge--dark">' + fam + '</span>' : '') +
-          '<span class="badge badge--gold">Envío incluido</span>' +
+          '<span class="badge badge--acento">Envío incluido</span>' +
         '</div>' +
         '<div>' +
           '<p class="card__brand">' + p.brand + '</p>' +
@@ -654,7 +654,7 @@
           '<div class="card__bottom">' +
             '<span class="card__price">' + money(p.price) + '</span>' +
             '<span class="card__size">' + p.size + '</span>' +
-            '<button class="btn btn--gold btn--sm add-cart">' +
+            '<button class="btn btn--acento btn--sm add-cart">' +
               '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 5v14M5 12h14"/></svg>Agregar' +
             '</button>' +
           '</div>' +
@@ -818,7 +818,7 @@
       sendEvent({
         type: "order",
         detail: prodActual.name + " " + prodActual.size + " ×" + qty + " — " + money(prodActual.price * qty),
-        source: "Ventana del producto 🧴"
+        source: "Ventana del producto"
       });
     });
 
