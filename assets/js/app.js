@@ -109,10 +109,9 @@
   else window.addEventListener("load", arrancar);
   setTimeout(arrancar, 1400); /* red lenta: nunca quedamos en blanco */
 
-  /* Header compacto + barra de progreso + parallax del hero */
+  /* Header compacto + barra de progreso */
   var header = existe("header") ? $("header") : null;
   var progress = existe("progress") ? $("progress") : null;
-  var heroVisual = document.querySelector(".hero__visual");
   var ticking = false;
 
   /* El header tiene tres pisos (aviso, buscador, categorías) y su alto cambia
@@ -147,9 +146,6 @@
     if (progress) {
       var alto = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.transform = "scaleX(" + (alto > 0 ? Math.min(y / alto, 1) : 0) + ")";
-    }
-    if (!reduced && heroVisual && y < window.innerHeight * 1.2) {
-      heroVisual.style.transform = "translate3d(0," + (y * 0.11).toFixed(1) + "px,0)";
     }
     ticking = false;
   }
@@ -704,25 +700,6 @@
   }
   catActual = param("cat");
   pintarFiltros();
-
-  /* La portada muestra el primer perfume en el banner. */
-  if (existe("bannerImg") && PRODUCTS.length) {
-    var destacado = PRODUCTS[0];
-    $("bannerImg").src = destacado.image;
-    $("bannerImg").alt = destacado.name;
-    $("bannerPrecio").textContent = money(destacado.price);
-    $("bannerNombre").textContent = destacado.name + " · " + destacado.size;
-    var shot = $("bannerShot");
-    if (shot) {
-      /* En el catálogo se abre la ficha del producto; en la portada, que no
-         tiene ventana de detalle, se va derecho al catálogo. */
-      shot.style.cursor = "pointer";
-      shot.addEventListener("click", function () {
-        if (pv) openProduct(0);
-        else location.href = "catalogo.html";
-      });
-    }
-  }
 
   var prodActual = null;
   var galIndex = 0;

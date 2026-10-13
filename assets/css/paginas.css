@@ -4,41 +4,13 @@
    animación de la ruta (assets/js/ruta.js).
    ============================================================ */
 
-/* ---------- Hero: portada de marca y portada de página interna ---------- */
-.hero--portada .hero__visual{display:flex;justify-content:center}
+/* ---------- Encabezado de página interior ---------- */
 .hero--inner{min-height:auto;padding:calc(var(--header-h) + clamp(40px,7vw,90px)) 0 clamp(40px,6vw,72px)}
 .hero--corto{padding-bottom:0}
 .hero__full{grid-column:1/-1;text-align:left}
 .hero__full .hero__lead{max-width:60ch}
 .nav a.is-on{color:var(--acento)}
 .mobile-menu a.is-on{color:var(--acento)}
-
-/* ---------- Emblema giratorio del hero ---------- */
-.emblem{
-  position:relative;width:min(76vw,480px);aspect-ratio:1;
-  display:grid;place-items:center;isolation:isolate;
-}
-.emblem img{
-  width:64%;border-radius:50%;position:relative;z-index:2;
-  filter:drop-shadow(0 22px 50px rgba(0,0,0,.14));
-}
-.emblem__ring{
-  position:absolute;inset:14%;border-radius:50%;
-  border:1px solid var(--line-2);
-  border-top-color:var(--acento);border-right-color:rgba(0,0,0,.5);
-  animation:gira 26s linear infinite;
-}
-.emblem__ring--b{
-  inset:2%;border:1px solid rgba(0,0,0,.12);
-  border-bottom-color:rgba(0,0,0,.42);
-  animation:gira 44s linear infinite reverse;
-}
-.emblem::after{
-  content:"";position:absolute;inset:26%;border-radius:50%;z-index:1;
-  background:radial-gradient(circle,rgba(0,0,0,.06),transparent 70%);
-}
-@keyframes gira{to{transform:rotate(360deg)}}
-
 
 /* ---------- Tarjetas de redes ---------- */
 .socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
@@ -56,14 +28,14 @@
 .social:hover::before{opacity:1}
 .social>*{position:relative}
 .social__icon{
-  width:54px;height:54px;border-radius:15px;display:grid;place-items:center;
-  border:1px solid var(--line-2);background:rgba(0,0,0,.08);
-  transition:transform .6s var(--ease),background .5s var(--ease);
+  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;
+  border:1px solid var(--line);background:var(--bg);
+  transition:transform .6s var(--ease),background .5s var(--ease),border-color .5s var(--ease);
 }
-.social:hover .social__icon{transform:rotate(-7deg) scale(1.06)}
-.social__icon svg{width:26px;height:26px}
+.social:hover .social__icon{transform:rotate(-7deg) scale(1.06);border-color:var(--line-2)}
+.social__icon svg{width:24px;height:24px;stroke-width:1.6}
 .social__body{display:grid;gap:5px;align-content:start}
-.social__body b{font-family:'Cormorant Garamond',serif;font-size:27px;font-weight:400;line-height:1.1}
+.social__body b{font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:23px;font-weight:800;line-height:1.15}
 .social__body i{font-style:normal;font-size:13px;color:var(--acento);letter-spacing:.03em}
 .social__body span{font-size:14px;color:var(--muted);line-height:1.6}
 .social__go{
@@ -98,11 +70,11 @@
 .portal:hover{transform:translateY(-7px);border-color:var(--line-2)}
 .portal:hover::after{opacity:1}
 .portal__num{
-  font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--acento);
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-weight:700;font-size:13px;color:var(--acento);
   letter-spacing:.3em;
 }
 .portal__body{display:grid;gap:7px}
-.portal__body b{font-family:'Cormorant Garamond',serif;font-size:31px;font-weight:400;line-height:1.05}
+.portal__body b{font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:25px;font-weight:800;line-height:1.1}
 .portal__body i{font-style:normal;color:var(--acento-2);font-size:14.5px}
 .portal__body span{color:var(--muted);font-size:14px;line-height:1.6}
 .portal__go{
@@ -117,7 +89,6 @@
 .btn--wa{background:#25d366;border-color:#25d366;color:#04220f}
 .btn--wa:hover{background:#1eb958;border-color:#1eb958}
 .btn--wa svg{width:19px;height:19px;flex:0 0 auto}
-.icon-btn--wa{color:#25D366}
 
 /* ============================================================
    LA RUTA: el carrito sobre el mapa de El Salvador
@@ -165,7 +136,7 @@
 /* --- el nombre del departamento que está sonando --- */
 .etiqueta{
   fill:var(--acento-2);
-  font-family:'Jost',system-ui,sans-serif;
+  font-family:'DM Sans',system-ui,sans-serif;
   font-size:8px;font-weight:400;letter-spacing:.09em;
   paint-order:stroke;stroke:#ffffff;stroke-width:2.6px;stroke-linejoin:round;
   pointer-events:none;
@@ -184,7 +155,7 @@
   display:flex;flex-direction:column;justify-content:center;gap:10px;
 }
 .ruta__paso{
-  font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.34em;
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:13px;letter-spacing:.34em;
   color:var(--acento);
 }
 .ruta__de{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
@@ -200,7 +171,7 @@
   font-size:13.5px;transition:color .4s var(--ease),padding-left .4s var(--ease);
 }
 .ruta__lista li b{
-  font-family:'Cormorant Garamond',serif;font-weight:400;font-size:12px;
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-weight:400;font-size:12px;
   letter-spacing:.16em;color:var(--acento-3);flex:0 0 auto;
 }
 .ruta__lista li.is-on{color:var(--acento-2);padding-left:11px}
@@ -233,7 +204,6 @@
   .ruta__lista{max-height:210px}
 }
 @media (max-width:640px){
-  .emblem{width:min(70vw,300px)}
   .ruta{padding:12px}
   .ruta__dial{min-height:0;padding:20px 18px}
   .portals,.socials{grid-template-columns:1fr}

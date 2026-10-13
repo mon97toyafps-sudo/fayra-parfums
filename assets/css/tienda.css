@@ -101,7 +101,7 @@
    achican para que la página se lea como una sección de tienda y no como
    un cartel que empuja todo hacia abajo. */
 .hero--inner{min-height:auto;padding:calc(var(--header-h) + clamp(20px,3vh,38px)) 0 clamp(26px,3.6vw,44px)}
-.hero--inner h1{font-size:clamp(38px,5.4vw,74px)}
+.hero--inner h1{font-size:clamp(31px,4.4vw,54px)}
 .hero--inner .hero__lead{margin-top:18px;font-size:clamp(15.5px,1.5vw,18px);max-width:54ch}
 .hero--inner .hero__cta{margin-top:28px}
 
@@ -119,23 +119,27 @@
     radial-gradient(80% 60% at 78% 22%,rgba(0,0,0,.04),transparent 62%),
     linear-gradient(180deg,var(--band),var(--bg));
 }
+/* La portada es solo texto: una sola columna, centrada, sin nada al lado. */
 .banner__in{
-  position:relative;display:grid;grid-template-columns:1.02fr .98fr;
-  gap:clamp(28px,4.6vw,64px);align-items:center;
+  position:relative;display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;
+  max-width:880px;margin:0 auto;text-align:center;
 }
-.banner__txt h1{font-size:clamp(40px,5.8vw,80px);line-height:1.02;margin:20px 0 0}
+.banner__txt h1{font-size:clamp(33px,4.7vw,58px);line-height:1.07;margin:20px 0 0}
+/* El rótulo de arriba va con su línea al lado: acá se centra todo junto. */
+.banner__txt .eyebrow{justify-content:center}
 /* La frase destacada va sobre una placa negra, en su propia línea: la placa
    abraza el texto (width:fit-content) en vez de estirarse a todo el ancho. */
 .banner__txt h1 em{
   display:block;width:fit-content;font-style:normal;font-weight:300;
   background:var(--acento);color:var(--sobre-acento);
-  padding:.04em .2em .12em;border-radius:16px;margin-top:.06em;
+  padding:.04em .2em .12em;border-radius:16px;margin:.06em auto 0;
 }
-.banner__lead{color:var(--muted);font-size:clamp(15.5px,1.5vw,18.5px);max-width:48ch;margin:24px 0 0}
-.banner__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.banner__lead{color:var(--muted);font-size:clamp(15.5px,1.5vw,18px);max-width:52ch;margin:24px auto 0}
+.banner__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;justify-content:center}
 .banner__puntos{
   display:flex;flex-wrap:wrap;gap:12px 26px;margin:34px 0 0;padding:22px 0 0;
   border-top:1px solid var(--line);list-style:none;
+  justify-content:center;width:100%;
 }
 .banner__puntos li{
   display:flex;align-items:center;gap:10px;
@@ -145,39 +149,6 @@
   content:"";width:6px;height:6px;border-radius:50%;flex:0 0 auto;
   background:var(--acento);box-shadow:0 0 0 3px rgba(0,0,0,.16);
 }
-
-/* el producto del banner: la foto va en una placa clara,
-   porque las tomas son de estudio sobre blanco */
-.banner__shot{
-  position:relative;display:block;max-width:520px;justify-self:end;width:100%;
-  background:#fff;border-radius:var(--card-r);
-  border:1px solid var(--line);
-  box-shadow:0 40px 70px -40px rgba(0,0,0,.28);
-  overflow:hidden;
-}
-.banner__shot img{width:100%;aspect-ratio:1;object-fit:cover;transition:transform 1.4s var(--ease)}
-.banner__shot:hover img{transform:scale(1.05)}
-.banner__shot::after{
-  content:"";position:absolute;inset:10px;border:1px solid rgba(0,0,0,.10);
-  border-radius:12px;pointer-events:none;
-}
-.banner__etiqueta{
-  position:absolute;left:20px;bottom:20px;right:20px;
-  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
-  background:rgba(0,0,0,.86);backdrop-filter:blur(10px);color:var(--sobre-acento);
-  border:1px solid rgba(255,255,255,.14);border-radius:100px;padding:13px 22px;
-}
-.banner__etiqueta b{font-family:'Cormorant Garamond',serif;font-size:30px;color:#ffffff;line-height:1;font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1}
-.banner__etiqueta span{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.72);text-align:right}
-.banner__sello{
-  position:absolute;top:-26px;left:-26px;width:108px;height:108px;border-radius:50%;
-  display:grid;place-items:center;z-index:2;
-  background:#ffffff;
-  border:1px solid var(--line);
-  box-shadow:0 16px 34px -18px rgba(0,0,0,.3);
-  animation:bob 6s ease-in-out infinite;
-}
-.banner__sello img{width:66%;border-radius:50%}
 
 /* ============================================================
    REJILLA DE PRODUCTOS
@@ -261,15 +232,12 @@
   grid-column:1/-1;text-align:center;padding:56px 20px;
   border:1px dashed var(--line-2);border-radius:var(--card-r);background:var(--band);
 }
-.tienda__vacio b{display:block;font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:400}
+.tienda__vacio b{display:block;font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:26px;font-weight:800}
 .tienda__vacio span{display:block;color:var(--muted);margin:10px 0 22px}
 
 /* ---------- Pantallas chicas ---------- */
 @media (max-width:1020px){
   :root{--header-h:196px}
-  .banner__in{grid-template-columns:1fr;gap:34px}
-  .banner__shot{justify-self:start;order:-1;max-width:400px}
-  .banner__sello{width:84px;height:84px;top:-18px;left:-18px}
 }
 @media (max-width:860px){
   :root{--header-h:190px}
@@ -293,7 +261,7 @@
   .card__price{font-size:24px}
   .card__bottom{padding-top:11px;flex-direction:column;align-items:flex-start;gap:2px}
   .card__bottom .btn{padding:12px 18px;font-size:11px}
-  .banner__etiqueta{padding:11px 14px;left:14px;right:14px;bottom:14px}
-  .banner__etiqueta b{font-size:25px}
   .fila-titulo{gap:14px}
+  .feature{padding:22px 20px}
+  .emoji-badge{width:50px;height:50px;font-size:23px}
 }
