@@ -27,12 +27,19 @@ exports.handler = async (event) => {
     return entrar(clave);
   }
 
-  /* ---------- datos del monitor ---------- */
+  /* ---------- datos del monitor ----------
+     La página pide estos datos desde el navegador con la cookie de sesión
+     (HttpOnly, así que el JS no puede leerla ni mandarla como Bearer). Si se
+     aceptara solo la cabecera Authorization, el monitor quedaría en 401 y el
+     navegador recargando en bucle. Por eso se aceptan las dos vías: la
+     cabecera, para consultas desde afuera, y la cookie del panel. */
   if (q.accion === "datos") {
-    if (!event.headers.authorization) return json(401, { error: "sin sesión" });
-    if (!valido(String(event.headers.authorization).replace(/^Bearer\s+/i, ""))) {
-      return json(401, { error: "sesión vencida" });
-    }
+    const cabecera = event.headers.authorization
+      ? String(event.headers.authorization).replace(/^Bearer\s+/i, "")
+      : "";
+    const sesion = cabecera || leerCookie(event) || "";
+    if (!sesion) return json(401, { error: "sin sesión" });
+    if (!valido(sesion)) return json(401, { error: "sesión vencida" });
     return datos();
   }
 
