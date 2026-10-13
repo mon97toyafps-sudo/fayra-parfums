@@ -93,13 +93,21 @@ function entrar(clave) {
 
 /* ============================================================ datos === */
 
-/* Netlify inyecta el siteID y el token cuando Blobs está prendido en el
-   proyecto, y la librería les da prioridad sobre lo que se pase acá. Antes
-   se pasaba siteID: process.env.CONTEXT ("production"), que no es un ID de
-   sitio: quedaba ignorado, pero confundía al leer el código. */
+/* Este proyecto NO tiene Blobs configurado de forma automática: el runtime
+   responde "The environment has not been configured to use Netlify Blobs".
+   Por eso la store se abre con credenciales explícitas, leídas de:
+     NETLIFY_SITE_ID     → id del sitio
+     NETLIFY_BLOBS_TOKEN → token de la cuenta (personal access token)
+   Si faltaran, se usa la vía automática como respaldo. Así el panel abre
+   igual y, si algún día falla la lectura, el error técnico se ve en
+   pantalla en vez de quedar el panel en blanco. */
 async function abrirStore() {
   const b = await import("@netlify/blobs");
-  return b.getStore("fayra");
+  const siteID = process.env.NETLIFY_SITE_ID || "";
+  const token = process.env.NETLIFY_BLOBS_TOKEN || "";
+  return siteID && token
+    ? b.getStore({ name: "fayra", siteID, token })
+    : b.getStore("fayra");
 }
 
 async function datos() {

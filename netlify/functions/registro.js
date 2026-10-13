@@ -19,17 +19,23 @@ const TTL_GEO = 30 * 24 * 3600 * 1000;
 
 let blobs = null;
 
-/* Blobs se carga con import dinámico: si el paquete faltara, el resto de
-   la función sigue sirviendo en vez de caerse entera en el deploy.
+/* Blobs: este proyecto NO tiene Blobs configurado de forma automática
+   (el runtime responde "The environment has not been configured to use
+   Netlify Blobs"), así que la store se abre con credenciales explícitas:
+     NETLIFY_SITE_ID     → id del sitio
+     NETLIFY_BLOBS_TOKEN → token de la cuenta (personal access token)
+   Si por algún motivo faltaran, se intenta la vía automática para no
+   romper la función.
 
-   Sin siteID ni token a mano: Netlify inyecta esas credenciales cuando Blobs
-   está prendido en el proyecto y la librería les da prioridad sobre lo que
-   se pase acá. Antes se pasaba siteID: process.env.CONTEXT, que vale
-   "production" y no es un ID de sitio: quedaba ignorado, pero era engañoso. */
+   La store se abre una sola vez y se reutiliza entre invocaciones calientes. */
 async function abrirStore() {
   if (!blobs) {
     const b = await import("@netlify/blobs");
-    blobs = b.getStore("fayra");
+    const siteID = process.env.NETLIFY_SITE_ID || "";
+    const token = process.env.NETLIFY_BLOBS_TOKEN || "";
+    blobs = siteID && token
+      ? b.getStore({ name: "fayra", siteID, token })
+      : b.getStore("fayra");
   }
   return blobs;
 }
