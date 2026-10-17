@@ -24,7 +24,7 @@
       brand: "Armaf",
       name: "Mandary Sky",
       size: "100 ml Eau de Parfum",
-      price: 84.99,
+      price: 64.99,
       image: "assets/img/mandary-sky-2.jpg",
       gallery: [
         "assets/img/mandary-sky-2.jpg",
