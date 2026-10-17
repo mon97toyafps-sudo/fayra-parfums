@@ -16,7 +16,7 @@
      NETLIFY_SITE_ID        para leer Blobs
      NETLIFY_BLOBS_TOKEN    para leer Blobs
 
-   Comandos: /stats  /hoy  /online
+   Comandos: /stats  /hoy  /online  /canales
    ============================================================ */
 
 const crypto = require("crypto");
@@ -28,6 +28,15 @@ const PERMITIDOS = (process.env.DISCORD_ALLOW_USERS || "")
 
 const ABACUS = "https://abacus.jasoncameron.dev";
 const NS = "fayraparfumsv.netlify.app";
+
+/* Canales de aviso, para /canales. Si falta cualquiera, los avisos caen al
+   webhook general (DISCORD_WEBHOOK_URL). */
+const CANALES = [
+  "DISCORD_WEBHOOK_VENTAS",
+  "DISCORD_WEBHOOK_TRAFICO",
+  "DISCORD_WEBHOOK_ALERTAS"
+];
+
 const EFIMERO = 64;              /* solo lo ve quien pidió el comando */
 const TTL_ONLINE = 100000;       /* igual que registro.js: 100 s sin ping = salió */
 const LIMITE_MS = 2300;          /* Discord corta a los 3 s: respondemos antes */
@@ -274,6 +283,44 @@ async function cmdHoy() {
   });
 }
 
+/* Revisa cada canal configurado. Discord contesta el detalle del webhook
+   con un GET, así se comprueba que la URL existe y sigue viva, sin
+   mandar ningún mensaje de prueba al canal. */
+async function cmdCanales() {
+  const lista = [
+    ["🛒 Ventas", process.env.DISCORD_WEBHOOK_VENTAS || process.env.DISCORD_WEBHOOK_URL],
+    ["👀 Tráfico", process.env.DISCORD_WEBHOOK_TRAFICO || process.env.DISCORD_WEBHOOK_URL],
+    ["🚨 Alertas", process.env.DISCORD_WEBHOOK_ALERTAS || process.env.DISCORD_WEBHOOK_URL]
+  ];
+
+  const estado = await Promise.all(lista.map(async function (c) {
+    if (!c[1]) return c[0] + ": ❌ sin configurar";
+    try {
+      const r = await fetch(c[1], { signal: AbortSignal.timeout(2000) });
+      if (r.ok) {
+        const j = await r.json().catch(function () { return {}; });
+        return c[0] + ": ✅ conectado" + (j.name ? " (" + j.name + ")" : "");
+      }
+      return c[0] + ": ⚠️ Discord respondió " + r.status;
+    } catch (e) {
+      return c[0] + ": ⚠️ no respondió";
+    }
+  }));
+
+  const faltan = CANALES.filter(function (c) { return !process.env[c]; });
+
+  return tarjeta({
+    title: "🔌 Canales de Discord",
+    description: estado.join("\n"),
+    color: faltan.length ? 0xc9a35c : 0x25d366,
+    fields: faltan.length
+      ? [{ name: "Variables que faltan en Netlify", value: "```" + faltan.join("\n") + "```", inline: false }]
+      : [{ name: "Estados", value: "Todo configurado", inline: false }],
+    footer: { text: "Fayra Parfums · solo vos ves este mensaje" },
+    timestamp: new Date().toISOString()
+  });
+}
+
 async function cmdOnline() {
   const o = await conLimite(leer("online"), LIMITE_MS, null);
   if (!o) {
@@ -357,6 +404,7 @@ exports.handler = async function (event) {
     if (nombre === "stats") return await cmdStats();
     if (nombre === "hoy") return await cmdHoy();
     if (nombre === "online") return await cmdOnline();
+    if (nombre === "canales") return await cmdCanales();
     return aviso("No conozco el comando `/" + nombre + "`.");
   } catch (e) {
     return aviso("No pude leer los datos ahora mismo. Probá de nuevo en un rato.");

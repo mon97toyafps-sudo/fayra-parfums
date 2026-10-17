@@ -16,6 +16,7 @@ const WEBHOOK = process.env.DISCORD_WEBHOOK_URL;
    su webhook y los que no estén definidos caen al general. */
 const VENTAS = process.env.DISCORD_WEBHOOK_VENTAS || WEBHOOK;
 const TRAFICO = process.env.DISCORD_WEBHOOK_TRAFICO || WEBHOOK;
+const ALERTAS = process.env.DISCORD_WEBHOOK_ALERTAS || WEBHOOK;
 const ABACUS = "https://abacus.jasoncameron.dev";
 const NS = "fayraparfumsv.netlify.app";
 
@@ -91,6 +92,47 @@ async function contar(lista) {
   for (let i = 0; i < lista.length; i++) await hit(lista[i]);
 }
 
+/* Manda un embed a un webhook. Devuelve "" si salió bien, o el motivo del
+   fallo. Antes el error se tragaba en silencio y un canal mal configurado
+   se veía igual que un canal sano. */
+async function enviar(url, payload) {
+  try {
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    return r.ok ? "" : "Discord respondió " + r.status;
+  } catch (e) {
+    return e.message || "sin conexión con Discord";
+  }
+}
+
+/* Si el canal de ventas o el de tráfico falla, se avisa en #alertas. Si el
+   que falló es el propio canal de alertas, no se hace nada: no hay a dónde
+   avisar y sería un bucle. */
+async function alertar(canal, motivo, etiqueta) {
+  if (!ALERTAS || ALERTAS === canal) return;
+  const marca = "alerta|" + etiqueta + "|" + motivo;
+  const ahora = Date.now();
+  if (hits[marca] && ahora - hits[marca] < 300000) return;
+  hits[marca] = ahora;
+
+  await enviar(ALERTAS, {
+    username: "Fayra Alertas",
+    embeds: [{
+      title: "⚠️ No pude avisar a Discord",
+      color: 0xe74c3c,
+      fields: [
+        { name: "Canal", value: etiqueta, inline: true },
+        { name: "Motivo", value: "```" + motivo + "```", inline: false }
+      ],
+      footer: { text: "El sitio sigue funcionando: solo se perdió ese aviso" },
+      timestamp: new Date().toISOString()
+    }]
+  });
+}
+
 /* Abacus guarda un contador por clave, y la clave va en la URL: nada de
    barras, espacios ni acentos. "/catalogo.html" → "catalogo-html". */
 function clave(texto) {
@@ -111,6 +153,13 @@ exports.handler = async function (event) {
 
   let body = {};
   try { body = JSON.parse(event.body || "{}"); } catch (e) { /* body vacío */ }
+
+  /* Prueba de vida: contesta sin contar nada, así el chequeo de cada hora
+     puede verificar que la función está viva sin inflar las visitas. Va
+     antes del filtro de bots a propósito: quien pregunta es otra función. */
+  if (body.type === "ping") {
+    return { statusCode: 200, body: JSON.stringify({ ok: true, pong: true, hora: new Date().toISOString() }) };
+  }
 
   const type = ["cart", "order", "click"].indexOf(body.type) !== -1 ? body.type : "visit";
 
@@ -209,21 +258,21 @@ exports.handler = async function (event) {
     ]);
   }
 
+  /* Cada tipo va a su canal: lo que hace ganar plata a ventas, las visitas a
+     tráfico, y los fallos de esos dos canales a alertas. */
   const destino = type === "visit" ? TRAFICO : VENTAS;
+  const etiqueta = type === "visit" ? "tráfico (visitas)" : type === "order" ? "ventas (pedidos)" : "ventas (carrito)";
 
-  let enviado = false;
+  let aviso = "sin webhook";
   if (destino) {
-    try {
-      const r = await fetch(destino, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: "Fayra Monitor", embeds: [embed] })
-      });
-      enviado = r.ok;
-    } catch (e) {
-      /* Si Discord falla, el sitio sigue funcionando igual */
+    const fallo = await enviar(destino, { username: "Fayra Monitor", embeds: [embed] });
+    if (fallo) {
+      aviso = "discord-respondio-mal";
+      await alertar(destino, fallo, etiqueta);
+    } else {
+      aviso = "enviado";
     }
   }
 
-  return { statusCode: 200, body: JSON.stringify({ ok: true, aviso: enviado ? "enviado" : destino ? "discord-respondio-mal" : "sin webhook" }) };
+  return { statusCode: 200, body: JSON.stringify({ ok: true, aviso: aviso }) };
 };

@@ -5,33 +5,50 @@ que solo vos podés hacer, porque son credenciales de tu cuenta.
 
 | Pieza | Archivo | Para qué |
 |---|---|---|
-| Avisos | `netlify/functions/track.js` | Avisa al instante: visita, carrito y **pedido por WhatsApp** |
+| Avisos | `netlify/functions/track.js` | Manda cada cosa a su canal: **ventas**, **tráfico** y **alertas** |
+| Latido | `netlify/functions/latido.js` | Cada hora revisa sitio, registro y contadores; si algo cae, avisa a alertas |
 | Panel | `netlify/functions/discord.js` | Comandos `/stats`, `/hoy`, `/online` dentro de Discord |
 | Quién está online | `netlify/functions/online.js` | Lo que alimenta el contador de conectados |
 | Resumen semanal | `netlify/functions/weekly.js` | Lunes 9:00 am, automático |
 
 ---
 
-## 1. Avisos al instante (webhook)
+## 1. Los tres canales
 
-1. Discord → tu servidor → click derecho en el canal → **Editar canal**
-   → **Integraciones** → **Webhooks** → **Nuevo webhook** → **Copiar URL**.
-2. Netlify → tu sitio → **Site configuration** → **Environment variables**
-   → **Add a variable**:
-   - Nombre: `DISCORD_WEBHOOK_URL`
-   - Valor: la URL que copiaste
+Creá **tres canales** en tu servidor (los nombres son tuyos, sugiero estos):
+
+| Canal | Qué llega | Variable en Netlify |
+|---|---|---|
+| `#ventas` | Pedidos por WhatsApp y carritos | `DISCORD_WEBHOOK_VENTAS` |
+| `#trafico` | Cada visita, con equipo, ubicación y de dónde vino | `DISCORD_WEBHOOK_TRAFICO` |
+| `#alertas` | Fallos del sitio o de los propios avisos | `DISCORD_WEBHOOK_ALERTAS` |
+
+Para cada canal:
+
+1. Discord → click derecho en el canal → **Editar canal** →
+   **Integraciones** → **Webhooks** → **Nuevo webhook** → **Copiar URL**.
+   Poné un nombre distinto a cada webhook (`Fayra Ventas`, `Fayra Tráfico`,
+   `Fayra Alertas`) para reconocerlos después.
+2. Netlify → **Site configuration** → **Environment variables** →
+   **Add a variable**, una por canal con el nombre exacto de la tabla.
 3. **Deploys** → **Trigger deploy** → *Deploy site*.
 
-Prueba: abrí el sitio en el celular y mirá el canal. Debe llegar
-"🛍️ Nueva visita a Fayra Parfums".
+**Respaldo**: si creás uno solo, cargalo como `DISCORD_WEBHOOK_URL` y los
+seis tipos caen ahí. Cada canal que configures se separa solo; los que no
+existan siguen usando el general.
 
-> Si querés separar el ruido: creá dos webhooks más y usá
-> `DISCORD_WEBHOOK_VENTAS` y `DISCORD_WEBHOOK_TRAFICO`. El código ya
-> prioriza el de ventas para `order`/`cart` si existe.
+Prueba: abrí el sitio en el celular → tiene que llegar la visita a
+`#trafico`. Agregá algo al carrito → a `#ventas`.
+
+> El aviso de **«no pude avisar a Discord»** aparece en `#alertas` cuando un
+> canal responde con error (webhook borrado, canal eliminado, Discord
+> caído). Antes ese fallo se perdía en silencio: parecía que nadie visitaba
+> el sitio. Si el que falla es el propio canal de alertas, no se avisa (no
+> hay a dónde, y sería un bucle).
 
 ---
 
-## 2. Panel dentro de Discord (comandos `/stats`, `/hoy`, `/online`)
+## 2. Panel dentro de Discord (comandos `/stats`, `/hoy`, `/online`, `/canales`)
 
 Esto **no es un bot corriendo 24/7**: Discord le pega a una función de
 Netlify cada vez que escribís un comando. Si nadie escribe, no corre nada.
@@ -70,6 +87,7 @@ por uno. Todos de tipo **CHAT_INPUT** y sin opciones:
 | `stats` | Resumen de la semana: visitas, celular vs PC, clics y carritos |
 | `hoy` | Visitas, clics y pedidos de hoy |
 | `online` | Quién está ahora mismo en el sitio |
+| `canales` | Revisa que los tres webhooks estén conectados y dice cuál falta |
 
 > Los nombres van en minúscula y sin `/`. Discord los muestra como `/stats`.
 
@@ -104,6 +122,8 @@ comando y no quedan en el historial del canal.
 | `/stats` | Abacus (contadores de la semana) | **Sí**, no necesita nada |
 | `/hoy` | Abacus (contadores del día) + Blobs si está | **Sí** |
 | `/online` | Blobs (`online`) | No: falta configurar Blobs |
+| `/canales` | los propios webhooks de Discord | **Sí**, no necesita nada |
+| Aviso de caída | `latido.js`, cada hora (minuto 5) | **Sí**, con `DISCORD_WEBHOOK_ALERTAS` |
 
 ### Lo de Blobs (opcional)
 
@@ -130,7 +150,12 @@ Sin eso, la tienda y los comandos `/stats` y `/hoy` andan igual.
 3. **Comando**: escribí `/stats` en el canal → tarjeta privada con la
    semana en curso. Si sale "No estás autorizado", revisá
    `DISCORD_ALLOW_USERS`.
-4. **Sin firma**: un POST normal a la URL del endpoint tiene que devolver
+4. **Latido**: abrí en el navegador
+   `https://fayraparfumsv.netlify.app/.netlify/functions/latido`. Tiene que
+   devolver `{"ok":true,"revisado":[...]}`. Si dice `ok:false`, el campo
+   `problemas` dice qué no respondió, y `canalesSinConfigurar` qué
+   variables faltan.
+5. **Sin firma**: un POST normal a la URL del endpoint tiene que devolver
    `401 firma inválida`. Si devuelve `503 falta DISCORD_PUBLIC_KEY`, la
    clave todavía no está cargada en Netlify (o falta el redeploy después
    de cargarla): eso es lo que hace que Discord no acepte la URL al

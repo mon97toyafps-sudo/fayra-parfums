@@ -17,3 +17,8 @@
 [functions."weekly"]
   schedule = "0 15 * * 1"
 
+# Latido: revisa sitio, función de registro y contadores cada hora.
+# Si algo se cae, avisa al canal de alertas.
+[functions."latido"]
+  schedule = "5 * * * *"
+

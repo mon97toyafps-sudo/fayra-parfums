@@ -26,6 +26,7 @@ my @ARCHIVOS = @ARGV ? @ARGV : qw(
   netlify/functions/discord.js
   netlify/functions/online.js
   netlify/functions/weekly.js
+  netlify/functions/latido.js
 );
 
 my $todo = 1;
