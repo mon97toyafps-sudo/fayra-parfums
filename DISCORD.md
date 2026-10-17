@@ -7,6 +7,7 @@ que solo vos podés hacer, porque son credenciales de tu cuenta.
 |---|---|---|
 | Avisos | `netlify/functions/track.js` | Manda cada cosa a su canal: **ventas**, **tráfico** y **alertas** |
 | Latido | `netlify/functions/latido.js` | Cada hora revisa sitio, registro y contadores; si algo cae, avisa a alertas |
+| Diagnóstico | `netlify/functions/salud.js` | Abrila en el navegador: te dice qué responde y qué falta configurar |
 | Panel | `netlify/functions/discord.js` | Comandos `/stats`, `/hoy`, `/online` dentro de Discord |
 | Quién está online | `netlify/functions/online.js` | Lo que alimenta el contador de conectados |
 | Resumen semanal | `netlify/functions/weekly.js` | Lunes 9:00 am, automático |
@@ -150,11 +151,17 @@ Sin eso, la tienda y los comandos `/stats` y `/hoy` andan igual.
 3. **Comando**: escribí `/stats` en el canal → tarjeta privada con la
    semana en curso. Si sale "No estás autorizado", revisá
    `DISCORD_ALLOW_USERS`.
-4. **Latido**: abrí en el navegador
-   `https://fayraparfumsv.netlify.app/.netlify/functions/latido`. Tiene que
+4. **Diagnóstico**: abrí en el navegador
+   `https://fayraparfumsv.netlify.app/.netlify/functions/salud`. Tiene que
    devolver `{"ok":true,"revisado":[...]}`. Si dice `ok:false`, el campo
    `problemas` dice qué no respondió, y `canalesSinConfigurar` qué
    variables faltan.
+
+   El latido que avisa a `#alertas` corre solo cada hora. **No se puede
+   abrir por URL** a propósito: las funciones programadas de Netlify
+   responden 403 desde el borde, y además así nadie puede usar la URL para
+   llenar el canal. Para probarlo a mano: Netlify → **Functions** →
+   `latido` → **Run now**.
 5. **Sin firma**: un POST normal a la URL del endpoint tiene que devolver
    `401 firma inválida`. Si devuelve `503 falta DISCORD_PUBLIC_KEY`, la
    clave todavía no está cargada en Netlify (o falta el redeploy después

@@ -3,7 +3,8 @@
    Netlify Function programada (cada lunes 9am El Salvador).
    Lee los contadores de Abacus (semana actual) y publica un
    embed con las visitas de la semana y el total histórico.
-   Se puede disparar a mano: /.netlify/functions/weekly
+   Ojo: al tener schedule, Netlify no la expone por URL (responde 403).
+   Se puede lanzar desde Netlify → Functions → weekly → Run now.
    ============================================================ */
 
 const WEBHOOK = process.env.DISCORD_WEBHOOK_URL;
