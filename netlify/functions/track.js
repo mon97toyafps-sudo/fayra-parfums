@@ -11,6 +11,11 @@
    ============================================================ */
 
 const WEBHOOK = process.env.DISCORD_WEBHOOK_URL;
+
+/* Un solo canal alcanza para empezar. Si después separás, cada tipo va a
+   su webhook y los que no estén definidos caen al general. */
+const VENTAS = process.env.DISCORD_WEBHOOK_VENTAS || WEBHOOK;
+const TRAFICO = process.env.DISCORD_WEBHOOK_TRAFICO || WEBHOOK;
 const ABACUS = "https://abacus.jasoncameron.dev";
 const NS = "fayraparfumsv.netlify.app";
 
@@ -62,6 +67,16 @@ async function hit(key) {
   try { await fetch(ABACUS + "/hit/" + NS + "/" + key); } catch (e) { /* Abacus no disponible */ }
 }
 
+/* Abacus guarda un contador por clave, y la clave va en la URL: nada de
+   barras, espacios ni acentos. "/catalogo.html" → "catalogo-html". */
+function clave(texto) {
+  return String(texto || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 40) || "otro";
+}
+
 exports.handler = async function (event) {
   const h = event.headers || {};
   const ip = header(h, "x-nf-client-connection-ip") || (header(h, "x-forwarded-for").split(",")[0] || "?").trim();
@@ -75,9 +90,10 @@ exports.handler = async function (event) {
 
   const type = ["cart", "order", "click"].indexOf(body.type) !== -1 ? body.type : "visit";
 
-  if (!WEBHOOK) {
-    return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "sin webhook" }) };
-  }
+  /* Ojo: el aviso a Discord NO es requisito para contar. Antes se cortaba acá
+     cuando faltaba DISCORD_WEBHOOK_URL, y por eso los contadores de la semana
+     y de clics nunca sumaron nada. Ahora se cuenta siempre y el aviso es
+     opcional, al final. */
 
   /* Ignora bots y hits repetidos (los pedidos no se limitan: son la cosa importante) */
   if (/bot|crawler|spider|curl|wget/i.test(ua)) {
@@ -85,16 +101,23 @@ exports.handler = async function (event) {
   }
   const ahora = Date.now();
   const intervalo = type === "visit" ? 20000 : type === "cart" ? 8000 : type === "click" ? 4000 : 0;
-  const clave = ip + "|" + type;
-  if (intervalo && hits[clave] && ahora - hits[clave] < intervalo) {
+  const marca = ip + "|" + type;
+  if (intervalo && hits[marca] && ahora - hits[marca] < intervalo) {
     return { statusCode: 200, body: JSON.stringify({ ok: true, skip: "repetido" }) };
   }
-  hits[clave] = ahora;
+  hits[marca] = ahora;
+
+  /* Contadores del día. Van a Abacus porque Blobs todavía no está
+     configurado: así /hoy del panel en Discord funciona sin secretos. */
+  const dia = new Date().toISOString().slice(0, 10);
 
   /* Los clics solo se cuentan: no ensucian el canal de Discord */
   if (type === "click") {
     const origen = String(body.source || "otro").slice(0, 24);
-    await hit("clic-" + origen);
+    await Promise.all([
+      hit("clic-" + origen),
+      hit("dia-" + dia + "-c")
+    ]);
     return { statusCode: 200, body: JSON.stringify({ ok: true, counted: origen }) };
   }
 
@@ -106,6 +129,14 @@ exports.handler = async function (event) {
     { name: "🌐 IP", value: "`" + ip + "`", inline: true },
     { name: "💻 Equipo", value: d.device + " · " + d.os + " · " + d.nav, inline: false }
   ];
+
+  if (type === "cart") {
+    await Promise.all([hit("dia-" + dia + "-c"), hit("dia-" + dia + "-carrito")]);
+  }
+
+  if (type === "order") {
+    await Promise.all([hit("dia-" + dia + "-o"), hit("dia-" + dia + "-c")]);
+  }
 
   let embed;
   if (type === "cart") {
@@ -149,19 +180,29 @@ exports.handler = async function (event) {
     const wk = isoWeek();
     await Promise.all([
       hit("sem-" + wk + "-visitas"),
-      hit("sem-" + wk + (d.movil ? "-movil" : "-pc"))
+      hit("sem-" + wk + (d.movil ? "-movil" : "-pc")),
+      hit("dia-" + dia + "-v"),
+      hit("dia-" + dia + (d.movil ? "-movil" : "-pc")),
+      hit("pag-" + clave(pagina)),
+      hit("fue-" + clave(body.source || body.ref || "directo"))
     ]);
   }
 
-  try {
-    await fetch(WEBHOOK, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: "Fayra Monitor", embeds: [embed] })
-    });
-  } catch (e) {
-    /* Si Discord falla, el sitio sigue funcionando igual */
+  const destino = type === "visit" ? TRAFICO : VENTAS;
+
+  let enviado = false;
+  if (destino) {
+    try {
+      const r = await fetch(destino, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "Fayra Monitor", embeds: [embed] })
+      });
+      enviado = r.ok;
+    } catch (e) {
+      /* Si Discord falla, el sitio sigue funcionando igual */
+    }
   }
 
-  return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+  return { statusCode: 200, body: JSON.stringify({ ok: true, aviso: enviado ? "enviado" : destino ? "discord-respondio-mal" : "sin webhook" }) };
 };

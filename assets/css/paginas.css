@@ -191,13 +191,6 @@
 .cierre__btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px}
 .section--cierre{padding-bottom:clamp(70px,9vw,120px)}
 
-/* ---------- Pie: enlace al panel ---------- */
-.footer__panel{
-  color:var(--acento-3);border-bottom:1px solid transparent;padding-bottom:1px;
-  transition:color .4s var(--ease),border-color .4s var(--ease);
-}
-.footer__panel:hover{color:var(--acento);border-bottom-color:var(--line-2)}
-
 /* ---------- Pantallas chicas ---------- */
 @media (max-width:980px){
   .ruta{grid-template-columns:1fr}
