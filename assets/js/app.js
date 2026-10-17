@@ -34,9 +34,7 @@
       tags: ["Hombre", "Cítrico"],
       short: "Cítrico y dulce a la vez: mandarina y naranja sobre caramelo y haba tonka.",
       long: "Mandary Sky abre con la frescura de la mandarina y la naranja, y se asienta en un fondo dulce de caramelo y haba tonka. Una fragancia luminosa y cálida a la vez, buena para el día y para la noche. Original e importada de Emiratos Árabes Unidos.",
-      sale: ["Mandarina", "Naranja"],
-      heart: ["Caramelo"],
-      base: ["Haba Tonka"]
+      notes: ["Mandarina", "Naranja", "Caramelo", "Haba Tonka"]
     }
   ];
 ;
@@ -733,9 +731,9 @@
     $("pvDesc").textContent = prodActual.long;
     $("pvTags").innerHTML = prodActual.tags.map(function (t) { return '<span class="chip">' + t + '</span>'; }).join("");
     $("pvNotes").innerHTML =
-      '<div><h4>Salida</h4><ul>' + prodActual.sale.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul></div>" +
-      '<div><h4>Corazón</h4><ul>' + prodActual.heart.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul></div>" +
-      '<div><h4>Fondo</h4><ul>' + prodActual.base.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul></div>";
+      '<div><h4>Notas olfativas</h4><ul>' +
+        prodActual.notes.map(function (x) { return "<li>" + x + "</li>"; }).join("") +
+      "</ul></div>";
     $("pvWhats").setAttribute("data-name", prodActual.name);
     renderGaleria();
     setQty(1);
