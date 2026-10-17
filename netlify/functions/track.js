@@ -63,8 +63,22 @@ function isoWeek() {
   return t.getUTCFullYear() + "-W" + String(semana).padStart(2, "0");
 }
 
-async function hit(key) {
-  try { await fetch(ABACUS + "/hit/" + NS + "/" + key); } catch (e) { /* Abacus no disponible */ }
+async function hit(key, intento) {
+  try {
+    const r = await fetch(ABACUS + "/hit/" + NS + "/" + key);
+    /* Abacus devuelve 429 si le llegan muchos seguidos: se reintenta una vez */
+    if (!r.ok && (intento || 1) < 2) {
+      await new Promise(function (listo) { setTimeout(listo, 350); });
+      return hit(key, 2);
+    }
+  } catch (e) { /* Abacus no disponible */ }
+}
+
+/* Una visita cuenta en varias claves (semana, día, página, fuente). En
+   paralelo Abacus se salta alguna: comprobado, de seis llamadas juntas
+   perdía la cuarta. De a una no se pierde ninguna. */
+async function contar(lista) {
+  for (let i = 0; i < lista.length; i++) await hit(lista[i]);
 }
 
 /* Abacus guarda un contador por clave, y la clave va en la URL: nada de
@@ -114,10 +128,7 @@ exports.handler = async function (event) {
   /* Los clics solo se cuentan: no ensucian el canal de Discord */
   if (type === "click") {
     const origen = String(body.source || "otro").slice(0, 24);
-    await Promise.all([
-      hit("clic-" + origen),
-      hit("dia-" + dia + "-c")
-    ]);
+    await contar(["clic-" + origen, "dia-" + dia + "-c"]);
     return { statusCode: 200, body: JSON.stringify({ ok: true, counted: origen }) };
   }
 
@@ -131,11 +142,11 @@ exports.handler = async function (event) {
   ];
 
   if (type === "cart") {
-    await Promise.all([hit("dia-" + dia + "-c"), hit("dia-" + dia + "-carrito")]);
+    await contar(["dia-" + dia + "-c", "dia-" + dia + "-carrito"]);
   }
 
   if (type === "order") {
-    await Promise.all([hit("dia-" + dia + "-o"), hit("dia-" + dia + "-c")]);
+    await contar(["dia-" + dia + "-o", "dia-" + dia + "-c"]);
   }
 
   let embed;
@@ -178,13 +189,13 @@ exports.handler = async function (event) {
 
     /* Contadores para el resumen semanal (solo visitas reales) */
     const wk = isoWeek();
-    await Promise.all([
-      hit("sem-" + wk + "-visitas"),
-      hit("sem-" + wk + (d.movil ? "-movil" : "-pc")),
-      hit("dia-" + dia + "-v"),
-      hit("dia-" + dia + (d.movil ? "-movil" : "-pc")),
-      hit("pag-" + clave(pagina)),
-      hit("fue-" + clave(body.source || body.ref || "directo"))
+    await contar([
+      "sem-" + wk + "-visitas",
+      "sem-" + wk + (d.movil ? "-movil" : "-pc"),
+      "dia-" + dia + "-v",
+      "dia-" + dia + (d.movil ? "-movil" : "-pc"),
+      "pag-" + clave(pagina),
+      "fue-" + clave(body.source || body.ref || "directo")
     ]);
   }
 
