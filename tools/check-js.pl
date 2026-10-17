@@ -21,9 +21,9 @@ my @ARCHIVOS = @ARGV ? @ARGV : qw(
   assets/js/app.js
   assets/js/ruta.js
   assets/js/mapa-es.js
-  netlify/functions/panel.js
   netlify/functions/registro.js
   netlify/functions/track.js
+  netlify/functions/discord.js
   netlify/functions/online.js
   netlify/functions/weekly.js
 );
