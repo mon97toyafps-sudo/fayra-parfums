@@ -74,6 +74,17 @@ async function hit(key, intento) {
   } catch (e) { /* Abacus no disponible */ }
 }
 
+/* Ojo con la fecha: El Salvador es UTC-6. Con la fecha en UTC el contador
+   de "hoy" cambiaba de día a las 6 de la tarde, justo en plena venta. Se
+   calcula en la zona del negocio y se devuelve YYYY-MM-DD. */
+function hoyLocal() {
+  try {
+    return new Date().toLocaleDateString("en-CA", { timeZone: "America/El_Salvador" });
+  } catch (e) {
+    return new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10);
+  }
+}
+
 /* Una visita cuenta en varias claves (semana, día, página, fuente). En
    paralelo Abacus se salta alguna: comprobado, de seis llamadas juntas
    perdía la cuarta. De a una no se pierde ninguna. */
@@ -123,7 +134,7 @@ exports.handler = async function (event) {
 
   /* Contadores del día. Van a Abacus porque Blobs todavía no está
      configurado: así /hoy del panel en Discord funciona sin secretos. */
-  const dia = new Date().toISOString().slice(0, 10);
+  const dia = hoyLocal();
 
   /* Los clics solo se cuentan: no ensucian el canal de Discord */
   if (type === "click") {

@@ -159,8 +159,14 @@ function isoWeek() {
   return t.getUTCFullYear() + "-W" + String(semana).padStart(2, "0");
 }
 
+/* El Salvador es UTC-6: con la fecha en UTC el "hoy" cambiaba a las 6 de la
+   tarde y /hoy mostraba ceros. Tiene que coincidir con track.js. */
 function hoyISO() {
-  return new Date().toISOString().slice(0, 10);
+  try {
+    return new Date().toLocaleDateString("en-CA", { timeZone: "America/El_Salvador" });
+  } catch (e) {
+    return new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10);
+  }
 }
 
 function miles(n) {
