@@ -78,11 +78,10 @@ async function hit(key, intento) {
    de "hoy" cambiaba de día a las 6 de la tarde, justo en plena venta. Se
    calcula en la zona del negocio y se devuelve YYYY-MM-DD. */
 function hoyLocal() {
-  try {
-    return new Date().toLocaleDateString("en-CA", { timeZone: "America/El_Salvador" });
-  } catch (e) {
-    return new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10);
-  }
+  /* Se restan 6 horas en vez de usar toLocaleDateString con zona: el
+     corrimiento fijo no depende del soporte de zonas horarias del runtime
+     ni del formato que devuelva el locale. */
+  return new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 10);
 }
 
 /* Una visita cuenta en varias claves (semana, día, página, fuente). En
