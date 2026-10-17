@@ -31,12 +31,12 @@
         "assets/img/mandary-sky-3.jpg",
         "assets/img/mandary-sky-1.jpg"
       ],
-      tags: ["Hombre", "CÃ­trico"],
-      short: "Aroma cÃ­trico y fresco: mandarina, naranja y notas verdes. Ideal para el dÃ­a a dÃ­a y las salidas.",
-      long: "Mandary Sky es un aroma cÃ­trico y fresco. Abre con la frescura de la mandarina y la naranja, y se desarrolla en notas verdes y arÃ¡ndanos. Una fragancia equilibrada, con una terminaciÃ³n limpia y percuntiva. Original, luminosa y alegre, es una buena opciÃ³n para todo el dÃ­a.",
-      sale: ["Mandarina", "Naranja", "Nota verde"],
-      heart: ["Haba tonka", "Pechina", "Naranja"],
-      base: ["SÃ¡ndalo", "notas terroseras", "resÃ­nculos"]
+      tags: ["Hombre", "Cítrico"],
+      short: "Cítrico y dulce a la vez: mandarina y naranja sobre caramelo y haba tonka.",
+      long: "Mandary Sky abre con la frescura de la mandarina y la naranja, y se asienta en un fondo dulce de caramelo y haba tonka. Una fragancia luminosa y cálida a la vez, buena para el día y para la noche. Original e importada de Emiratos Árabes Unidos.",
+      sale: ["Mandarina", "Naranja"],
+      heart: ["Caramelo"],
+      base: ["Haba Tonka"]
     }
   ];
 ;
@@ -210,7 +210,7 @@
       var cuerpo = {
         sid: SID,
         path: location.pathname,
-        ref: document.referrer || 
+        ref: document.referrer || "",
         accion: datos.accion || "visita"
       };
       fetch("/.netlify/functions/registro", {
