@@ -315,6 +315,17 @@ exports.handler = async function (event) {
 
   const bytes = cuerpoCrudo(event);
 
+  /* Sin la clave pública no se puede verificar nada. Se avisa distinto de
+     una firma inválida: así, cuando Discord rechaza la URL al guardarla,
+     el motivo se ve de una y no parece un problema de seguridad. */
+  if (!PUBLIC_KEY) {
+    return {
+      statusCode: 503,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ok: false, error: "falta DISCORD_PUBLIC_KEY en Netlify" })
+    };
+  }
+
   if (!firmaValida(event, bytes)) {
     return { statusCode: 401, body: "firma inválida" };
   }
