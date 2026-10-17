@@ -14,12 +14,12 @@
 <meta property="og:url" content="https://fayraparfumsv.netlify.app/catalogo.html" />
 <meta property="og:title" content="Catálogo · Fayra Parfums" />
 <meta property="og:description" content="Perfumes originales importados de Emiratos Árabes Unidos. Envío incluido en el precio." />
-<meta property="og:image" content="https://fayraparfumsv.netlify.app/assets/img/social.jpg?v=2" />
+<meta property="og:image" content="https://fayraparfumsv.netlify.app/assets/img/social.jpg?v=3" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="Fayra Parfums — Mandary Sky de Armaf, 100 ml Eau de Parfum, envío incluido" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#0c0a08" />
+<meta name="theme-color" content="#ffffff" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +27,33 @@
 <link rel="stylesheet" href="assets/css/estilos.css" />
 <link rel="stylesheet" href="assets/css/paginas.css" />
 <link rel="stylesheet" href="assets/css/tienda.css" />
+
+<!-- Datos estructurados: es lo que le permite a Google mostrar el precio y
+     la disponibilidad del perfume directo en los resultados de búsqueda. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Mandary Sky",
+  "sku": "mandary-sky",
+  "brand": { "@type": "Brand", "name": "Armaf" },
+  "description": "Cítrico y dulce a la vez: mandarina y naranja sobre caramelo y haba tonka. Original e importado de Emiratos Árabes Unidos.",
+  "image": [
+    "https://fayraparfumsv.netlify.app/assets/img/mandary-sky-2.jpg",
+    "https://fayraparfumsv.netlify.app/assets/img/mandary-sky-3.jpg",
+    "https://fayraparfumsv.netlify.app/assets/img/mandary-sky-1.jpg"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://fayraparfumsv.netlify.app/catalogo.html",
+    "priceCurrency": "USD",
+    "price": "64.99",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": { "@type": "Organization", "name": "Fayra Parfums" }
+  }
+}
+</script>
 </head>
 
 <body>
@@ -197,7 +224,7 @@
   <div class="pv__wrap">
     <div class="pv__col">
       <div class="pv__media" id="pvMedia">
-        <img id="pvImg" src="assets/img/perfume-1.jpg" alt="" />
+        <img id="pvImg" src="assets/img/mandary-sky-2.jpg" alt="Mandary Sky de Armaf" />
         <button type="button" class="pv__nav pv__nav--prev" id="pvPrev" aria-label="Foto anterior">‹</button>
         <button type="button" class="pv__nav pv__nav--next" id="pvNext" aria-label="Foto siguiente">›</button>
         <span class="pv__counter" id="pvCounter"></span>

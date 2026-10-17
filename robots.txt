@@ -1,0 +1,9 @@
+# Fayra Parfums
+User-agent: *
+Allow: /
+
+# El panel es privado: no tiene por qué aparecer en buscadores.
+Disallow: /panel
+Disallow: /.netlify/
+
+Sitemap: https://fayraparfumsv.netlify.app/sitemap.xml
