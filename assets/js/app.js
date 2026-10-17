@@ -17,45 +17,29 @@
      Para agregar un perfume nuevo, copiá un bloque de abajo y
      cambiale los datos. La página de catálogo los muestra solo.
      ------------------------------------------------------------ */
+
   var PRODUCTS = [
     {
-      id: "odyssey-aqua",
+      id: "mandary-sky",
       brand: "Armaf",
-      name: "Odyssey Aqua",
-      size: "100 ml EDP",
-      price: 64.99,
-      image: "assets/img/perfume-1.jpg",
+      name: "Mandary Sky",
+      size: "100 ml Eau de Parfum",
+      price: 84.99,
+      image: "assets/img/mandary-sky-2.jpg",
       gallery: [
-        "assets/img/perfume-1.jpg",
-        "assets/img/perfume-2.webp",
-        "assets/img/odyssey-ingredientes.jpg",
-        "assets/img/odyssey-ficha.jpg"
+        "assets/img/mandary-sky-2.jpg",
+        "assets/img/mandary-sky-3.jpg",
+        "assets/img/mandary-sky-1.jpg"
       ],
-      tags: ["Hombre", "Fresco"],
-      short: "Fresco, acuático y cítrico: la frescura del mar en cada atomización.",
-      long: "Fresco, acuático y cítrico: la frescura del mar en cada atomización. Abre con cítricos jugosos y notas marinas, se vuelve aromática en el corazón y termina en un fondo limpio de maderas y almizcle. Perfecta para el día a día, la oficina o una salida casual.",
-      sale: ["Toronja", "Mandarina", "Notas marinas"],
-      heart: ["Lavanda", "Geranio", "Salvia"],
-      base: ["Ambroxan", "Almizcle", "Cedro"]
+      tags: ["Hombre", "CÃ­trico"],
+      short: "Aroma cÃ­trico y fresco: mandarina, naranja y notas verdes. Ideal para el dÃ­a a dÃ­a y las salidas.",
+      long: "Mandary Sky es un aroma cÃ­trico y fresco. Abre con la frescura de la mandarina y la naranja, y se desarrolla en notas verdes y arÃ¡ndanos. Una fragancia equilibrada, con una terminaciÃ³n limpia y percuntiva. Original, luminosa y alegre, es una buena opciÃ³n para todo el dÃ­a.",
+      sale: ["Mandarina", "Naranja", "Nota verde"],
+      heart: ["Haba tonka", "Pechina", "Naranja"],
+      base: ["SÃ¡ndalo", "notas terroseras", "resÃ­nculos"]
     }
-    /*
-    ,{
-      id: "otro-perfume",
-      brand: "Marca",
-      name: "Nombre",
-      size: "100 ml EDP",
-      price: 0.00,
-      image: "assets/img/otro.jpg",
-      gallery: ["assets/img/otro.jpg"],
-      tags: ["Hombre"],
-      short: "Descripción corta para la tarjeta.",
-      long: "Descripción larga para la ventana de detalle.",
-      sale: ["Nota 1", "Nota 2"],
-      heart: ["Nota 3"],
-      base: ["Nota 4"]
-    }
-    */
   ];
+;
 
   var WA_GREETING = "Hola, Fayra Parfums.";
   var money = function (n) { return "$" + n.toFixed(2); };
@@ -226,7 +210,7 @@
       var cuerpo = {
         sid: SID,
         path: location.pathname,
-        ref: document.referrer || "",
+        ref: document.referrer || 
         accion: datos.accion || "visita"
       };
       fetch("/.netlify/functions/registro", {
