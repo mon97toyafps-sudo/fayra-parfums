@@ -131,8 +131,10 @@ Sin eso, la tienda y los comandos `/stats` y `/hoy` andan igual.
    semana en curso. Si sale "No estás autorizado", revisá
    `DISCORD_ALLOW_USERS`.
 4. **Sin firma**: un POST normal a la URL del endpoint tiene que devolver
-   `401 firma inválida`. Si devuelve otra cosa, la verificación no está
-   actuando.
+   `401 firma inválida`. Si devuelve `503 falta DISCORD_PUBLIC_KEY`, la
+   clave todavía no está cargada en Netlify (o falta el redeploy después
+   de cargarla): eso es lo que hace que Discord no acepte la URL al
+   guardarla.
 
 ---
 
